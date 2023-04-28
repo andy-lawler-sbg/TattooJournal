@@ -1,0 +1,857 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B081C0629FAF2C800A86E63 /* GetWhatYouGet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B081C0529FAF2C800A86E63 /* GetWhatYouGet.swift */; };
+		2B081C0929FAF3F800A86E63 /* GetWhatYouGetBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B081C0829FAF3F800A86E63 /* GetWhatYouGetBanner.swift */; };
+		2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */; };
+		2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D27C29F312C00051F6B9 /* EmptyState.swift */; };
+		2B53D28129F316930051F6B9 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D28029F316930051F6B9 /* UserPreferences.swift */; };
+		2B53D28429F31B0B0051F6B9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D28329F31B0B0051F6B9 /* SettingsView.swift */; };
+		2B6C8CF329FBFD8100A4BA6E /* PastTattoosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6C8CF229FBFD8100A4BA6E /* PastTattoosViewModel.swift */; };
+		2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6C8CF529FC054C00A4BA6E /* VisitedShops.swift */; };
+		2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */; };
+		2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */; };
+		2BD3184829F275DD0059F9A8 /* CoreDataExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3184729F275DD0059F9A8 /* CoreDataExample.swift */; };
+		2BD3184A29F275DF0059F9A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3184929F275DF0059F9A8 /* Assets.xcassets */; };
+		2BD3184D29F275DF0059F9A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3184C29F275DF0059F9A8 /* Preview Assets.xcassets */; };
+		2BD3184F29F275DF0059F9A8 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3184E29F275DF0059F9A8 /* Persistence.swift */; };
+		2BD3185229F275DF0059F9A8 /* TattooJournal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3185029F275DF0059F9A8 /* TattooJournal.xcdatamodeld */; };
+		2BD3185C29F275DF0059F9A8 /* TattooJournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3185B29F275DF0059F9A8 /* TattooJournalTests.swift */; };
+		2BD3186629F275DF0059F9A8 /* TattooJournalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3186529F275DF0059F9A8 /* TattooJournalUITests.swift */; };
+		2BD3186829F275DF0059F9A8 /* TattooJournalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3186729F275DF0059F9A8 /* TattooJournalUITestsLaunchTests.swift */; };
+		2BD3187629F276830059F9A8 /* TJTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3187529F276830059F9A8 /* TJTabView.swift */; };
+		2BD3187829F2768F0059F9A8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3187729F2768F0059F9A8 /* HomeView.swift */; };
+		2BD3187C29F27B800059F9A8 /* AppointmentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3187B29F27B800059F9A8 /* AppointmentForm.swift */; };
+		2BD3187E29F285D90059F9A8 /* AppointmentFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3187D29F285D90059F9A8 /* AppointmentFormViewModel.swift */; };
+		2BD3188029F285E90059F9A8 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3187F29F285E90059F9A8 /* Appointment.swift */; };
+		2BD3188229F2871C0059F9A8 /* AppointmentMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3188129F2871C0059F9A8 /* AppointmentMapView.swift */; };
+		2BD3188429F299CD0059F9A8 /* Appointments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3188329F299CD0059F9A8 /* Appointments.swift */; };
+		2BD3188629F29B070059F9A8 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3188529F29B070059F9A8 /* AppointmentsView.swift */; };
+		2BD3188829F2B5160059F9A8 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3188729F2B5160059F9A8 /* Shop.swift */; };
+		2BD3189029F2B5D60059F9A8 /* AppointmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3188F29F2B5D60059F9A8 /* AppointmentsViewModel.swift */; };
+		2BD3189729F2B6410059F9A8 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3189629F2B6410059F9A8 /* Modifiers.swift */; };
+		2BD3189929F2B65D0059F9A8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3189829F2B65D0059F9A8 /* Location.swift */; };
+		2BD3189F29F2C0CD0059F9A8 /* PastTattoosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3189E29F2C0CD0059F9A8 /* PastTattoosView.swift */; };
+		2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */; };
+		2BD318A529F2C6230059F9A8 /* CostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD318A429F2C6230059F9A8 /* CostView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2BD3185829F275DF0059F9A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BD3183A29F275DD0059F9A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BD3184129F275DD0059F9A8;
+			remoteInfo = TattooJournal;
+		};
+		2BD3186229F275DF0059F9A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BD3183A29F275DD0059F9A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BD3184129F275DD0059F9A8;
+			remoteInfo = TattooJournal;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2B081C0529FAF2C800A86E63 /* GetWhatYouGet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWhatYouGet.swift; sourceTree = "<group>"; };
+		2B081C0829FAF3F800A86E63 /* GetWhatYouGetBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWhatYouGetBanner.swift; sourceTree = "<group>"; };
+		2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
+		2B53D27C29F312C00051F6B9 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
+		2B53D28029F316930051F6B9 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		2B53D28329F31B0B0051F6B9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2B6C8CF229FBFD8100A4BA6E /* PastTattoosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastTattoosViewModel.swift; sourceTree = "<group>"; };
+		2B6C8CF529FC054C00A4BA6E /* VisitedShops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedShops.swift; sourceTree = "<group>"; };
+		2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		2BD3184229F275DD0059F9A8 /* TattooJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TattooJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooJournalApp.swift; sourceTree = "<group>"; };
+		2BD3184729F275DD0059F9A8 /* CoreDataExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExample.swift; sourceTree = "<group>"; };
+		2BD3184929F275DF0059F9A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2BD3184C29F275DF0059F9A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2BD3184E29F275DF0059F9A8 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		2BD3185129F275DF0059F9A8 /* TattooJournal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TattooJournal.xcdatamodel; sourceTree = "<group>"; };
+		2BD3185729F275DF0059F9A8 /* TattooJournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TattooJournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BD3185B29F275DF0059F9A8 /* TattooJournalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooJournalTests.swift; sourceTree = "<group>"; };
+		2BD3186129F275DF0059F9A8 /* TattooJournalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TattooJournalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BD3186529F275DF0059F9A8 /* TattooJournalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooJournalUITests.swift; sourceTree = "<group>"; };
+		2BD3186729F275DF0059F9A8 /* TattooJournalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooJournalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2BD3187529F276830059F9A8 /* TJTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TJTabView.swift; sourceTree = "<group>"; };
+		2BD3187729F2768F0059F9A8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2BD3187B29F27B800059F9A8 /* AppointmentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentForm.swift; sourceTree = "<group>"; };
+		2BD3187D29F285D90059F9A8 /* AppointmentFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentFormViewModel.swift; sourceTree = "<group>"; };
+		2BD3187F29F285E90059F9A8 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
+		2BD3188129F2871C0059F9A8 /* AppointmentMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentMapView.swift; sourceTree = "<group>"; };
+		2BD3188329F299CD0059F9A8 /* Appointments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointments.swift; sourceTree = "<group>"; };
+		2BD3188529F29B070059F9A8 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
+		2BD3188729F2B5160059F9A8 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		2BD3188F29F2B5D60059F9A8 /* AppointmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsViewModel.swift; sourceTree = "<group>"; };
+		2BD3189629F2B6410059F9A8 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		2BD3189829F2B65D0059F9A8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		2BD3189E29F2C0CD0059F9A8 /* PastTattoosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastTattoosView.swift; sourceTree = "<group>"; };
+		2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentCell.swift; sourceTree = "<group>"; };
+		2BD318A429F2C6230059F9A8 /* CostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2BD3183F29F275DD0059F9A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BD3185429F275DF0059F9A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BD3185E29F275DF0059F9A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B081C0729FAF2CE00A86E63 /* GetWhatYouGet */ = {
+			isa = PBXGroup;
+			children = (
+				2B081C0529FAF2C800A86E63 /* GetWhatYouGet.swift */,
+			);
+			path = GetWhatYouGet;
+			sourceTree = "<group>";
+		};
+		2B081C0A29FAF6B200A86E63 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2B53D27B29F312B50051F6B9 /* EmptyState */ = {
+			isa = PBXGroup;
+			children = (
+				2B53D27C29F312C00051F6B9 /* EmptyState.swift */,
+			);
+			path = EmptyState;
+			sourceTree = "<group>";
+		};
+		2B53D28229F31B040051F6B9 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				2B53D28329F31B0B0051F6B9 /* SettingsView.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		2B6C8CF429FC053F00A4BA6E /* VisitedShops */ = {
+			isa = PBXGroup;
+			children = (
+				2B6C8CF529FC054C00A4BA6E /* VisitedShops.swift */,
+			);
+			path = VisitedShops;
+			sourceTree = "<group>";
+		};
+		2BD3183929F275DD0059F9A8 = {
+			isa = PBXGroup;
+			children = (
+				2BD3184429F275DD0059F9A8 /* TattooJournal */,
+				2BD3185A29F275DF0059F9A8 /* TattooJournalTests */,
+				2BD3186429F275DF0059F9A8 /* TattooJournalUITests */,
+				2BD3184329F275DD0059F9A8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2BD3184329F275DD0059F9A8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3184229F275DD0059F9A8 /* TattooJournal.app */,
+				2BD3185729F275DF0059F9A8 /* TattooJournalTests.xctest */,
+				2BD3186129F275DF0059F9A8 /* TattooJournalUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2BD3184429F275DD0059F9A8 /* TattooJournal */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3189429F2B6310059F9A8 /* Utilities */,
+				2BD3189129F2B5F50059F9A8 /* Views */,
+				2BD3188A29F2B5390059F9A8 /* Screens */,
+				2BD3188929F2B52F0059F9A8 /* Model */,
+				2BD3185029F275DF0059F9A8 /* TattooJournal.xcdatamodeld */,
+				2BD3187429F2763E0059F9A8 /* Core Data */,
+				2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */,
+				2BD3184929F275DF0059F9A8 /* Assets.xcassets */,
+				2BD3184B29F275DF0059F9A8 /* Preview Content */,
+			);
+			path = TattooJournal;
+			sourceTree = "<group>";
+		};
+		2BD3184B29F275DF0059F9A8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3184C29F275DF0059F9A8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2BD3185A29F275DF0059F9A8 /* TattooJournalTests */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3185B29F275DF0059F9A8 /* TattooJournalTests.swift */,
+			);
+			path = TattooJournalTests;
+			sourceTree = "<group>";
+		};
+		2BD3186429F275DF0059F9A8 /* TattooJournalUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3186529F275DF0059F9A8 /* TattooJournalUITests.swift */,
+				2BD3186729F275DF0059F9A8 /* TattooJournalUITestsLaunchTests.swift */,
+			);
+			path = TattooJournalUITests;
+			sourceTree = "<group>";
+		};
+		2BD3187429F2763E0059F9A8 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3184E29F275DF0059F9A8 /* Persistence.swift */,
+				2BD3184729F275DD0059F9A8 /* CoreDataExample.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		2BD3188929F2B52F0059F9A8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3188C29F2B54E0059F9A8 /* EnvironmentObjects */,
+				2BD3188729F2B5160059F9A8 /* Shop.swift */,
+				2BD3187F29F285E90059F9A8 /* Appointment.swift */,
+				2BD3189829F2B65D0059F9A8 /* Location.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2BD3188A29F2B5390059F9A8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3187529F276830059F9A8 /* TJTabView.swift */,
+				2BD3188B29F2B53E0059F9A8 /* HomeView */,
+				2BD3189229F2B5FA0059F9A8 /* AppointmentsView */,
+				2BD3189D29F2C0C10059F9A8 /* PastTattoosView */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		2BD3188B29F2B53E0059F9A8 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3187729F2768F0059F9A8 /* HomeView.swift */,
+				2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		2BD3188C29F2B54E0059F9A8 /* EnvironmentObjects */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3188329F299CD0059F9A8 /* Appointments.swift */,
+				2B53D28029F316930051F6B9 /* UserPreferences.swift */,
+			);
+			path = EnvironmentObjects;
+			sourceTree = "<group>";
+		};
+		2BD3189129F2B5F50059F9A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B6C8CF429FC053F00A4BA6E /* VisitedShops */,
+				2B53D28229F31B040051F6B9 /* SettingsView */,
+				2B081C0A29FAF6B200A86E63 /* Buttons */,
+				2B53D27B29F312B50051F6B9 /* EmptyState */,
+				2BD318A329F2C61E0059F9A8 /* CostView */,
+				2BD318A029F2C50A0059F9A8 /* Cells */,
+				2BD3189A29F2B66E0059F9A8 /* AppointmentMapView */,
+				2BD3189329F2B61A0059F9A8 /* AppointmentForm */,
+				2B081C0729FAF2CE00A86E63 /* GetWhatYouGet */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2BD3189229F2B5FA0059F9A8 /* AppointmentsView */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3188529F29B070059F9A8 /* AppointmentsView.swift */,
+				2BD3188F29F2B5D60059F9A8 /* AppointmentsViewModel.swift */,
+			);
+			path = AppointmentsView;
+			sourceTree = "<group>";
+		};
+		2BD3189329F2B61A0059F9A8 /* AppointmentForm */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3187B29F27B800059F9A8 /* AppointmentForm.swift */,
+				2BD3187D29F285D90059F9A8 /* AppointmentFormViewModel.swift */,
+			);
+			path = AppointmentForm;
+			sourceTree = "<group>";
+		};
+		2BD3189429F2B6310059F9A8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3189529F2B63A0059F9A8 /* Modifiers */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		2BD3189529F2B63A0059F9A8 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3189629F2B6410059F9A8 /* Modifiers.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		2BD3189A29F2B66E0059F9A8 /* AppointmentMapView */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3188129F2871C0059F9A8 /* AppointmentMapView.swift */,
+			);
+			path = AppointmentMapView;
+			sourceTree = "<group>";
+		};
+		2BD3189D29F2C0C10059F9A8 /* PastTattoosView */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3189E29F2C0CD0059F9A8 /* PastTattoosView.swift */,
+				2B6C8CF229FBFD8100A4BA6E /* PastTattoosViewModel.swift */,
+			);
+			path = PastTattoosView;
+			sourceTree = "<group>";
+		};
+		2BD318A029F2C50A0059F9A8 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */,
+				2B081C0829FAF3F800A86E63 /* GetWhatYouGetBanner.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		2BD318A329F2C61E0059F9A8 /* CostView */ = {
+			isa = PBXGroup;
+			children = (
+				2BD318A429F2C6230059F9A8 /* CostView.swift */,
+			);
+			path = CostView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2BD3184129F275DD0059F9A8 /* TattooJournal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BD3186B29F275DF0059F9A8 /* Build configuration list for PBXNativeTarget "TattooJournal" */;
+			buildPhases = (
+				2BD3183E29F275DD0059F9A8 /* Sources */,
+				2BD3183F29F275DD0059F9A8 /* Frameworks */,
+				2BD3184029F275DD0059F9A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TattooJournal;
+			productName = TattooJournal;
+			productReference = 2BD3184229F275DD0059F9A8 /* TattooJournal.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2BD3185629F275DF0059F9A8 /* TattooJournalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BD3186E29F275DF0059F9A8 /* Build configuration list for PBXNativeTarget "TattooJournalTests" */;
+			buildPhases = (
+				2BD3185329F275DF0059F9A8 /* Sources */,
+				2BD3185429F275DF0059F9A8 /* Frameworks */,
+				2BD3185529F275DF0059F9A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BD3185929F275DF0059F9A8 /* PBXTargetDependency */,
+			);
+			name = TattooJournalTests;
+			productName = TattooJournalTests;
+			productReference = 2BD3185729F275DF0059F9A8 /* TattooJournalTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2BD3186029F275DF0059F9A8 /* TattooJournalUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BD3187129F275DF0059F9A8 /* Build configuration list for PBXNativeTarget "TattooJournalUITests" */;
+			buildPhases = (
+				2BD3185D29F275DF0059F9A8 /* Sources */,
+				2BD3185E29F275DF0059F9A8 /* Frameworks */,
+				2BD3185F29F275DF0059F9A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2BD3186329F275DF0059F9A8 /* PBXTargetDependency */,
+			);
+			name = TattooJournalUITests;
+			productName = TattooJournalUITests;
+			productReference = 2BD3186129F275DF0059F9A8 /* TattooJournalUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2BD3183A29F275DD0059F9A8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					2BD3184129F275DD0059F9A8 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					2BD3185629F275DF0059F9A8 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 2BD3184129F275DD0059F9A8;
+					};
+					2BD3186029F275DF0059F9A8 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 2BD3184129F275DD0059F9A8;
+					};
+				};
+			};
+			buildConfigurationList = 2BD3183D29F275DD0059F9A8 /* Build configuration list for PBXProject "TattooJournal" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2BD3183929F275DD0059F9A8;
+			productRefGroup = 2BD3184329F275DD0059F9A8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2BD3184129F275DD0059F9A8 /* TattooJournal */,
+				2BD3185629F275DF0059F9A8 /* TattooJournalTests */,
+				2BD3186029F275DF0059F9A8 /* TattooJournalUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2BD3184029F275DD0059F9A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BD3184D29F275DF0059F9A8 /* Preview Assets.xcassets in Resources */,
+				2BD3184A29F275DF0059F9A8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BD3185529F275DF0059F9A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BD3185F29F275DF0059F9A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2BD3183E29F275DD0059F9A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BD3187E29F285D90059F9A8 /* AppointmentFormViewModel.swift in Sources */,
+				2BD3185229F275DF0059F9A8 /* TattooJournal.xcdatamodeld in Sources */,
+				2BD3189929F2B65D0059F9A8 /* Location.swift in Sources */,
+				2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */,
+				2B081C0929FAF3F800A86E63 /* GetWhatYouGetBanner.swift in Sources */,
+				2BD318A529F2C6230059F9A8 /* CostView.swift in Sources */,
+				2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */,
+				2BD3188629F29B070059F9A8 /* AppointmentsView.swift in Sources */,
+				2BD3189F29F2C0CD0059F9A8 /* PastTattoosView.swift in Sources */,
+				2BD3187C29F27B800059F9A8 /* AppointmentForm.swift in Sources */,
+				2BD3189729F2B6410059F9A8 /* Modifiers.swift in Sources */,
+				2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */,
+				2B53D28429F31B0B0051F6B9 /* SettingsView.swift in Sources */,
+				2BD3188029F285E90059F9A8 /* Appointment.swift in Sources */,
+				2BD3184F29F275DF0059F9A8 /* Persistence.swift in Sources */,
+				2BD3184829F275DD0059F9A8 /* CoreDataExample.swift in Sources */,
+				2BD3187829F2768F0059F9A8 /* HomeView.swift in Sources */,
+				2BD3189029F2B5D60059F9A8 /* AppointmentsViewModel.swift in Sources */,
+				2BD3188829F2B5160059F9A8 /* Shop.swift in Sources */,
+				2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */,
+				2B53D28129F316930051F6B9 /* UserPreferences.swift in Sources */,
+				2BD3188229F2871C0059F9A8 /* AppointmentMapView.swift in Sources */,
+				2BD3187629F276830059F9A8 /* TJTabView.swift in Sources */,
+				2BD3188429F299CD0059F9A8 /* Appointments.swift in Sources */,
+				2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */,
+				2B6C8CF329FBFD8100A4BA6E /* PastTattoosViewModel.swift in Sources */,
+				2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */,
+				2B081C0629FAF2C800A86E63 /* GetWhatYouGet.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BD3185329F275DF0059F9A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BD3185C29F275DF0059F9A8 /* TattooJournalTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2BD3185D29F275DF0059F9A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BD3186629F275DF0059F9A8 /* TattooJournalUITests.swift in Sources */,
+				2BD3186829F275DF0059F9A8 /* TattooJournalUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2BD3185929F275DF0059F9A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2BD3184129F275DD0059F9A8 /* TattooJournal */;
+			targetProxy = 2BD3185829F275DF0059F9A8 /* PBXContainerItemProxy */;
+		};
+		2BD3186329F275DF0059F9A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2BD3184129F275DD0059F9A8 /* TattooJournal */;
+			targetProxy = 2BD3186229F275DF0059F9A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2BD3186929F275DF0059F9A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2BD3186A29F275DF0059F9A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2BD3186C29F275DF0059F9A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TattooJournal/Preview Content\"";
+				DEVELOPMENT_TEAM = R7VRH6S6K3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AndrewLawler.TattooJournal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2BD3186D29F275DF0059F9A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TattooJournal/Preview Content\"";
+				DEVELOPMENT_TEAM = R7VRH6S6K3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AndrewLawler.TattooJournal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2BD3186F29F275DF0059F9A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R7VRH6S6K3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AndrewLawler.TattooJournalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TattooJournal.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TattooJournal";
+			};
+			name = Debug;
+		};
+		2BD3187029F275DF0059F9A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R7VRH6S6K3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AndrewLawler.TattooJournalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TattooJournal.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TattooJournal";
+			};
+			name = Release;
+		};
+		2BD3187229F275DF0059F9A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R7VRH6S6K3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AndrewLawler.TattooJournalUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TattooJournal;
+			};
+			name = Debug;
+		};
+		2BD3187329F275DF0059F9A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R7VRH6S6K3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AndrewLawler.TattooJournalUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TattooJournal;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2BD3183D29F275DD0059F9A8 /* Build configuration list for PBXProject "TattooJournal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BD3186929F275DF0059F9A8 /* Debug */,
+				2BD3186A29F275DF0059F9A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BD3186B29F275DF0059F9A8 /* Build configuration list for PBXNativeTarget "TattooJournal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BD3186C29F275DF0059F9A8 /* Debug */,
+				2BD3186D29F275DF0059F9A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BD3186E29F275DF0059F9A8 /* Build configuration list for PBXNativeTarget "TattooJournalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BD3186F29F275DF0059F9A8 /* Debug */,
+				2BD3187029F275DF0059F9A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BD3187129F275DF0059F9A8 /* Build configuration list for PBXNativeTarget "TattooJournalUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BD3187229F275DF0059F9A8 /* Debug */,
+				2BD3187329F275DF0059F9A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2BD3185029F275DF0059F9A8 /* TattooJournal.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2BD3185129F275DF0059F9A8 /* TattooJournal.xcdatamodel */,
+			);
+			currentVersion = 2BD3185129F275DF0059F9A8 /* TattooJournal.xcdatamodel */;
+			path = TattooJournal.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 2BD3183A29F275DD0059F9A8 /* Project object */;
+}
