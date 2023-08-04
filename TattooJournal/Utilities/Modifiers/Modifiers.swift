@@ -30,11 +30,17 @@ struct PreviewEnvironmentObjects: ViewModifier {
 struct CellOutline: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .background(Color(.systemBackground))
             .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color(UIColor.lightGray).opacity(0.5), lineWidth: 1.5)
-            )
+            .background(Color(.systemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
     }
+}
+
+#Preview {
+    HStack {
+        Spacer()
+    }
+    .frame(height: 50)
+    .modifier(CellOutline())
+    .padding(.horizontal)
 }

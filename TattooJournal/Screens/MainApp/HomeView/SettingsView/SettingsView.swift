@@ -30,6 +30,14 @@ struct SettingsView: View {
                             Text(tipAmount.title)
                         }
                     }
+                    ColorPicker("App Tint", selection: $userPreferences.appColor)
+                    Button {
+                        userPreferences.saveColor()
+                    } label: {
+                        Text("Save Changes")
+                            .multilineTextAlignment(.center)
+                            .tint(userPreferences.appColor)
+                    }
                 } header: {
                     Text("Preferences")
                 } footer: {

@@ -10,5 +10,4 @@ import SwiftUI
 final class HomeViewModel: ObservableObject {
     @Published var shouldShowAppointmentForm = false
     @Published var shouldShowSettingsScreen = false
-    @Published var shouldShowGetWhatYouGet = false
 }

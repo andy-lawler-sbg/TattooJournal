@@ -47,6 +47,24 @@ final class UserPreferences: ObservableObject {
 
     @Published var selectedCurrency = 1
     @Published var selectedTipAmount = 1
+    @Published var appColor = Color.accentColor
+
+    init() {
+        appColor = getColor() ?? Color.accentColor
+    }
+
+    func saveColor() {
+        guard let cgColor = appColor.cgColor,
+              let array = cgColor.components else { return }
+        UserDefaults.standard.set(array, forKey: "appColor")
+    }
+
+    func getColor() -> Color? {
+        guard let array = UserDefaults.standard.object(forKey: "appColor") as? [CGFloat],
+              let cgColor = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: array)
+        else { return nil }
+        return Color(cgColor)
+    }
 
     func updateTipAmount(_ tipAmount: TipAmount) {
         guard let index = tipAmounts.firstIndex(where: { $0.title == tipAmount.title }) else { return }
@@ -56,5 +74,13 @@ final class UserPreferences: ObservableObject {
     func updateCurrency(_ currency: Currency) {
         guard let index = currencies.firstIndex(where: { $0.title == currency.title }) else { return }
         self.selectedCurrency = index
+    }
+}
+
+extension UserDefaults {
+    func color(forKey key: String) -> Color {
+        guard let array = object(forKey: key) as? [CGFloat] else { return .accentColor }
+        let color = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: array)!
+        return Color(color)
     }
 }

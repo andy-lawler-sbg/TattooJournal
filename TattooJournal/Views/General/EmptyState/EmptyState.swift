@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EmptyState: View {
 
+    @EnvironmentObject var userPreferences: UserPreferences
+
     let imageName: String
     let title: String
     let description: String
@@ -19,7 +21,7 @@ struct EmptyState: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 100)
-                .foregroundColor(.accentColor)
+                .foregroundColor(userPreferences.appColor)
                 .padding()
             Text(title)
                 .font(.headline)
@@ -39,5 +41,6 @@ struct EmptyState: View {
 struct EmptyState_Previews: PreviewProvider {
     static var previews: some View {
         EmptyState(imageName: "gear", title: "Sorry", description: "You have not set any settings.")
+            .modifier(PreviewEnvironmentObjects())
     }
 }

@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B081C0629FAF2C800A86E63 /* GetWhatYouGet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B081C0529FAF2C800A86E63 /* GetWhatYouGet.swift */; };
-		2B081C0929FAF3F800A86E63 /* GetWhatYouGetBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B081C0829FAF3F800A86E63 /* GetWhatYouGetBanner.swift */; };
 		2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */; };
+		2B208AFD2A7D36DC000EDCE3 /* InformationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B208AFC2A7D36DC000EDCE3 /* InformationPopUp.swift */; };
+		2B208AFF2A7D383A000EDCE3 /* AppointmentsCollapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B208AFE2A7D383A000EDCE3 /* AppointmentsCollapsible.swift */; };
+		2B208B022A7D3D13000EDCE3 /* PersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B208B012A7D3D13000EDCE3 /* PersonalView.swift */; };
 		2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D27C29F312C00051F6B9 /* EmptyState.swift */; };
 		2B53D28129F316930051F6B9 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D28029F316930051F6B9 /* UserPreferences.swift */; };
 		2B53D28429F31B0B0051F6B9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D28329F31B0B0051F6B9 /* SettingsView.swift */; };
+		2B64D2282A7D536900090EB6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64D2272A7D536900090EB6 /* OnboardingView.swift */; };
+		2B64D22A2A7D649300090EB6 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64D2292A7D649300090EB6 /* OnboardingPageView.swift */; };
+		2B64D22C2A7D64D400090EB6 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64D22B2A7D64D400090EB6 /* OnboardingPage.swift */; };
 		2B6C8CF329FBFD8100A4BA6E /* PastTattoosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6C8CF229FBFD8100A4BA6E /* PastTattoosViewModel.swift */; };
 		2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6C8CF529FC054C00A4BA6E /* VisitedShops.swift */; };
 		2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */; };
@@ -39,7 +43,6 @@
 		2BD3189929F2B65D0059F9A8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3189829F2B65D0059F9A8 /* Location.swift */; };
 		2BD3189F29F2C0CD0059F9A8 /* PastTattoosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3189E29F2C0CD0059F9A8 /* PastTattoosView.swift */; };
 		2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */; };
-		2BD318A529F2C6230059F9A8 /* CostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD318A429F2C6230059F9A8 /* CostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,12 +63,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B081C0529FAF2C800A86E63 /* GetWhatYouGet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWhatYouGet.swift; sourceTree = "<group>"; };
-		2B081C0829FAF3F800A86E63 /* GetWhatYouGetBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWhatYouGetBanner.swift; sourceTree = "<group>"; };
 		2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
+		2B208AFC2A7D36DC000EDCE3 /* InformationPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPopUp.swift; sourceTree = "<group>"; };
+		2B208AFE2A7D383A000EDCE3 /* AppointmentsCollapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsCollapsible.swift; sourceTree = "<group>"; };
+		2B208B012A7D3D13000EDCE3 /* PersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalView.swift; sourceTree = "<group>"; };
 		2B53D27C29F312C00051F6B9 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
 		2B53D28029F316930051F6B9 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		2B53D28329F31B0B0051F6B9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2B64D2272A7D536900090EB6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		2B64D2292A7D649300090EB6 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
+		2B64D22B2A7D64D400090EB6 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		2B6C8CF229FBFD8100A4BA6E /* PastTattoosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastTattoosViewModel.swift; sourceTree = "<group>"; };
 		2B6C8CF529FC054C00A4BA6E /* VisitedShops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedShops.swift; sourceTree = "<group>"; };
 		2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -95,7 +102,6 @@
 		2BD3189829F2B65D0059F9A8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		2BD3189E29F2C0CD0059F9A8 /* PastTattoosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastTattoosView.swift; sourceTree = "<group>"; };
 		2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentCell.swift; sourceTree = "<group>"; };
-		2BD318A429F2C6230059F9A8 /* CostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,20 +129,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2B081C0729FAF2CE00A86E63 /* GetWhatYouGet */ = {
-			isa = PBXGroup;
-			children = (
-				2B081C0529FAF2C800A86E63 /* GetWhatYouGet.swift */,
-			);
-			path = GetWhatYouGet;
-			sourceTree = "<group>";
-		};
 		2B081C0A29FAF6B200A86E63 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
 				2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2B208B002A7D3CFB000EDCE3 /* PersonalView */ = {
+			isa = PBXGroup;
+			children = (
+				2B208B012A7D3D13000EDCE3 /* PersonalView.swift */,
+			);
+			path = PersonalView;
 			sourceTree = "<group>";
 		};
 		2B53D27B29F312B50051F6B9 /* EmptyState */ = {
@@ -153,6 +159,61 @@
 				2B53D28329F31B0B0051F6B9 /* SettingsView.swift */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		2B64D21A2A7D518A00090EB6 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				2B64D21B2A7D518F00090EB6 /* Onboarding */,
+				2B64D21C2A7D519400090EB6 /* MainApp */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		2B64D21B2A7D518F00090EB6 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				2B64D2272A7D536900090EB6 /* OnboardingView.swift */,
+				2B64D2292A7D649300090EB6 /* OnboardingPageView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		2B64D21C2A7D519400090EB6 /* MainApp */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3187529F276830059F9A8 /* TJTabView.swift */,
+				2B208B002A7D3CFB000EDCE3 /* PersonalView */,
+				2BD3188B29F2B53E0059F9A8 /* HomeView */,
+				2BD3189229F2B5FA0059F9A8 /* AppointmentsView */,
+				2BD3189D29F2C0C10059F9A8 /* PastTattoosView */,
+			);
+			path = MainApp;
+			sourceTree = "<group>";
+		};
+		2B64D21D2A7D520300090EB6 /* InformationPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				2B208AFC2A7D36DC000EDCE3 /* InformationPopUp.swift */,
+			);
+			path = InformationPopUp;
+			sourceTree = "<group>";
+		};
+		2B64D21E2A7D520A00090EB6 /* AppointmentsCollapsible */ = {
+			isa = PBXGroup;
+			children = (
+				2B208AFE2A7D383A000EDCE3 /* AppointmentsCollapsible.swift */,
+			);
+			path = AppointmentsCollapsible;
+			sourceTree = "<group>";
+		};
+		2B64D2222A7D524300090EB6 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				2B53D27B29F312B50051F6B9 /* EmptyState */,
+				2B64D21D2A7D520300090EB6 /* InformationPopUp */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		2B6C8CF429FC053F00A4BA6E /* VisitedShops */ = {
@@ -186,10 +247,10 @@
 		2BD3184429F275DD0059F9A8 /* TattooJournal */ = {
 			isa = PBXGroup;
 			children = (
+				2B64D21A2A7D518A00090EB6 /* Screens */,
 				2BD3189429F2B6310059F9A8 /* Utilities */,
 				2BD3189129F2B5F50059F9A8 /* Views */,
-				2BD3188A29F2B5390059F9A8 /* Screens */,
-				2BD3188929F2B52F0059F9A8 /* Model */,
+				2BD3188929F2B52F0059F9A8 /* Models */,
 				2BD3185029F275DF0059F9A8 /* TattooJournal.xcdatamodeld */,
 				2BD3187429F2763E0059F9A8 /* Core Data */,
 				2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */,
@@ -233,31 +294,22 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
-		2BD3188929F2B52F0059F9A8 /* Model */ = {
+		2BD3188929F2B52F0059F9A8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				2BD3188C29F2B54E0059F9A8 /* EnvironmentObjects */,
 				2BD3188729F2B5160059F9A8 /* Shop.swift */,
 				2BD3187F29F285E90059F9A8 /* Appointment.swift */,
 				2BD3189829F2B65D0059F9A8 /* Location.swift */,
+				2B64D22B2A7D64D400090EB6 /* OnboardingPage.swift */,
 			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2BD3188A29F2B5390059F9A8 /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				2BD3187529F276830059F9A8 /* TJTabView.swift */,
-				2BD3188B29F2B53E0059F9A8 /* HomeView */,
-				2BD3189229F2B5FA0059F9A8 /* AppointmentsView */,
-				2BD3189D29F2C0C10059F9A8 /* PastTattoosView */,
-			);
-			path = Screens;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		2BD3188B29F2B53E0059F9A8 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				2B53D28229F31B040051F6B9 /* SettingsView */,
 				2BD3187729F2768F0059F9A8 /* HomeView.swift */,
 				2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */,
 			);
@@ -276,15 +328,9 @@
 		2BD3189129F2B5F50059F9A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2B6C8CF429FC053F00A4BA6E /* VisitedShops */,
-				2B53D28229F31B040051F6B9 /* SettingsView */,
+				2B64D2222A7D524300090EB6 /* General */,
 				2B081C0A29FAF6B200A86E63 /* Buttons */,
-				2B53D27B29F312B50051F6B9 /* EmptyState */,
-				2BD318A329F2C61E0059F9A8 /* CostView */,
 				2BD318A029F2C50A0059F9A8 /* Cells */,
-				2BD3189A29F2B66E0059F9A8 /* AppointmentMapView */,
-				2BD3189329F2B61A0059F9A8 /* AppointmentForm */,
-				2B081C0729FAF2CE00A86E63 /* GetWhatYouGet */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,6 +338,8 @@
 		2BD3189229F2B5FA0059F9A8 /* AppointmentsView */ = {
 			isa = PBXGroup;
 			children = (
+				2BD3189329F2B61A0059F9A8 /* AppointmentForm */,
+				2B64D21E2A7D520A00090EB6 /* AppointmentsCollapsible */,
 				2BD3188529F29B070059F9A8 /* AppointmentsView.swift */,
 				2BD3188F29F2B5D60059F9A8 /* AppointmentsViewModel.swift */,
 			);
@@ -301,6 +349,7 @@
 		2BD3189329F2B61A0059F9A8 /* AppointmentForm */ = {
 			isa = PBXGroup;
 			children = (
+				2BD3189A29F2B66E0059F9A8 /* AppointmentMapView */,
 				2BD3187B29F27B800059F9A8 /* AppointmentForm.swift */,
 				2BD3187D29F285D90059F9A8 /* AppointmentFormViewModel.swift */,
 			);
@@ -334,6 +383,7 @@
 		2BD3189D29F2C0C10059F9A8 /* PastTattoosView */ = {
 			isa = PBXGroup;
 			children = (
+				2B6C8CF429FC053F00A4BA6E /* VisitedShops */,
 				2BD3189E29F2C0CD0059F9A8 /* PastTattoosView.swift */,
 				2B6C8CF229FBFD8100A4BA6E /* PastTattoosViewModel.swift */,
 			);
@@ -344,17 +394,8 @@
 			isa = PBXGroup;
 			children = (
 				2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */,
-				2B081C0829FAF3F800A86E63 /* GetWhatYouGetBanner.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		2BD318A329F2C61E0059F9A8 /* CostView */ = {
-			isa = PBXGroup;
-			children = (
-				2BD318A429F2C6230059F9A8 /* CostView.swift */,
-			);
-			path = CostView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,12 +528,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B64D22A2A7D649300090EB6 /* OnboardingPageView.swift in Sources */,
 				2BD3187E29F285D90059F9A8 /* AppointmentFormViewModel.swift in Sources */,
 				2BD3185229F275DF0059F9A8 /* TattooJournal.xcdatamodeld in Sources */,
 				2BD3189929F2B65D0059F9A8 /* Location.swift in Sources */,
 				2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */,
-				2B081C0929FAF3F800A86E63 /* GetWhatYouGetBanner.swift in Sources */,
-				2BD318A529F2C6230059F9A8 /* CostView.swift in Sources */,
+				2B208AFD2A7D36DC000EDCE3 /* InformationPopUp.swift in Sources */,
 				2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */,
 				2BD3188629F29B070059F9A8 /* AppointmentsView.swift in Sources */,
 				2BD3189F29F2C0CD0059F9A8 /* PastTattoosView.swift in Sources */,
@@ -504,17 +545,20 @@
 				2BD3184F29F275DF0059F9A8 /* Persistence.swift in Sources */,
 				2BD3184829F275DD0059F9A8 /* CoreDataExample.swift in Sources */,
 				2BD3187829F2768F0059F9A8 /* HomeView.swift in Sources */,
+				2B64D22C2A7D64D400090EB6 /* OnboardingPage.swift in Sources */,
 				2BD3189029F2B5D60059F9A8 /* AppointmentsViewModel.swift in Sources */,
 				2BD3188829F2B5160059F9A8 /* Shop.swift in Sources */,
 				2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */,
+				2B208AFF2A7D383A000EDCE3 /* AppointmentsCollapsible.swift in Sources */,
 				2B53D28129F316930051F6B9 /* UserPreferences.swift in Sources */,
 				2BD3188229F2871C0059F9A8 /* AppointmentMapView.swift in Sources */,
+				2B64D2282A7D536900090EB6 /* OnboardingView.swift in Sources */,
 				2BD3187629F276830059F9A8 /* TJTabView.swift in Sources */,
 				2BD3188429F299CD0059F9A8 /* Appointments.swift in Sources */,
 				2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */,
+				2B208B022A7D3D13000EDCE3 /* PersonalView.swift in Sources */,
 				2B6C8CF329FBFD8100A4BA6E /* PastTattoosViewModel.swift in Sources */,
 				2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */,
-				2B081C0629FAF2C800A86E63 /* GetWhatYouGet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,7 +645,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -655,7 +699,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -681,6 +725,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -688,6 +733,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AndrewLawler.TattooJournal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -710,6 +759,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -717,6 +767,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AndrewLawler.TattooJournal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

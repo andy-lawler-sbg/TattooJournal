@@ -20,37 +20,55 @@ struct AppointmentCell: View {
     }
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 5) {
+            HStack(spacing: 15) {
                 Text(appointment.artist)
-                    .foregroundColor(.accentColor)
+                    .foregroundColor(userPreferences.appColor)
                     .font(.headline)
                     .fontWeight(.bold)
-                Text(appointment.shop.title)
-                    .font(.body)
-                    .fontWeight(.medium)
-                Text(dateString)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            Spacer()
-            VStack (alignment: .trailing, spacing: 5) {
-                Text(appointment.design)
-                    .font(.body)
-                    .fontWeight(.medium)
                 Text("\(userPreferences.currencyString)\(appointment.price)")
-                    .foregroundColor(.secondary)
+                    .font(.caption).bold()
+                    .foregroundStyle(Color.secondary)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 8)
+                    .background(Color(.buttonCapsule))
+                    .clipShape(.capsule)
+                Spacer()
+            }
+            Text(appointment.shop.title)
+                .font(.caption)
+                .fontWeight(.medium)
+            Text(dateString)
+                .font(.caption2)
+                .foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        .overlay(alignment: .bottomTrailing) {
+            Button {
+                print("hello world")
+            } label: {
                 Image(systemName: appointment.notifyMe ? "bell.fill" : "bell")
-                    .foregroundColor(appointment.notifyMe ? Color.accentColor : Color.gray)
+                    .resizable()
+                    .frame(width: 13, height: 13)
+                    .foregroundStyle(appointment.notifyMe ? userPreferences.appColor : Color.gray)
+                    .padding(6)
+                    .background(Color(.buttonCapsule))
+                    .clipShape(.circle)
             }
         }
-        .modifier(CellOutline())
+        .padding()
+        .background(Color(.cellBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }
 
-struct AppointmentCell_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    VStack {
+        Spacer()
         AppointmentCell(appointment: MockAppointmentData().appointment)
-            .environmentObject(UserPreferences())
+            .modifier(PreviewEnvironmentObjects())
+        Spacer()
     }
+    .padding()
+    .background(Color.gray.opacity(0.1))
 }

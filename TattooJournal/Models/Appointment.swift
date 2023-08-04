@@ -22,7 +22,7 @@ struct MockAppointmentData {
         var appointment = Appointment()
         appointment.artist = "John Crompton"
         appointment.date = Calendar.current.date(byAdding: .month, value: 3, to: Date())!
-        appointment.design = "☠️ Skull"
+        appointment.design = "Skull"
         appointment.price = "250"
         appointment.notifyMe = true
         appointment.shop = Shop(location: Location(id: UUID(),
@@ -38,7 +38,7 @@ struct MockAppointmentData {
         var appointment = Appointment()
         appointment.artist = "John Crompton"
         appointment.date = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
-        appointment.design = "🐍 Snake"
+        appointment.design = "Snake"
         appointment.price = "200"
         appointment.notifyMe = true
         appointment.shop = Shop(location: Location(id: UUID(),
@@ -54,7 +54,7 @@ struct MockAppointmentData {
         var appointment = Appointment()
         appointment.artist = "John Crompton"
         appointment.date = Calendar.current.date(byAdding: .month, value: 6, to: Date())!
-        appointment.design = "🦅 Eagle"
+        appointment.design = "Eagle"
         appointment.price = "300"
         appointment.notifyMe = true
         appointment.shop = Shop(location: Location(id: UUID(),
@@ -70,7 +70,7 @@ struct MockAppointmentData {
         var appointment = Appointment()
         appointment.artist = "John Crompton"
         appointment.date = Calendar.current.date(byAdding: .month, value: 9, to: Date())!
-        appointment.design = "⚓️ Ship"
+        appointment.design = "Ship"
         appointment.price = "200"
         appointment.notifyMe = true
         appointment.shop = Shop(location: Location(id: UUID(),
@@ -85,8 +85,8 @@ struct MockAppointmentData {
     var appointment5: Appointment {
         var appointment = Appointment()
         appointment.artist = "John Crompton"
-        appointment.date = Calendar.current.date(byAdding: .month, value: -2, to: Date())!
-        appointment.design = "🐆 Panther"
+        appointment.date = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
+        appointment.design = "Panther"
         appointment.price = "250"
         appointment.notifyMe = true
         appointment.shop = Shop(location: Location(id: UUID(),
@@ -102,7 +102,7 @@ struct MockAppointmentData {
         var appointment = Appointment()
         appointment.artist = "John Crompton"
         appointment.date = Calendar.current.date(byAdding: .month, value: -10, to: Date())!
-        appointment.design = "💀 Reaper"
+        appointment.design = "Reaper"
         appointment.price = "150"
         appointment.notifyMe = true
         appointment.shop = Shop(location: Location(id: UUID(),

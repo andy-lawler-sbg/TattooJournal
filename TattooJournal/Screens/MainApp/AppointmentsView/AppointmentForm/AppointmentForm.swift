@@ -9,7 +9,9 @@ import SwiftUI
 
 struct AppointmentForm: View {
 
+    @EnvironmentObject var userPreferences: UserPreferences
     @EnvironmentObject var appointments: Appointments
+
     @Binding var isShowingAppointmentForm: Bool
     @FocusState private var focusedTextField: FormTextField?
     @ObservedObject var viewModel: AppointmentFormViewModel
@@ -63,10 +65,10 @@ struct AppointmentForm: View {
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
-
+                
                 Section {
                     Toggle("Notify Me", isOn: $viewModel.appointment.notifyMe)
-                        .tint(.accentColor)
+                        .tint(userPreferences.appColor)
                 } header: {
                     Text("Notifications")
                 } footer: {
@@ -96,6 +98,7 @@ struct AppointmentForm: View {
                             Text("🚨 Delete Appointment 🚨")
                                 .frame(maxWidth: .infinity)
                                 .multilineTextAlignment(.center)
+                                .foregroundColor(Color.accentColor)
                         }
                     }
                 }
@@ -117,7 +120,7 @@ struct AppointmentForm_Previews: PreviewProvider {
     static var previews: some View {
         AppointmentForm(isShowingAppointmentForm: .constant(true),
                         viewModel: AppointmentFormViewModel(appointment: MockAppointmentData().appointment))
-            .tint(.accentColor)
+            .tint(UserPreferences().appColor)
             .modifier(PreviewEnvironmentObjects())
     }
 }

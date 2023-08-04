@@ -9,26 +9,25 @@ import SwiftUI
 
 @main
 struct TattooJournalApp: App {
+
     var appointments = Appointments()
     var userPreferences = UserPreferences()
-    
+
+    let shouldShowOnboarding = false
+
     var body: some Scene {
         WindowGroup {
-            TJTabView()
-                .environmentObject(appointments)
-                .environmentObject(userPreferences)
+            if shouldShowOnboarding {
+                OnboardingView {
+                    TJTabView()
+                        .environmentObject(appointments)
+                        .environmentObject(userPreferences)
+                }
+            } else {
+                TJTabView()
+                    .environmentObject(appointments)
+                    .environmentObject(userPreferences)
+            }
         }
     }
 }
-
-//@main
-//struct TattooJournalApp: App {
-//    let persistenceController = PersistenceController.shared
-//
-//    var body: some Scene {
-//        WindowGroup {
-//            CoreDataExample()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-//        }
-//    }
-//}
