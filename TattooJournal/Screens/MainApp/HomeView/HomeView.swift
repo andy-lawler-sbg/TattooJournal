@@ -53,21 +53,15 @@ struct HomeView: View {
 
                 List {
                     if appointments.hasAppointments {
-                        Section("Next Appointment") {
-                            AppointmentCell(appointment: appointments.nextAppointment()!)
-                                .listRowSeparator(.hidden)
-                                .onTapGesture {
-                                    viewModel.shouldShowAppointmentForm = true
-                                }
-                        }
-
-                        Section("Memories") {
-
-                        }
-                        .listRowBackground(Color.clear)
+                        AppointmentCell(appointment: appointments.nextAppointment()!)
+                            .listRowSeparator(.hidden)
+                            .onTapGesture {
+                                viewModel.shouldShowAppointmentForm = true
+                            }
+                            .listRowBackground(Color.clear)
                     }
-                    .listStyle(.plain)
                 }
+                .listStyle(.plain)
                 .scrollIndicators(.hidden)
 
             }
