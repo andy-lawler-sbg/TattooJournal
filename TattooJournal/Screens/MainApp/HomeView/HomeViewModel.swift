@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-final class HomeViewModel: ObservableObject {
-    @Published var shouldShowAppointmentForm = false
-    @Published var shouldShowSettingsScreen = false
+@Observable
+final class HomeViewModel {
+    var shouldShowAppointmentForm = false
+    var shouldShowSettingsScreen = false
 }

@@ -14,7 +14,8 @@ struct AppointmentForm: View {
 
     @Binding var isShowingAppointmentForm: Bool
     @FocusState private var focusedTextField: FormTextField?
-    @ObservedObject var viewModel: AppointmentFormViewModel
+
+    @Bindable var viewModel: AppointmentFormViewModel
 
     enum FormTextField {
         case artist, date, price, design, location
@@ -116,11 +117,9 @@ struct AppointmentForm: View {
     }
 }
 
-struct AppointmentForm_Previews: PreviewProvider {
-    static var previews: some View {
-        AppointmentForm(isShowingAppointmentForm: .constant(true),
-                        viewModel: AppointmentFormViewModel(appointment: MockAppointmentData().appointment))
-            .tint(UserPreferences().appColor)
-            .modifier(PreviewEnvironmentObjects())
-    }
+#Preview {
+    AppointmentForm(isShowingAppointmentForm: .constant(true),
+                    viewModel: AppointmentFormViewModel(appointment: MockAppointmentData().appointment))
+        .tint(UserPreferences().appColor)
+        .modifier(PreviewEnvironmentObjects())
 }

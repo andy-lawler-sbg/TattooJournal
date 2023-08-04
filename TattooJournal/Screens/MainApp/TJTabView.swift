@@ -31,7 +31,6 @@ struct TJTabView: View {
                         Label("Personal", systemImage: "person.fill")
                     }
             }
-            .navigationBarBackButtonHidden()
             .tint(userPreferences.appColor)
         }
     }

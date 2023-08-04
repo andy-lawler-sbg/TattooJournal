@@ -7,21 +7,69 @@
 
 import SwiftUI
 
+struct HomeHelperViewItem: Identifiable {
+    let id = UUID()
+    let title: String
+    let description: String
+}
+
 struct HomeView: View {
 
     @EnvironmentObject var appointments: Appointments
-    @StateObject var viewModel = HomeViewModel()
+    @Bindable var viewModel = HomeViewModel()
+
+    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+
+    let helperViewItems: [HomeHelperViewItem] = [
+        .init(title: "Add Appointments", description: "You don't have any appointments, maybe add some?"),
+        .init(title: "Add Appointments", description: "Add some appointments :)"),
+        .init(title: "Add Appointments", description: "Add some appointments :)"),
+        .init(title: "Add Appointments", description: "Add some appointments :)")
+    ]
 
     var body: some View {
         NavigationStack {
             VStack {
-                if appointments.hasAppointments {
-                    AppointmentCell(appointment: appointments.nextAppointment()!)
-                        .onTapGesture {
-                            viewModel.shouldShowAppointmentForm = true
+                InformationPopUp(text: "Welcome to TattooJournal. Follow the steps below to get started.")
+                    .padding(.vertical, 7.5)
+
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(helperViewItems) { item in
+                            VStack(spacing: 20) {
+                                Text(item.title)
+                                    .font(.callout).bold()
+                                Text(item.description)
+                                    .font(.caption2)
+                                    .multilineTextAlignment(.center)
+                            }
+                            .foregroundStyle(.white)
+                            .padding()
+                            .background(Color.accentColor)
                         }
-                        .padding()
+                    }
                 }
+                .scrollIndicators(.hidden)
+
+                List {
+                    if appointments.hasAppointments {
+                        Section("Next Appointment") {
+                            AppointmentCell(appointment: appointments.nextAppointment()!)
+                                .listRowSeparator(.hidden)
+                                .onTapGesture {
+                                    viewModel.shouldShowAppointmentForm = true
+                                }
+                        }
+
+                        Section("Memories") {
+
+                        }
+                        .listRowBackground(Color.clear)
+                    }
+                }
+                .listStyle(.plain)
+                .scrollIndicators(.hidden)
+
             }
             .background(Color.gray.opacity(0.1))
             .navigationTitle(Constants.title)
@@ -72,15 +120,12 @@ struct NavBarItem: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-                .modifier(PreviewEnvironmentObjects())
-        }
+#Preview {
+    TabView {
+        HomeView()
+            .tabItem {
+                Label("Home", systemImage: "house")
+            }
+            .modifier(PreviewEnvironmentObjects())
     }
 }

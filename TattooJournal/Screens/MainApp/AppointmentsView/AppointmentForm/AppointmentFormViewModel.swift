@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-final class AppointmentFormViewModel: ObservableObject {
+@Observable
+final class AppointmentFormViewModel {
 
-    @Published var appointment = Appointment()
-    @Published var isShowingMapView = false
+    var appointment = Appointment()
+    var isShowingMapView = false
 
     var editingAppointment = false
     var isValidForm: Bool { false }

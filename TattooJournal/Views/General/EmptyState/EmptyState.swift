@@ -38,9 +38,7 @@ struct EmptyState: View {
 }
 
 
-struct EmptyState_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyState(imageName: "gear", title: "Sorry", description: "You have not set any settings.")
-            .modifier(PreviewEnvironmentObjects())
-    }
+#Preview {
+    EmptyState(imageName: "gear", title: "Sorry", description: "You have not set any settings.")
+        .modifier(PreviewEnvironmentObjects())
 }

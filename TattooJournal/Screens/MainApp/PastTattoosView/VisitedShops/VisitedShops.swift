@@ -24,9 +24,7 @@ struct VisitedShops: View {
     }
 }
 
-struct VisitedShops_Previews: PreviewProvider {
-    static var previews: some View {
-        VisitedShops(shouldShowVisitedShops: .constant(true))
-            .modifier(PreviewEnvironmentObjects())
-    }
+#Preview {
+    VisitedShops(shouldShowVisitedShops: .constant(true))
+        .modifier(PreviewEnvironmentObjects())
 }

@@ -12,7 +12,7 @@ struct AppointmentMapView: View {
 
     // MARK: - Observed Object
 
-    @ObservedObject var formViewModel: AppointmentFormViewModel
+    @Bindable var formViewModel: AppointmentFormViewModel
 
     // MARK: - Binding
 
@@ -136,9 +136,7 @@ private extension AppointmentMapView {
     }
 }
 
-struct AppointmentMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        AppointmentMapView(formViewModel: AppointmentFormViewModel(appointment: nil),
-                           isShowingMapView: .constant(true))
-    }
+#Preview {
+    AppointmentMapView(formViewModel: AppointmentFormViewModel(appointment: nil),
+                       isShowingMapView: .constant(true))
 }

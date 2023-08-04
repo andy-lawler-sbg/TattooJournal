@@ -57,9 +57,7 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(isShowingSettingsView: .constant(true))
-            .modifier(PreviewEnvironmentObjects())
-    }
+#Preview {
+    SettingsView(isShowingSettingsView: .constant(true))
+        .modifier(PreviewEnvironmentObjects())
 }
