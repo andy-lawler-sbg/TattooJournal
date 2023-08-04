@@ -66,8 +66,8 @@ struct HomeView: View {
                         }
                         .listRowBackground(Color.clear)
                     }
+                    .listStyle(.plain)
                 }
-                .listStyle(.plain)
                 .scrollIndicators(.hidden)
 
             }

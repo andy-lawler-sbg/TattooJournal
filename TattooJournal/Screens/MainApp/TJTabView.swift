@@ -8,31 +8,29 @@
 import SwiftUI
 
 struct TJTabView: View {
-
+    
     @EnvironmentObject var userPreferences: UserPreferences
-
+    
     var body: some View {
-        NavigationStack {
-            TabView {
-                HomeView()
-                    .tabItem {
-                        Label("Home", systemImage: "house")
-                    }
-                AppointmentsView()
-                    .tabItem {
-                        Label("Appointments", systemImage: "book")
-                    }
-                PastTattoosView()
-                    .tabItem {
-                        Label("Past Tattoos", systemImage: "pencil.line")
-                    }
-                PersonalView()
-                    .tabItem {
-                        Label("Personal", systemImage: "person.fill")
-                    }
-            }
-            .tint(userPreferences.appColor)
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+            AppointmentsView()
+                .tabItem {
+                    Label("Appointments", systemImage: "book")
+                }
+            PastTattoosView()
+                .tabItem {
+                    Label("Past Tattoos", systemImage: "pencil.line")
+                }
+            PersonalView()
+                .tabItem {
+                    Label("Personal", systemImage: "person.fill")
+                }
         }
+        .tint(userPreferences.appColor)
     }
 }
 
