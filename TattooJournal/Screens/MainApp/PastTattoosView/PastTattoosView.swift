@@ -6,19 +6,24 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct PastTattoosView: View {
 
     @EnvironmentObject var appointments: Appointments
     @Bindable var viewModel = PastTattoosViewModel()
 
+    var pastTattoosTip = PastTattoosTip()
+
     var body: some View {
         NavigationStack {
             ZStack {
                 if appointments.hasAppointments {
                     VStack {
-                        InformationPopUp(text: Constants.description)
-                            .padding(.top, 10)
+                        TipView(pastTattoosTip, arrowEdge: .bottom)
+                            .tipBackground(Color.white)
+                            .padding(.horizontal)
+                            .padding(.top, 7.5)
                         List {
                             ForEach(appointments.completedAppointments) { appointment in
                                 AppointmentCell(appointment: appointment)
@@ -52,6 +57,7 @@ struct PastTattoosView: View {
                     } label: {
                         NavBarItem(imageName: Constants.ImageNames.visitedShops)
                     }
+                    .onTapGesture(perform: Haptics.shared.successHaptic)
                 }
             }
         }
@@ -68,7 +74,6 @@ struct PastTattoosView: View {
 private extension PastTattoosView {
     enum Constants {
         static let title = "🕰️ Past Tattoos"
-        static let description = "This list shows you the tattoo's you have completed. If you did in-fact miss an appointment feel free to swipe to delete it."
 
         enum ImageNames {
             static let visitedShops = "globe.desk"

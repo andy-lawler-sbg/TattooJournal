@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct AppointmentsView: View {
 
@@ -14,13 +15,17 @@ struct AppointmentsView: View {
 
     @Bindable var viewModel = AppointmentsViewModel()
 
+    var appointmentsTip = AppointmentsTip()
+
     var body: some View {
         NavigationStack {
             ZStack {
                 if appointments.hasAppointments {
                     VStack {
-                        InformationPopUp(text: Constants.description)
-                            .padding(.top, 10)
+                        TipView(appointmentsTip, arrowEdge: .bottom)
+                            .tipBackground(Color.white)
+                            .padding(.horizontal)
+                            .padding(.top, 7.5)
                         List {
                             ForEach(appointments.orderedAppointments) { appointment in
                                 AppointmentCell(appointment: appointment)
@@ -58,6 +63,7 @@ struct AppointmentsView: View {
                     } label: {
                         NavBarItem(imageName: Constants.ImageNames.add)
                     }
+                    .onTapGesture(perform: Haptics.shared.successHaptic)
                 }
             }
         }
@@ -71,7 +77,6 @@ struct AppointmentsView: View {
 private extension AppointmentsView {
     enum Constants {
         static let title = "🗓️ Appointments"
-        static let description = "This list shows you your upcoming appointments. Swipe to delete any appointments you no longer have booked."
 
         enum ImageNames {
             static let add = "plus"

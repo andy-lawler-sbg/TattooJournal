@@ -91,6 +91,7 @@ struct AppointmentForm: View {
                             .frame(maxWidth: .infinity)
                             .multilineTextAlignment(.center)
                     }
+                    .onTapGesture(perform: Haptics.shared.successHaptic)
                     if viewModel.editingAppointment {
                         Button {
                             appointments.delete(viewModel.appointment)
@@ -101,6 +102,7 @@ struct AppointmentForm: View {
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(Color.accentColor)
                         }
+                        .onTapGesture(perform: Haptics.shared.successHaptic)
                     }
                 }
             }

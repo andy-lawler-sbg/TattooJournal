@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 @main
 struct TattooJournalApp: App {
@@ -13,21 +14,39 @@ struct TattooJournalApp: App {
     var appointments = Appointments()
     var userPreferences = UserPreferences()
 
-    let shouldShowOnboarding = false
+    @AppStorage(Constants.AppStorage.shouldShowOnboarding) private var shouldShowOnboarding = false
 
     var body: some Scene {
         WindowGroup {
-            if shouldShowOnboarding {
-                OnboardingView {
+            ZStack {
+                if shouldShowOnboarding {
+                    OnboardingView {
+                        TJTabView()
+                            .environmentObject(appointments)
+                            .environmentObject(userPreferences)
+                    }
+                } else {
                     TJTabView()
                         .environmentObject(appointments)
                         .environmentObject(userPreferences)
                 }
-            } else {
-                TJTabView()
-                    .environmentObject(appointments)
-                    .environmentObject(userPreferences)
             }
+            .task {
+                // Configure and load your tips at app launch.
+                try? await Tips.configure {
+                    DisplayFrequency(.immediate)
+                    DatastoreLocation(.applicationDefault)
+                }
+            }
+        }
+    }
+}
+
+extension TattooJournalApp {
+    enum Constants {
+        enum AppStorage {
+            static let shouldShowOnboarding = "shouldShowOnboarding"
+            static let shouldShowNotificationPermissions = "shouldShowNotificationPermissions"
         }
     }
 }

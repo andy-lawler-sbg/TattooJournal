@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct HomeHelperViewItem: Identifiable {
     let id = UUID()
@@ -17,6 +18,8 @@ struct HomeView: View {
 
     @EnvironmentObject var appointments: Appointments
     @Bindable var viewModel = HomeViewModel()
+
+    var homeTip = HomeTip()
 
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
 
@@ -30,8 +33,10 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                InformationPopUp(text: "Welcome to TattooJournal. Follow the steps below to get started.")
-                    .padding(.vertical, 7.5)
+                TipView(homeTip, arrowEdge: .bottom)
+                    .tipBackground(Color.white)
+                    .padding(.horizontal)
+                    .padding(.top, 7.5)
 
                 ScrollView(.horizontal) {
                     HStack {
@@ -73,6 +78,7 @@ struct HomeView: View {
                 } label: {
                     NavBarItem(imageName: Constants.ImageNames.settings)
                 }
+                .onTapGesture(perform: Haptics.shared.successHaptic)
             }
         }
         .sheet(isPresented: $viewModel.shouldShowAppointmentForm) {

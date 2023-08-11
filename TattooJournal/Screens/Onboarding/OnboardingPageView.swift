@@ -43,6 +43,7 @@ struct OnboardingPageView: View {
                         .background(.white)
                         .clipShape(.buttonBorder)
                 }
+                .onTapGesture(perform: Haptics.shared.successHaptic)
             }
         }
     }

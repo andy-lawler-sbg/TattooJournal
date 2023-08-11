@@ -38,6 +38,7 @@ struct OnboardingView<Destination: View>: View {
                             .clipShape(.capsule)
                             .padding()
                     }
+                    .onTapGesture(perform: Haptics.shared.successHaptic)
                 }
             }
             .tabViewStyle(.page)

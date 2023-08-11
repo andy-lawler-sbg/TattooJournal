@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct AppointmentCell: View {
     
@@ -45,7 +46,17 @@ struct AppointmentCell: View {
         .frame(maxWidth: .infinity)
         .overlay(alignment: .bottomTrailing) {
             Button {
-                print("hello world")
+//                let content = UNMutableNotificationContent()
+//                content.title = "\(appointment.artist) - \(appointment.shop)"
+//                content.subtitle = "\(appointment.date)"
+//                content.sound = UNNotificationSound.default
+//
+//                // show this notification five seconds from now
+//                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//
+//                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//
+//                UNUserNotificationCenter.current().add(request)
             } label: {
                 Image(systemName: appointment.notifyMe ? "bell.fill" : "bell")
                     .resizable()
@@ -59,6 +70,10 @@ struct AppointmentCell: View {
         .padding()
         .background(Color(.cellBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.accentColor)
+        )
     }
 }
 
