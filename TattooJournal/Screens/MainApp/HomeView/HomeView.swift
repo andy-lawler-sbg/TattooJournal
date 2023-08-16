@@ -108,19 +108,26 @@ struct NavBarItem: View {
     var body: some View {
         ZStack {
             Circle()
-                .frame(width: 40, height: 40)
+                .frame(width: 35, height: 35)
                 .foregroundStyle(Color(.cellBackground))
-                .shadow(color: .black.opacity(0.05), radius: 5, y: 3)
             Image(systemName: imageName)
                 .imageScale(.medium)
                 .frame(width: 60, height: 60)
                 .foregroundColor(.secondary)
+                .bold()
                 .symbolEffect(.pulse, value: symbolAnimationValue)
         }
     }
 }
 
-#Preview {
+#Preview("Nav Bar Button") {
+    ZStack {
+        Color.gray.opacity(0.1)
+        NavBarItem(imageName: "gear")
+    }
+}
+
+#Preview("Home Screen") {
     TabView {
         HomeView()
             .tabItem {

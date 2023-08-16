@@ -107,6 +107,7 @@ struct AppointmentForm: View {
                 }
             }
             .navigationTitle("🧾 Log Appointment")
+            .background(Color(.background))
         }
         .overlay(Button {
             isShowingAppointmentForm = false

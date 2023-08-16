@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+@Observable
 final class Appointments: ObservableObject {
 
-    @Published var appointments: [Appointment] = [MockAppointmentData().appointment,
+    var appointments: [Appointment] = [MockAppointmentData().appointment,
                                                   MockAppointmentData().appointment2,
                                                   MockAppointmentData().appointment3,
                                                   MockAppointmentData().appointment4,

@@ -27,13 +27,15 @@ struct AppointmentCell: View {
                     .foregroundColor(userPreferences.appColor)
                     .font(.headline)
                     .fontWeight(.bold)
-                Text("\(userPreferences.currencyString)\(appointment.price)")
-                    .font(.caption).bold()
-                    .foregroundStyle(Color.secondary)
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 8)
-                    .background(Color(.buttonCapsule))
-                    .clipShape(.capsule)
+                HStack(spacing: 10) {
+                    Text("\(userPreferences.currencyString)\(appointment.price)")
+                        .font(.caption).bold()
+                        .foregroundStyle(Color.secondary)
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 8)
+                        .background(Color(.buttonCapsule))
+                        .clipShape(.capsule)
+                }
                 Spacer()
             }
             Text(appointment.shop.title)
@@ -70,10 +72,7 @@ struct AppointmentCell: View {
         .padding()
         .background(Color(.cellBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.accentColor)
-        )
+        .shadow(color: .black.opacity(0.02), radius: 10)
     }
 }
 
@@ -85,5 +84,5 @@ struct AppointmentCell: View {
         Spacer()
     }
     .padding()
-    .background(Color.gray.opacity(0.1))
+    .background(Color(.background))
 }

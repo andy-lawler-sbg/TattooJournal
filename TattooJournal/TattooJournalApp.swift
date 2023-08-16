@@ -12,6 +12,7 @@ import TipKit
 struct TattooJournalApp: App {
 
     var appointments = Appointments()
+
     var userPreferences = UserPreferences()
 
     @AppStorage(Constants.AppStorage.shouldShowOnboarding) private var shouldShowOnboarding = false

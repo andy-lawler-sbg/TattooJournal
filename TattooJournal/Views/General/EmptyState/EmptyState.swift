@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct EmptyState: View {
 
@@ -17,23 +18,26 @@ struct EmptyState: View {
 
     var body: some View {
         VStack(spacing: 5) {
-            Image(systemName: imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 100)
-                .foregroundColor(userPreferences.appColor)
-                .padding()
-            Text(title)
-                .font(.headline)
-                .fontWeight(.semibold)
-                .foregroundColor(.primary)
-            Text(description)
-                .font(.subheadline)
-                .fontWeight(.regular)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
+            VStack {
+                Image(systemName: imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100)
+                    .foregroundColor(userPreferences.appColor)
+                    .padding()
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                Text(description)
+                    .font(.subheadline)
+                    .fontWeight(.regular)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
         }
         .padding(.bottom, 20)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

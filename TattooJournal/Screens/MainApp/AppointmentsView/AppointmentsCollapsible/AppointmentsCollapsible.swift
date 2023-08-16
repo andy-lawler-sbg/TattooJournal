@@ -48,10 +48,10 @@ struct AppointmentsCollapsible: View {
                 Text("You will need the above amount to pay for all of your appointments. This price includes the %\(userPreferences.tipAmount.amount) tips.")
                     .multilineTextAlignment(.center)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(userPreferences.appColor)
                     .padding(.horizontal)
                     .padding()
-                    .background(Color(.cellBackground))
+                    .background(userPreferences.appColor.opacity(0.1))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(color: .black.opacity(0.05), radius: 5, y: 3)
             }
@@ -61,5 +61,6 @@ struct AppointmentsCollapsible: View {
 
 
 #Preview {
-    AppointmentsCollapsible(collapsedTotal: .constant(true))
+    AppointmentsCollapsible(collapsedTotal: .constant(false))
+        .modifier(PreviewEnvironmentObjects())
 }
