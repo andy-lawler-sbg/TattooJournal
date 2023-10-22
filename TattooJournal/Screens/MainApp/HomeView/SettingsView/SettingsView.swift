@@ -7,38 +7,15 @@
 
 import SwiftUI
 
-struct SettingsItemView<Content: View>: View {
-
-    var itemView: Content
-    var imageName: String
-    var color: Color
-
-    var body: some View {
-        HStack(spacing: 10) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundStyle(color)
-                Image(systemName: imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundStyle(Color.white)
-                    .padding(8)
-            }
-            .frame(width: 35, height: 35)
-            itemView
-        }.padding(.vertical, 2)
-    }
-}
-
 struct SettingsView: View {
 
     @EnvironmentObject var userPreferences: UserPreferences
+    @Environment(\.dismiss) var dismiss
 
     var selectedCurrency: Int { userPreferences.selectedCurrency }
     var tipAmount: TipAmount { userPreferences.tipAmount }
     var appTint: Color { userPreferences.appColor }
 
-    @Binding var isShowingSettingsView: Bool
 
     @State var selectedCurrencyIndex = 0
     @State var selectedTipAmount = 0
@@ -47,10 +24,6 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section {
-// Theme
-//                    SettingsItemView(itemView: currencyPicker,
-//                                     imageName: "lightbulb.max.fill",
-//                                     color: Color(uiColor: .lightGray))
                     SettingsItemView(itemView: currencyPicker,
                                      imageName: currencyIconName,
                                      color: .orange)
@@ -79,7 +52,7 @@ struct SettingsView: View {
             .navigationTitle("Settings")
         }
         .overlay(Button {
-            isShowingSettingsView = false
+            dismiss()
         } label: {
             XMarkButton()
         }, alignment: .topTrailing)
@@ -111,6 +84,6 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(isShowingSettingsView: .constant(true))
-        .modifier(PreviewEnvironmentObjects())
+    SettingsView()
+        .environmentObject(UserPreferences())
 }

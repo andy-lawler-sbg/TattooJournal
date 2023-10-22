@@ -46,7 +46,6 @@ struct AppointmentsView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewModel.shouldShowAppointmentsForm = true
-                        viewModel.selectedAppointment = nil
                     } label: {
                         NavBarItem(imageName: Constants.ImageNames.add)
                     }
@@ -112,8 +111,12 @@ struct AppointmentsView: View {
                         }
                         .tint(.yellow)
                     }
+            }.listRowBackground(Color.clear)
+
+            if appointments.count <= 3 {
+                redactedAppointmentCell
+                redactedAppointmentCell
             }
-            .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
@@ -124,6 +127,13 @@ struct AppointmentsView: View {
     private var appointmentsCollapsible: some View {
         AppointmentsCollapsible(viewModel: .init(appointments: appointments), 
                                 collapsed: $viewModel.collapsedTotal)
+    }
+
+    private var redactedAppointmentCell: some View {
+        AppointmentCell(viewModel: .init(appointment: Appointment()))
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
+            .redacted(reason: .placeholder)
     }
 
     // MARK: - Empty State View
@@ -163,7 +173,7 @@ private extension AppointmentsView {
     TabView {
         AppointmentsView()
             .tabItem {
-                Label("Appointments", systemImage: "pencil.and.list.clipboard")
+                Label("Appointments", systemImage: "list.clipboard.fill")
             }
             .modelContainer(for: [Appointment.self, Artist.self, Shop.self])
             .environmentObject(UserPreferences())

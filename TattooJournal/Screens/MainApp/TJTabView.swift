@@ -21,7 +21,7 @@ struct TJTabView: View {
                 }
             AppointmentsView()
                 .tabItem {
-                    Label("Appointments", systemImage: "pencil.and.list.clipboard")
+                    Label("Appointments", systemImage: "list.clipboard.fill")
                 }
             PastTattoosView()
                 .tabItem {
@@ -35,5 +35,5 @@ struct TJTabView: View {
 #Preview {
     /// `isShowingOnboarding = true` allows the permissions view to not show
     TJTabView(isShowingOnboarding: .constant(true))
-        .modifier(PreviewEnvironmentObjects())
+        .environmentObject(UserPreferences())
 }

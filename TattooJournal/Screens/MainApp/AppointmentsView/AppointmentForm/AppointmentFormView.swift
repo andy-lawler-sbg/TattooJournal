@@ -90,11 +90,15 @@ struct AppointmentFormView: View {
 
     private var actionButtonSections: some View {
         Section {
-            Button(type == .create ? "Create" : "Update") {
+            Button {
                 withAnimation {
                     buttonAction()
+                    dismiss()
                 }
-                dismiss()
+            } label: {
+                Text(type == .create ? "Create" : "Update")
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
             }
         }
     }
@@ -103,10 +107,10 @@ struct AppointmentFormView: View {
 #Preview {
     AppointmentFormView(type: .create,
                         date: .constant(.now),
-                        name: .constant(""),
-                        price: .constant(""),
-                        design: .constant(""),
-                        notifyMe: .constant(false),
+                        name: .constant("Andy Lawler"),
+                        price: .constant("250"),
+                        design: .constant("Eagle"),
+                        notifyMe: .constant(true),
                         buttonAction: {}
     )
 }

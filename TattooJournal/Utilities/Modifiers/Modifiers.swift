@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-struct PreviewEnvironmentObjects: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .environmentObject(UserPreferences())
-    }
-}
-
 struct CellOutline: ViewModifier {
     func body(content: Content) -> some View {
         content

@@ -109,5 +109,4 @@ private extension AppointmentsCollapsible {
 
 #Preview {
     AppointmentsCollapsible(viewModel: .init(appointments: [Appointment()]), collapsed: .constant(false))
-        .modifier(PreviewEnvironmentObjects())
-}
+        .environmentObject(UserPreferences())}

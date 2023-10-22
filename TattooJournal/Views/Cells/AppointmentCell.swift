@@ -85,7 +85,7 @@ struct AppointmentCell: View {
     VStack {
         Spacer()
         AppointmentCell(viewModel: .init(appointment: Appointment()))
-            .modifier(PreviewEnvironmentObjects())
+            .environmentObject(UserPreferences())
         Spacer()
     }
     .padding()

@@ -40,5 +40,5 @@ struct EmptyState: View {
     EmptyState(imageName: "list.clipboard",
                title: "Sorry",
                description: "You have not set any settings.")
-        .modifier(PreviewEnvironmentObjects())
+        .environmentObject(UserPreferences())
 }

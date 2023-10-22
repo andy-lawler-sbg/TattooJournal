@@ -56,4 +56,10 @@ struct OnboardingPageView: View {
                                    description: "This is just a test onboarding page.",
                                    showEnterPage: true),
                        isShowingOnboarding: .constant(false))
+    .padding(.bottom)
+    .background(
+        LinearGradient(colors: [Color(.lighterAccent), Color.accentColor],
+                       startPoint: .top,
+                       endPoint: .bottom)
+    )
 }

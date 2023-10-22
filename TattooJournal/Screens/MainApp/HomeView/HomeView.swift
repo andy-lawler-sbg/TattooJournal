@@ -7,13 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import TipKit
-
-struct HomeHelperViewItem: Identifiable {
-    let id = UUID()
-    let title: String
-    let description: String
-}
 
 struct HomeView: View {
 
@@ -28,17 +21,6 @@ struct HomeView: View {
         let startDate: Date = Date()
         return queriedAppointments.filter({ $0.date >= startDate }).first
     }
-
-    var homeTip = HomeTip()
-
-    let columns = [GridItem(.flexible()), GridItem(.flexible())]
-
-    let helperViewItems: [HomeHelperViewItem] = [
-        .init(title: "Add Appointments", description: "You don't have any appointments, maybe add some?"),
-        .init(title: "Add Appointments", description: "Add some appointments :)"),
-        .init(title: "Add Appointments", description: "Add some appointments :)"),
-        .init(title: "Add Appointments", description: "Add some appointments :)")
-    ]
 
     var body: some View {
         NavigationStack {
@@ -69,7 +51,7 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $viewModel.shouldShowSettingsScreen) {
-            SettingsView(isShowingSettingsView: $viewModel.shouldShowSettingsScreen)
+            SettingsView()
         }
     }
 }
@@ -83,41 +65,12 @@ extension HomeView {
     }
 }
 
-struct NavBarItem: View {
-
-    @State private var symbolAnimationValue = 10
-
-    var imageName: String
-
-    var body: some View {
-        ZStack {
-            Circle()
-                .frame(width: 35, height: 35)
-                .foregroundStyle(Color(.cellBackground))
-                .shadow(color: .black.opacity(0.1), radius: 5)
-            Image(systemName: imageName)
-                .imageScale(.medium)
-                .frame(width: 60, height: 60)
-                .foregroundColor(.secondary)
-                .bold()
-                .symbolEffect(.pulse, value: symbolAnimationValue)
-        }
-    }
-}
-
-#Preview("Nav Bar Button") {
-    ZStack {
-        Color.gray.opacity(0.1)
-        NavBarItem(imageName: "gear")
-    }
-}
-
 #Preview("Home Screen") {
     TabView {
         HomeView()
             .tabItem {
                 Label("Home", systemImage: "house")
             }
-            .modifier(PreviewEnvironmentObjects())
+            .environmentObject(UserPreferences())
     }
 }

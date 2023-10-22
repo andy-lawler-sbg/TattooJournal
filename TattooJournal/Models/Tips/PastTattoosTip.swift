@@ -14,7 +14,7 @@ struct PastTattoosTip: Tip {
     }
 
     var message: Text? {
-        Text("This list shows you the tattoo's you have completed. If you did in-fact miss an appointment feel free to swipe to delete it.")
+        Text("This page shows you the tattoo sessions you have completed. If you did in-fact miss an appointment feel free to swipe to delete it.")
     }
 
     var asset: Image? {
