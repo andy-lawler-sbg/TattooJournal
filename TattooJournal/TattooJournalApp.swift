@@ -12,9 +12,9 @@ import TipKit
 @main
 struct TattooJournalApp: App {
 
-    var userPreferences = UserPreferences()
-
     @AppStorage(Constants.AppStorage.shouldShowOnboarding) private var shouldShowOnboarding = true
+    
+    var userPreferences = UserPreferences()
 
     var body: some Scene {
         WindowGroup {
@@ -28,7 +28,8 @@ struct TattooJournalApp: App {
             .task {
                 try? Tips.configure([.displayFrequency(.immediate), .datastoreLocation(.applicationDefault)])
             }
-        }.modelContainer(for: [Appointment.self, Artist.self, Shop.self])
+        }
+        .modelContainer(for: [Appointment.self, Artist.self, Shop.self])
     }
 }
 

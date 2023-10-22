@@ -91,10 +91,7 @@ struct AppointmentsView: View {
             ForEach(appointments) { appointment in
                 AppointmentCell(viewModel: .init(appointment: appointment))
                     .listRowSeparator(.hidden)
-                    .onTapGesture {
-                        viewModel.selectedAppointment = appointment
-                    }
-                    .swipeActions {
+                    .swipeActions(allowsFullSwipe: false) {
                         Button(role: .destructive) {
                             withAnimation {
                                 if let currentArtist = appointment.artist {
@@ -106,6 +103,14 @@ struct AppointmentsView: View {
                             Label("Delete", systemImage: "trash")
                                 .symbolVariant(.fill)
                         }
+
+                        Button {
+                            viewModel.selectedAppointment = appointment
+                        } label: {
+                            Label("Edit", systemImage: "pencil.and.list.clipboard")
+                                .symbolVariant(.fill)
+                        }
+                        .tint(.yellow)
                     }
             }
             .listRowBackground(Color.clear)
@@ -117,7 +122,8 @@ struct AppointmentsView: View {
 
     /// Collapsible popup which shows the total cost of all appointments with some details about the cost.
     private var appointmentsCollapsible: some View {
-        AppointmentsCollapsible(collapsed: $viewModel.collapsedTotal)
+        AppointmentsCollapsible(viewModel: .init(appointments: appointments), 
+                                collapsed: $viewModel.collapsedTotal)
     }
 
     // MARK: - Empty State View
@@ -157,10 +163,13 @@ private extension AppointmentsView {
     TabView {
         AppointmentsView()
             .tabItem {
-                Label("Appointments", systemImage: "book")
+                Label("Appointments", systemImage: "pencil.and.list.clipboard")
             }
             .modelContainer(for: [Appointment.self, Artist.self, Shop.self])
             .environmentObject(UserPreferences())
+    }            
+    .task {
+        try? Tips.configure([.displayFrequency(.immediate), .datastoreLocation(.applicationDefault)])
     }
 }
 

@@ -86,6 +86,7 @@ extension HomeView {
 struct NavBarItem: View {
 
     @State private var symbolAnimationValue = 10
+
     var imageName: String
 
     var body: some View {
@@ -93,6 +94,7 @@ struct NavBarItem: View {
             Circle()
                 .frame(width: 35, height: 35)
                 .foregroundStyle(Color(.cellBackground))
+                .shadow(color: .black.opacity(0.1), radius: 5)
             Image(systemName: imageName)
                 .imageScale(.medium)
                 .frame(width: 60, height: 60)

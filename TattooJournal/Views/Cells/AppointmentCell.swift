@@ -63,7 +63,7 @@ struct AppointmentCell: View {
         .frame(maxWidth: .infinity)
         .overlay(alignment: .bottomTrailing) {
             Button {
-            
+                viewModel.appointment.notifyMe.toggle()
             } label: {
                 Image(systemName: viewModel.appointment.notifyMe ? "bell.fill" : "bell")
                     .resizable()

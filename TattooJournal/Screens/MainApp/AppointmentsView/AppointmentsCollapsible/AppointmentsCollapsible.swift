@@ -8,15 +8,26 @@
 import SwiftUI
 import SwiftData
 
+@Observable
+final class AppointmentsCollapsibleViewModel {
+
+    var appointments: [Appointment]
+
+    init(appointments: [Appointment]) {
+        self.appointments = appointments
+    }
+}
+
 struct AppointmentsCollapsible: View {
+
+    var viewModel: AppointmentsCollapsibleViewModel
 
     @EnvironmentObject var userPreferences: UserPreferences
     @Binding var collapsed: Bool
-    @Query private var appointments: [Appointment]
 
     private var costWithTip: Double {
         let multiplier = 1.0 + (Double(userPreferences.tipAmount.amount) / 100)
-        let cost = appointments.reduce(into: 0.0) { partialResult, appointment in
+        let cost = viewModel.appointments.reduce(into: 0.0) { partialResult, appointment in
             guard let price = Double(appointment.price) else { return }
             partialResult += price
         }
@@ -97,6 +108,6 @@ private extension AppointmentsCollapsible {
 // MARK: - Preview
 
 #Preview {
-    AppointmentsCollapsible(collapsed: .constant(false))
+    AppointmentsCollapsible(viewModel: .init(appointments: [Appointment()]), collapsed: .constant(false))
         .modifier(PreviewEnvironmentObjects())
 }

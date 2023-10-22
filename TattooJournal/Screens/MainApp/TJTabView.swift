@@ -21,11 +21,11 @@ struct TJTabView: View {
                 }
             AppointmentsView()
                 .tabItem {
-                    Label("Appointments", systemImage: "book")
+                    Label("Appointments", systemImage: "pencil.and.list.clipboard")
                 }
             PastTattoosView()
                 .tabItem {
-                    Label("Past Tattoos", systemImage: "pencil.line")
+                    Label("Past Tattoos", systemImage: "doc.badge.clock")
                 }
         }
         .tint(userPreferences.appColor)

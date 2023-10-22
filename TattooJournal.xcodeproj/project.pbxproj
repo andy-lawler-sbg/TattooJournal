@@ -29,17 +29,20 @@
 		2BD3186829F275DF0059F9A8 /* TattooJournalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3186729F275DF0059F9A8 /* TattooJournalUITestsLaunchTests.swift */; };
 		2BD3187629F276830059F9A8 /* TJTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3187529F276830059F9A8 /* TJTabView.swift */; };
 		2BD3187829F2768F0059F9A8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3187729F2768F0059F9A8 /* HomeView.swift */; };
-		2BD3187C29F27B800059F9A8 /* AppointmentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3187B29F27B800059F9A8 /* AppointmentForm.swift */; };
 		2BD3188029F285E90059F9A8 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3187F29F285E90059F9A8 /* Appointment.swift */; };
 		2BD3188629F29B070059F9A8 /* AppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3188529F29B070059F9A8 /* AppointmentsView.swift */; };
 		2BD3189029F2B5D60059F9A8 /* AppointmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3188F29F2B5D60059F9A8 /* AppointmentsViewModel.swift */; };
 		2BD3189729F2B6410059F9A8 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3189629F2B6410059F9A8 /* Modifiers.swift */; };
 		2BD3189F29F2C0CD0059F9A8 /* PastTattoosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3189E29F2C0CD0059F9A8 /* PastTattoosView.swift */; };
 		2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */; };
-		2BDAABA92AE3225D00251E4F /* UpdateAppointmentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAABA82AE3225D00251E4F /* UpdateAppointmentForm.swift */; };
 		2BF6BD5E2A868585006A7602 /* AppointmentsTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6BD5D2A868585006A7602 /* AppointmentsTip.swift */; };
 		2BF6BD602A8685B4006A7602 /* HomeTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6BD5F2A8685B4006A7602 /* HomeTip.swift */; };
 		2BF6BD622A86866A006A7602 /* PastTattoosTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6BD612A86866A006A7602 /* PastTattoosTip.swift */; };
+		64EAF4AD2AE5B28700AFD196 /* AppointmentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EAF4AC2AE5B28700AFD196 /* AppointmentFormView.swift */; };
+		64EAF4AF2AE5B2B900AFD196 /* NotificationsTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EAF4AE2AE5B2B900AFD196 /* NotificationsTrigger.swift */; };
+		64EAF4B12AE5B43F00AFD196 /* AppointmentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EAF4B02AE5B43F00AFD196 /* AppointmentForm.swift */; };
+		64EAF4B32AE5B54600AFD196 /* UpdateAppointmentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EAF4B22AE5B54600AFD196 /* UpdateAppointmentForm.swift */; };
+		64EAF4B62AE5B88600AFD196 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EAF4B52AE5B88600AFD196 /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,17 +88,20 @@
 		2BD3186729F275DF0059F9A8 /* TattooJournalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooJournalUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2BD3187529F276830059F9A8 /* TJTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TJTabView.swift; sourceTree = "<group>"; };
 		2BD3187729F2768F0059F9A8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		2BD3187B29F27B800059F9A8 /* AppointmentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentForm.swift; sourceTree = "<group>"; };
 		2BD3187F29F285E90059F9A8 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		2BD3188529F29B070059F9A8 /* AppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsView.swift; sourceTree = "<group>"; };
 		2BD3188F29F2B5D60059F9A8 /* AppointmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsViewModel.swift; sourceTree = "<group>"; };
 		2BD3189629F2B6410059F9A8 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		2BD3189E29F2C0CD0059F9A8 /* PastTattoosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastTattoosView.swift; sourceTree = "<group>"; };
 		2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentCell.swift; sourceTree = "<group>"; };
-		2BDAABA82AE3225D00251E4F /* UpdateAppointmentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppointmentForm.swift; sourceTree = "<group>"; };
 		2BF6BD5D2A868585006A7602 /* AppointmentsTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsTip.swift; sourceTree = "<group>"; };
 		2BF6BD5F2A8685B4006A7602 /* HomeTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTip.swift; sourceTree = "<group>"; };
 		2BF6BD612A86866A006A7602 /* PastTattoosTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastTattoosTip.swift; sourceTree = "<group>"; };
+		64EAF4AC2AE5B28700AFD196 /* AppointmentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentFormView.swift; sourceTree = "<group>"; };
+		64EAF4AE2AE5B2B900AFD196 /* NotificationsTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTrigger.swift; sourceTree = "<group>"; };
+		64EAF4B02AE5B43F00AFD196 /* AppointmentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentForm.swift; sourceTree = "<group>"; };
+		64EAF4B22AE5B54600AFD196 /* UpdateAppointmentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppointmentForm.swift; sourceTree = "<group>"; };
+		64EAF4B52AE5B88600AFD196 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,9 +286,9 @@
 		2BD3188929F2B52F0059F9A8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				64EAF4B42AE5B87500AFD196 /* SwiftData */,
 				2BF6BD5C2A86857B006A7602 /* Tips */,
 				2BD3188C29F2B54E0059F9A8 /* EnvironmentObjects */,
-				2BD3187F29F285E90059F9A8 /* Appointment.swift */,
 				2B64D22B2A7D64D400090EB6 /* OnboardingPage.swift */,
 			);
 			path = Models;
@@ -330,8 +336,9 @@
 		2BD3189329F2B61A0059F9A8 /* AppointmentForm */ = {
 			isa = PBXGroup;
 			children = (
-				2BD3187B29F27B800059F9A8 /* AppointmentForm.swift */,
-				2BDAABA82AE3225D00251E4F /* UpdateAppointmentForm.swift */,
+				64EAF4B02AE5B43F00AFD196 /* AppointmentForm.swift */,
+				64EAF4B22AE5B54600AFD196 /* UpdateAppointmentForm.swift */,
+				64EAF4AC2AE5B28700AFD196 /* AppointmentFormView.swift */,
 			);
 			path = AppointmentForm;
 			sourceTree = "<group>";
@@ -341,6 +348,7 @@
 			children = (
 				2B7F418C2A7FA6EB00ADF919 /* Haptics */,
 				2BD3189529F2B63A0059F9A8 /* Modifiers */,
+				64EAF4AE2AE5B2B900AFD196 /* NotificationsTrigger.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -379,6 +387,15 @@
 				2BF6BD612A86866A006A7602 /* PastTattoosTip.swift */,
 			);
 			path = Tips;
+			sourceTree = "<group>";
+		};
+		64EAF4B42AE5B87500AFD196 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3187F29F285E90059F9A8 /* Appointment.swift */,
+				64EAF4B52AE5B88600AFD196 /* Preferences.swift */,
+			);
+			path = SwiftData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,7 +462,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					2BD3184129F275DD0059F9A8 = {
 						CreatedOnToolsVersion = 14.1;
@@ -511,19 +528,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64EAF4B32AE5B54600AFD196 /* UpdateAppointmentForm.swift in Sources */,
 				2B64D22A2A7D649300090EB6 /* OnboardingPageView.swift in Sources */,
+				64EAF4AF2AE5B2B900AFD196 /* NotificationsTrigger.swift in Sources */,
+				64EAF4B62AE5B88600AFD196 /* Preferences.swift in Sources */,
 				2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */,
 				2B7F41862A7F9C0900ADF919 /* DebugMenu.swift in Sources */,
 				2B7F418E2A7FA6F000ADF919 /* Haptics.swift in Sources */,
 				2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */,
 				2BD3188629F29B070059F9A8 /* AppointmentsView.swift in Sources */,
 				2BD3189F29F2C0CD0059F9A8 /* PastTattoosView.swift in Sources */,
-				2BD3187C29F27B800059F9A8 /* AppointmentForm.swift in Sources */,
 				2BD3189729F2B6410059F9A8 /* Modifiers.swift in Sources */,
 				2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */,
 				2B53D28429F31B0B0051F6B9 /* SettingsView.swift in Sources */,
 				2BD3188029F285E90059F9A8 /* Appointment.swift in Sources */,
 				2BD3187829F2768F0059F9A8 /* HomeView.swift in Sources */,
+				64EAF4B12AE5B43F00AFD196 /* AppointmentForm.swift in Sources */,
 				2B64D22C2A7D64D400090EB6 /* OnboardingPage.swift in Sources */,
 				2BD3189029F2B5D60059F9A8 /* AppointmentsViewModel.swift in Sources */,
 				2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */,
@@ -535,7 +555,7 @@
 				2BF6BD622A86866A006A7602 /* PastTattoosTip.swift in Sources */,
 				2BF6BD602A8685B4006A7602 /* HomeTip.swift in Sources */,
 				2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */,
-				2BDAABA92AE3225D00251E4F /* UpdateAppointmentForm.swift in Sources */,
+				64EAF4AD2AE5B28700AFD196 /* AppointmentFormView.swift in Sources */,
 				2B6C8CF329FBFD8100A4BA6E /* PastTattoosViewModel.swift in Sources */,
 				2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */,
 				2B7F41882A7F9C3800ADF919 /* DebugMenu+Extensions.swift in Sources */,
@@ -611,6 +631,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -671,6 +692,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -697,7 +719,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TattooJournal/Preview Content\"";
-				DEVELOPMENT_TEAM = R7VRH6S6K3;
+				DEVELOPMENT_TEAM = FQ2J49XM7A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TattooTracker;
@@ -733,7 +755,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TattooJournal/Preview Content\"";
-				DEVELOPMENT_TEAM = R7VRH6S6K3;
+				DEVELOPMENT_TEAM = FQ2J49XM7A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TattooTracker;
