@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingPageView: View {
 
     let page: OnboardingPage
-    @Binding var enterApp: Bool
+    @Binding var isShowingOnboarding: Bool
 
     var body: some View {
         VStack(spacing: 20) {
@@ -33,7 +33,7 @@ struct OnboardingPageView: View {
                 .frame(minHeight: 20, maxHeight: 50)
             if page.showEnterPage {
                 Button {
-                    enterApp = true
+                    isShowingOnboarding = false
                 } label: {
                     Text("Enter")
                         .foregroundStyle(Color.accentColor)
@@ -50,12 +50,10 @@ struct OnboardingPageView: View {
 }
 
 #Preview {
-    OnboardingView {
-        OnboardingPageView(page: .init(id: 1,
-                                       title: "Test Onboarding",
-                                       image: "book.fill",
-                                       description: "This is just a test onboarding page.",
-                                       showEnterPage: true),
-                           enterApp: .constant(false))
-    }
+    OnboardingPageView(page: .init(id: 1,
+                                   title: "Test Onboarding",
+                                   image: "book.fill",
+                                   description: "This is just a test onboarding page.",
+                                   showEnterPage: true),
+                       isShowingOnboarding: .constant(false))
 }

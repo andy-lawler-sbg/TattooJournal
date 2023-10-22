@@ -6,111 +6,124 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Appointment: Identifiable {
-    let id = UUID()
-    var artist = ""
+@Model
+final class Appointment: Codable {
+    @Relationship(inverse: \Artist.appointment) var artist: Artist?
+    @Relationship(inverse: \Shop.appointment) var shop: Shop?
     var date = Date()
-    var price = ""
-    var design = ""
-    var notifyMe = false
-    var shop: Shop = Shop(location: nil, title: "")
+    var price: String
+    var design: String
+    var notifyMe: Bool
+
+    init(artist: Artist? = nil,
+         shop: Shop? = nil,
+         date: Date = .now,
+         price: String = "",
+         design: String = "",
+         notifyMe: Bool = false) {
+        self.artist = artist
+        self.shop = shop
+        self.date = date
+        self.price = price
+        self.design = design
+        self.notifyMe = notifyMe
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(artist, forKey: .artist)
+        try container.encode(shop, forKey: .shop)
+        try container.encode(date, forKey: .date)
+        try container.encode(price, forKey: .price)
+        try container.encode(design, forKey: .design)
+        try container.encode(notifyMe, forKey: .notifyMe)
+    }
+
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        artist = try values.decodeIfPresent(Artist.self, forKey: .artist)
+        shop = try values.decodeIfPresent(Shop.self, forKey: .shop)
+        date = try values.decode(Date.self, forKey: .date)
+        price = try values.decode(String.self, forKey: .price)
+        design = try values.decode(String.self, forKey: .design)
+        notifyMe = try values.decode(Bool.self, forKey: .notifyMe)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case artist
+        case shop
+        case date
+        case price
+        case design
+        case notifyMe
+    }
 }
 
-struct MockAppointmentData {
-    var appointment: Appointment {
-        var appointment = Appointment()
-        appointment.artist = "John Crompton"
-        appointment.date = Calendar.current.date(byAdding: .month, value: 3, to: Date())!
-        appointment.design = "Skull"
-        appointment.price = "250"
-        appointment.notifyMe = true
-        appointment.shop = Shop(location: Location(id: UUID(),
-                                                                  name: "Test",
-                                                                  description: "Test Description",
-                                                                  latitude: 50.0,
-                                                                  longitude: 10),
-                                               title: "Heart of Ink")
-        return appointment
+@Model
+class Artist: Codable {
+    var name: String
+    var appointment: Appointment?
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(appointment, forKey: .appointment)
     }
 
-    var appointment2: Appointment {
-        var appointment = Appointment()
-        appointment.artist = "John Crompton"
-        appointment.date = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
-        appointment.design = "Snake"
-        appointment.price = "200"
-        appointment.notifyMe = true
-        appointment.shop = Shop(location: Location(id: UUID(),
-                                                                  name: "Test",
-                                                                  description: "Test Description",
-                                                                  latitude: 50.0,
-                                                                  longitude: 10),
-                                               title: "Heart of Ink")
-        return appointment
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        name = try values.decode(String.self, forKey: .name)
+        appointment = try values.decodeIfPresent(Appointment.self, forKey: .appointment)
     }
 
-    var appointment3: Appointment {
-        var appointment = Appointment()
-        appointment.artist = "John Crompton"
-        appointment.date = Calendar.current.date(byAdding: .month, value: 6, to: Date())!
-        appointment.design = "Eagle"
-        appointment.price = "300"
-        appointment.notifyMe = true
-        appointment.shop = Shop(location: Location(id: UUID(),
-                                                                  name: "Test",
-                                                                  description: "Test Description",
-                                                                  latitude: 50.0,
-                                                                  longitude: 10),
-                                               title: "Heart of Ink")
-        return appointment
+    enum CodingKeys: String, CodingKey {
+        case name
+        case shop
+        case appointment
     }
 
-    var appointment4: Appointment {
-        var appointment = Appointment()
-        appointment.artist = "John Crompton"
-        appointment.date = Calendar.current.date(byAdding: .month, value: 9, to: Date())!
-        appointment.design = "Ship"
-        appointment.price = "200"
-        appointment.notifyMe = true
-        appointment.shop = Shop(location: Location(id: UUID(),
-                                                                  name: "Test",
-                                                                  description: "Test Description",
-                                                                  latitude: 50.0,
-                                                                  longitude: 10),
-                                               title: "Heart of Ink")
-        return appointment
+    init(name: String = "",
+         appointment: Appointment? = nil
+    ) {
+        self.name = name
+        self.appointment = appointment
+    }
+}
+
+@Model
+class Shop: Codable {
+    var name: String
+    var contactNumber: String
+    var appointment: Appointment?
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(contactNumber, forKey: .contactNumber)
+        try container.encode(appointment, forKey: .appointment)
     }
 
-    var appointment5: Appointment {
-        var appointment = Appointment()
-        appointment.artist = "John Crompton"
-        appointment.date = Calendar.current.date(byAdding: .month, value: 1, to: Date())!
-        appointment.design = "Panther"
-        appointment.price = "250"
-        appointment.notifyMe = true
-        appointment.shop = Shop(location: Location(id: UUID(),
-                                                                  name: "Test",
-                                                                  description: "Test Description",
-                                                                  latitude: 50.0,
-                                                                  longitude: 10),
-                                               title: "Heart of Ink")
-        return appointment
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        name = try values.decode(String.self, forKey: .name)
+        contactNumber = try values.decode(String.self, forKey: .contactNumber)
+        appointment = try values.decodeIfPresent(Appointment.self, forKey: .appointment)
     }
 
-    var appointment6: Appointment {
-        var appointment = Appointment()
-        appointment.artist = "John Crompton"
-        appointment.date = Calendar.current.date(byAdding: .month, value: -10, to: Date())!
-        appointment.design = "Reaper"
-        appointment.price = "150"
-        appointment.notifyMe = true
-        appointment.shop = Shop(location: Location(id: UUID(),
-                                                                  name: "Test",
-                                                                  description: "Test Description",
-                                                                  latitude: 50.0,
-                                                                  longitude: 10),
-                                               title: "Heart of Ink")
-        return appointment
+    enum CodingKeys: String, CodingKey {
+        case name
+        case contactNumber
+        case appointment
+    }
+
+    init(name: String = "",
+         contactNumber: String = "",
+         appointment: Appointment? = nil
+    ) {
+        self.name = name
+        self.contactNumber = contactNumber
+        self.appointment = appointment
     }
 }

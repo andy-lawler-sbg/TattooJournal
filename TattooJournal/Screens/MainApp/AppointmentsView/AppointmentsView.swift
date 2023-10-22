@@ -6,13 +6,25 @@
 //
 
 import SwiftUI
+import SwiftData
 import TipKit
 
 /// Appointments View to show the scheduled appointments a User has.
 struct AppointmentsView: View {
 
-    @EnvironmentObject var appointments: Appointments
+    @Environment(\.modelContext) var context
     @EnvironmentObject var userPreferences: UserPreferences
+
+    @Query(
+        sort: \Appointment.date,
+        order: .forward
+    ) private var queriedAppointments: [Appointment]
+    @Query private var artists: [Artist]
+
+    var appointments: [Appointment] {
+        let startDate: Date = Date()
+        return queriedAppointments.filter({ $0.date >= startDate })
+    }
 
     @Bindable var viewModel = AppointmentsViewModel()
 
@@ -21,17 +33,17 @@ struct AppointmentsView: View {
             ZStack {
                 VStack {
                     tipView
-                    if appointments.hasAppointments {
-                        appointmentsView
-                    } else {
+                    if appointments.isEmpty {
                         emptyStateView
+                    } else {
+                        appointmentsView
                     }
                 }
             }
             .background(Color(.background))
             .navigationTitle(Constants.title)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewModel.shouldShowAppointmentsForm = true
                         viewModel.selectedAppointment = nil
@@ -41,12 +53,14 @@ struct AppointmentsView: View {
                     .onTapGesture(perform: Haptics.shared.successHaptic)
                 }
             }
-        }
-        .sheet(isPresented: $viewModel.shouldShowAppointmentsForm) {
-            AppointmentForm(isShowingAppointmentForm: $viewModel.shouldShowAppointmentsForm,
-                            viewModel: AppointmentFormViewModel(
-                                appointment: viewModel.selectedAppointment)
-            )
+            .sheet(isPresented: $viewModel.shouldShowAppointmentsForm) {
+                AppointmentForm()
+            }
+            .sheet(item: $viewModel.selectedAppointment) {
+                viewModel.selectedAppointment = nil
+            } content: { appointment in
+                UpdateAppointmentForm(appointment: appointment)
+            }
         }
     }
 
@@ -54,8 +68,8 @@ struct AppointmentsView: View {
 
     /// Tip view which shows users how to use the page.
     private var tipView: some View {
-        TipView(AppointmentsTip(hasAppointments: appointments.hasAppointments), arrowEdge: .bottom)
-            .tipBackground(Color.white)
+        TipView(AppointmentsTip(hasAppointments: !appointments.isEmpty), arrowEdge: .bottom)
+            .tipBackground(Color(.cellBackground))
             .padding(.horizontal)
             .padding(.top, 7.5)
     }
@@ -74,16 +88,25 @@ struct AppointmentsView: View {
     /// List showing the appointments you have coming up.
     private var appointmentsList: some View {
         List {
-            ForEach(appointments.orderedAppointments) { appointment in
-                AppointmentCell(appointment: appointment)
+            ForEach(appointments) { appointment in
+                AppointmentCell(viewModel: .init(appointment: appointment))
                     .listRowSeparator(.hidden)
                     .onTapGesture {
-                        viewModel.shouldShowAppointmentsForm = true
                         viewModel.selectedAppointment = appointment
                     }
-            }
-            .onDelete { indexSet in
-                appointments.delete(context: .ordered, indexSet)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            withAnimation {
+                                if let currentArtist = appointment.artist {
+                                    context.delete(currentArtist)
+                                }
+                                context.delete(appointment)
+                            }
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                                .symbolVariant(.fill)
+                        }
+                    }
             }
             .listRowBackground(Color.clear)
         }
@@ -94,17 +117,19 @@ struct AppointmentsView: View {
 
     /// Collapsible popup which shows the total cost of all appointments with some details about the cost.
     private var appointmentsCollapsible: some View {
-        AppointmentsCollapsible(collapsedTotal: $viewModel.collapsedTotal)
-            .padding(.vertical, viewModel.collapsedTotal ? 5 : 10)
+        AppointmentsCollapsible(collapsed: $viewModel.collapsedTotal)
     }
 
     // MARK: - Empty State View
 
     /// Empty state view that shows when you have no appointments.
     private var emptyStateView: some View {
-        EmptyState(imageName: Constants.EmptyState.imageName,
-                   title: Constants.EmptyState.title,
-                   description: Constants.EmptyState.description)
+        VStack {
+            EmptyState(imageName: Constants.EmptyState.imageName,
+                       title: Constants.EmptyState.title,
+                       description: Constants.EmptyState.description)
+            Spacer()
+        }
     }
 }
 
@@ -112,7 +137,7 @@ struct AppointmentsView: View {
 
 private extension AppointmentsView {
     enum Constants {
-        static let title = "🗓️ Appointments"
+        static let title = "Appointments"
 
         enum ImageNames {
             static let add = "plus"
@@ -128,26 +153,13 @@ private extension AppointmentsView {
 
 // MARK: - Previews
 
-#Preview("Appointments View - With Appointments") {
+#Preview("Appointments View") {
     TabView {
         AppointmentsView()
             .tabItem {
                 Label("Appointments", systemImage: "book")
             }
-            .modifier(PreviewEnvironmentObjects())
-    }
-}
-
-#Preview("Appointments View - Without Appointments") {
-    let appointments = Appointments()
-    appointments.appointments = []
-
-    return TabView {
-        AppointmentsView()
-            .tabItem {
-                Label("Appointments", systemImage: "book")
-            }
-            .environmentObject(appointments)
+            .modelContainer(for: [Appointment.self, Artist.self, Shop.self])
             .environmentObject(UserPreferences())
     }
 }

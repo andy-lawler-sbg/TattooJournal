@@ -8,39 +8,54 @@
 import SwiftUI
 import UserNotifications
 
+@Observable
+class AppointmentCellViewModel {
+    var appointment: Appointment
+
+    init(appointment: Appointment) {
+        self.appointment = appointment
+    }
+}
+
 struct AppointmentCell: View {
     
     @EnvironmentObject var userPreferences: UserPreferences
-    let appointment: Appointment
+    var viewModel: AppointmentCellViewModel
 
     var dateString: String {
         let formatter1 = DateFormatter()
         formatter1.dateStyle = .full
         formatter1.timeStyle = .short
-        return formatter1.string(from: appointment.date)
+        return formatter1.string(from: viewModel.appointment.date)
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack(spacing: 15) {
-                Text(appointment.artist)
-                    .foregroundColor(userPreferences.appColor)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                HStack(spacing: 10) {
-                    Text("\(userPreferences.currencyString)\(appointment.price)")
-                        .font(.caption).bold()
-                        .foregroundStyle(Color.secondary)
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 8)
-                        .background(Color(.buttonCapsule))
-                        .clipShape(.capsule)
+                if let artistName = viewModel.appointment.artist?.name {
+                    Text(artistName)
+                        .foregroundColor(userPreferences.appColor)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                }
+                if viewModel.appointment.price != "" {
+                    HStack(spacing: 10) {
+                        Text("\(userPreferences.currencyString)\(viewModel.appointment.price)")
+                            .font(.caption).bold()
+                            .foregroundStyle(Color.secondary)
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 8)
+                            .background(Color(.buttonCapsule))
+                            .clipShape(.capsule)
+                    }
                 }
                 Spacer()
             }
-            Text(appointment.shop.title)
-                .font(.caption)
-                .fontWeight(.medium)
+            if let shopName = viewModel.appointment.shop?.name {
+                Text(shopName)
+                    .font(.caption)
+                    .fontWeight(.medium)
+            }
             Text(dateString)
                 .font(.caption2)
                 .foregroundColor(.secondary)
@@ -48,22 +63,12 @@ struct AppointmentCell: View {
         .frame(maxWidth: .infinity)
         .overlay(alignment: .bottomTrailing) {
             Button {
-//                let content = UNMutableNotificationContent()
-//                content.title = "\(appointment.artist) - \(appointment.shop)"
-//                content.subtitle = "\(appointment.date)"
-//                content.sound = UNNotificationSound.default
-//
-//                // show this notification five seconds from now
-//                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//
-//                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-//
-//                UNUserNotificationCenter.current().add(request)
+            
             } label: {
-                Image(systemName: appointment.notifyMe ? "bell.fill" : "bell")
+                Image(systemName: viewModel.appointment.notifyMe ? "bell.fill" : "bell")
                     .resizable()
                     .frame(width: 13, height: 13)
-                    .foregroundStyle(appointment.notifyMe ? userPreferences.appColor : Color.gray)
+                    .foregroundStyle(viewModel.appointment.notifyMe ? userPreferences.appColor : Color.gray)
                     .padding(6)
                     .background(Color(.buttonCapsule))
                     .clipShape(.circle)
@@ -79,7 +84,7 @@ struct AppointmentCell: View {
 #Preview {
     VStack {
         Spacer()
-        AppointmentCell(appointment: MockAppointmentData().appointment)
+        AppointmentCell(viewModel: .init(appointment: Appointment()))
             .modifier(PreviewEnvironmentObjects())
         Spacer()
     }

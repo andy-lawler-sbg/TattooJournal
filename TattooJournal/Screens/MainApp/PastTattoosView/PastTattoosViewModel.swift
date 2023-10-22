@@ -9,7 +9,6 @@ import SwiftUI
 
 @Observable
 final class PastTattoosViewModel {
-    var shouldShowAppointmentsForm = false
     var selectedAppointment: Appointment?
     var shouldShowVisitedShops = false
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import TipKit
 
 struct HomeHelperViewItem: Identifiable {
@@ -16,8 +17,17 @@ struct HomeHelperViewItem: Identifiable {
 
 struct HomeView: View {
 
-    @EnvironmentObject var appointments: Appointments
     @Bindable var viewModel = HomeViewModel()
+
+    @Query(
+        sort: \Appointment.date,
+        order: .forward
+    ) private var queriedAppointments: [Appointment]
+
+    var nextAppointment: Appointment? {
+        let startDate: Date = Date()
+        return queriedAppointments.filter({ $0.date >= startDate }).first
+    }
 
     var homeTip = HomeTip()
 
@@ -33,57 +43,30 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TipView(homeTip, arrowEdge: .bottom)
-                    .tipBackground(Color.white)
-                    .padding(.horizontal)
-                    .padding(.top, 7.5)
-
-                ScrollView(.horizontal) {
-                    HStack {
-                        ForEach(helperViewItems) { item in
-                            VStack(spacing: 20) {
-                                Text(item.title)
-                                    .font(.callout).bold()
-                                Text(item.description)
-                                    .font(.caption2)
-                                    .multilineTextAlignment(.center)
-                            }
-                            .foregroundStyle(.white)
-                            .padding()
-                            .background(Color.accentColor)
-                        }
-                    }
-                }
-                .scrollIndicators(.hidden)
-
-                List {
-                    if appointments.hasAppointments {
-                        AppointmentCell(appointment: appointments.nextAppointment()!)
-                            .listRowSeparator(.hidden)
-                            .onTapGesture {
-                                viewModel.shouldShowAppointmentForm = true
-                            }
+                if let nextAppointment {
+                    List {
+                        AppointmentCell(viewModel: .init(appointment: nextAppointment))
                             .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
                     }
+                    .listStyle(.plain)
+                    .scrollIndicators(.hidden)
+                    .listRowSpacing(-5)
                 }
-                .listStyle(.plain)
-                .scrollIndicators(.hidden)
 
             }
             .background(Color.gray.opacity(0.1))
             .navigationTitle(Constants.title)
             .toolbar {
-                Button {
-                    viewModel.shouldShowSettingsScreen = true
-                } label: {
-                    NavBarItem(imageName: Constants.ImageNames.settings)
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewModel.shouldShowSettingsScreen = true
+                    } label: {
+                        NavBarItem(imageName: Constants.ImageNames.settings)
+                    }
+                    .onTapGesture(perform: Haptics.shared.successHaptic)
                 }
-                .onTapGesture(perform: Haptics.shared.successHaptic)
             }
-        }
-        .sheet(isPresented: $viewModel.shouldShowAppointmentForm) {
-            AppointmentForm(isShowingAppointmentForm: $viewModel.shouldShowAppointmentForm,
-                            viewModel: AppointmentFormViewModel(appointment: appointments.nextAppointment()))
         }
         .sheet(isPresented: $viewModel.shouldShowSettingsScreen) {
             SettingsView(isShowingSettingsView: $viewModel.shouldShowSettingsScreen)
@@ -93,7 +76,7 @@ struct HomeView: View {
 
 extension HomeView {
     enum Constants {
-        static let title = "🏠 Home"
+        static let title = "Home"
         enum ImageNames {
             static let settings = "gear"
         }

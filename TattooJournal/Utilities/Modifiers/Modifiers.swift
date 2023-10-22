@@ -7,22 +7,9 @@
 
 import SwiftUI
 
-struct AppointmentMapViewButtonStyling: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .padding()
-            .background(.black.opacity(0.75))
-            .foregroundColor(.white)
-            .font(.title)
-            .clipShape(Circle())
-            .padding(.trailing)
-    }
-}
-
 struct PreviewEnvironmentObjects: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .environmentObject(Appointments())
             .environmentObject(UserPreferences())
     }
 }

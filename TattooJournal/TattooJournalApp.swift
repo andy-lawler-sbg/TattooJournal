@@ -6,40 +6,29 @@
 //
 
 import SwiftUI
+import SwiftData
 import TipKit
 
 @main
 struct TattooJournalApp: App {
 
-    var appointments = Appointments()
-
     var userPreferences = UserPreferences()
 
-    @AppStorage(Constants.AppStorage.shouldShowOnboarding) private var shouldShowOnboarding = false
+    @AppStorage(Constants.AppStorage.shouldShowOnboarding) private var shouldShowOnboarding = true
 
     var body: some Scene {
         WindowGroup {
             ZStack {
+                TJTabView(isShowingOnboarding: $shouldShowOnboarding)
+                    .environmentObject(userPreferences)
                 if shouldShowOnboarding {
-                    OnboardingView {
-                        TJTabView()
-                            .environmentObject(appointments)
-                            .environmentObject(userPreferences)
-                    }
-                } else {
-                    TJTabView()
-                        .environmentObject(appointments)
-                        .environmentObject(userPreferences)
+                    OnboardingView(isShowingOnboarding: $shouldShowOnboarding)
                 }
             }
             .task {
-                // Configure and load your tips at app launch.
-                try? await Tips.configure {
-                    DisplayFrequency(.immediate)
-                    DatastoreLocation(.applicationDefault)
-                }
+                try? Tips.configure([.displayFrequency(.immediate), .datastoreLocation(.applicationDefault)])
             }
-        }
+        }.modelContainer(for: [Appointment.self, Artist.self, Shop.self])
     }
 }
 

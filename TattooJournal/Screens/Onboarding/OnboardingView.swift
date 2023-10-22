@@ -7,55 +7,45 @@
 
 import SwiftUI
 
-struct OnboardingView<Destination: View>: View {
+struct OnboardingView: View {
 
     @State var selectedPage = 0
-    @State var enterApp = false
-
-    @ViewBuilder let destination: () -> Destination
+    @Binding var isShowingOnboarding: Bool
 
     var body: some View {
-        NavigationStack {
-            TabView(selection: $selectedPage) {
-                ForEach(OnboardingData.pages) { page in
-                    OnboardingPageView(page: page, enterApp: $enterApp)
-                }
+        TabView(selection: $selectedPage) {
+            ForEach(OnboardingData.pages) { page in
+                OnboardingPageView(page: page, isShowingOnboarding: $isShowingOnboarding)
             }
-            .navigationDestination(isPresented: $enterApp) {
-                destination()
-            }
-            .overlay(alignment: .topTrailing) {
-                if selectedPage != 3 {
-                    Button {
-                        enterApp = true
-                    } label: {
-                        Text("Skip")
-                            .font(.callout).bold()
-                            .foregroundStyle(.white)
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 20)
-                            .background(Color.accentColor.opacity(0.5))
-                            .clipShape(.capsule)
-                            .padding()
-                    }
-                    .onTapGesture(perform: Haptics.shared.successHaptic)
-                }
-            }
-            .tabViewStyle(.page)
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
-            .padding(.bottom)
-            .background(
-                LinearGradient(colors: [Color(.lighterAccent), Color.accentColor],
-                               startPoint: .top,
-                               endPoint: .bottom)
-            )
         }
+        .overlay(alignment: .topTrailing) {
+            if selectedPage != 3 {
+                Button {
+                    isShowingOnboarding = false
+                } label: {
+                    Text("Skip")
+                        .font(.callout).bold()
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 20)
+                        .background(Color.accentColor.opacity(0.5))
+                        .clipShape(.capsule)
+                        .padding()
+                }
+                .onTapGesture(perform: Haptics.shared.successHaptic)
+            }
+        }
+        .tabViewStyle(.page)
+        .indexViewStyle(.page(backgroundDisplayMode: .always))
+        .padding(.bottom)
+        .background(
+            LinearGradient(colors: [Color(.lighterAccent), Color.accentColor],
+                           startPoint: .top,
+                           endPoint: .bottom)
+        )
     }
 }
 
 #Preview {
-    OnboardingView {
-        TJTabView()
-            .modifier(PreviewEnvironmentObjects())
-    }
+    OnboardingView(isShowingOnboarding: .constant(true))
 }
