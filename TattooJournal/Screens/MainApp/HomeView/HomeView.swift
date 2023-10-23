@@ -17,27 +17,15 @@ struct HomeView: View {
         order: .forward
     ) private var queriedAppointments: [Appointment]
 
-    var nextAppointment: Appointment? {
-        let startDate: Date = Date()
-        return queriedAppointments.filter({ $0.date >= startDate }).first
-    }
-
     var body: some View {
         NavigationStack {
             VStack {
-                if let nextAppointment {
-                    List {
-                        AppointmentCell(viewModel: .init(appointment: nextAppointment))
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                    }
-                    .listStyle(.plain)
-                    .scrollIndicators(.hidden)
-                    .listRowSpacing(-5)
+                if !queriedAppointments.isEmpty {
+                    spendingChart
                 }
-
+                Spacer()
             }
-            .background(Color.gray.opacity(0.1))
+            .background(Color(.background))
             .navigationTitle(Constants.title)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -53,6 +41,10 @@ struct HomeView: View {
         .sheet(isPresented: $viewModel.shouldShowSettingsScreen) {
             SettingsView()
         }
+    }
+
+    private var spendingChart: some View {
+        AppointmentSpendingChart(viewModel: .init(appointments: queriedAppointments))
     }
 }
 
