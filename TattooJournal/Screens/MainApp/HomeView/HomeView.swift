@@ -18,7 +18,7 @@ struct HomeView: View {
     ) private var queriedAppointments: [Appointment]
 
     @Query private var artists: [Artist]
-
+    
     var body: some View {
         NavigationStack {
             VStack {

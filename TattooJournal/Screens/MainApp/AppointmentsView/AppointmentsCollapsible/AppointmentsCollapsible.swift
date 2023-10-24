@@ -67,7 +67,7 @@ struct AppointmentsCollapsible: View {
                 .resizable()
                 .frame(width: 10, height: 7)
                 .font(.callout.bold())
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(userPreferences.appColor)
                 .padding(.leading, 10)
         }
         .padding(.vertical, 10)

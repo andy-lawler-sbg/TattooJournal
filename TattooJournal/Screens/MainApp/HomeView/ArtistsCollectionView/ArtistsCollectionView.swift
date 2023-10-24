@@ -29,6 +29,8 @@ struct ArtistsCollectionView: View {
 }
 
 struct ArtistView: View {
+
+    @EnvironmentObject var userPreferences: UserPreferences
     var artist: Artist
 
     private var artistAbbreviation: String {
@@ -52,7 +54,7 @@ struct ArtistView: View {
                 .bold()
                 .padding(10)
                 .frame(width: 120, height: 120, alignment: .bottomLeading)
-                .background(Color.accentColor)
+                .background(userPreferences.appColor)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .padding()
         }

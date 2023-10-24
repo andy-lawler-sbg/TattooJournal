@@ -22,7 +22,7 @@ struct EmptyState: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 100)
-                    .foregroundColor(Color.accentColor)
+                    .foregroundColor(userPreferences.appColor)
                     .padding()
                 Text(title)
                     .font(.headline)
