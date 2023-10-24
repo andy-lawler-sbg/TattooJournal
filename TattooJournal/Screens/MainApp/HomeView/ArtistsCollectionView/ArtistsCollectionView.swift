@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @Observable
 final class ArtistsCollectionViewModel {
@@ -17,14 +18,23 @@ final class ArtistsCollectionViewModel {
 }
 
 struct ArtistsCollectionView: View {
+
     var viewModel: ArtistsCollectionViewModel
 
+    let padding: CGFloat = 16
+    let columns = [GridItem(.adaptive(minimum:150), spacing: 16), GridItem(.adaptive(minimum:150), spacing: 16)]
+
     var body: some View {
-        List {
-            ForEach(viewModel.artists) { artist in
-                ArtistView(artist: artist)
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(viewModel.artists, id: \.self) { artist in
+                    ArtistView(artist: artist)
+                }
             }
+            .padding(.horizontal)
         }
+        .frame(maxHeight: 300)
+        .background(Color.clear)
     }
 }
 
@@ -33,34 +43,14 @@ struct ArtistView: View {
     @EnvironmentObject var userPreferences: UserPreferences
     var artist: Artist
 
-    private var artistAbbreviation: String {
-        let formatter = PersonNameComponentsFormatter()
-        guard let components = formatter.personNameComponents(from: artist.name),
-              let firstLetter = components.givenName?.first,
-              let lastLetter = components.familyName?.first
-        else { return "" }
-        return "\(firstLetter)\(lastLetter)"
-    }
-
     var body: some View {
-        ZStack {
-            Text(artistAbbreviation)
-                .frame(width: 120, height: 120)
-                .scaledToFill()
-                .foregroundColor(.white)
-            Text(artist.name)
-                .foregroundStyle(.white)
-                .font(.title3)
-                .bold()
-                .padding(10)
-                .frame(width: 120, height: 120, alignment: .bottomLeading)
-                .background(userPreferences.appColor)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .padding()
-        }
+        RoundedRectangle(cornerRadius: 10)
+            .frame(minHeight: 150)
+            .foregroundStyle(userPreferences.appColor)
     }
 }
 
 #Preview {
-    ArtistsCollectionView(viewModel: .init(artists: [Artist(name: "John")]))
+    ArtistsCollectionView(viewModel: .init(artists: [Artist(name: "Andy Lawler")]))
+        .environmentObject(UserPreferences())
 }

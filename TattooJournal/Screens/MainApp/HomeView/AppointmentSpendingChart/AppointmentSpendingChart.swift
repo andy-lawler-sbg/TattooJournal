@@ -16,7 +16,7 @@ struct AppointmentSpendingChart: View {
     var viewModel: AppointmentSpendingChartViewModel
 
     var body: some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 15) {
             Text("Spending")
                 .font(.headline)
                 .bold()
