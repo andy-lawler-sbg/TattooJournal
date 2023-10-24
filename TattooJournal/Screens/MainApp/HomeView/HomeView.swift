@@ -17,11 +17,16 @@ struct HomeView: View {
         order: .forward
     ) private var queriedAppointments: [Appointment]
 
+    @Query private var artists: [Artist]
+
     var body: some View {
         NavigationStack {
             VStack {
-                if !queriedAppointments.isEmpty {
+                if queriedAppointments.count >= 2 {
                     spendingChart
+                }
+                if !artists.isEmpty {
+                    artistsCollectionView
                 }
                 Spacer()
             }
@@ -45,6 +50,10 @@ struct HomeView: View {
 
     private var spendingChart: some View {
         AppointmentSpendingChart(viewModel: .init(appointments: queriedAppointments))
+    }
+
+    private var artistsCollectionView: some View {
+        ArtistsCollectionView(viewModel: .init(artists: artists))
     }
 }
 

@@ -10,15 +10,6 @@ import SwiftUI
 import SwiftData
 import Charts
 
-@Observable
-final class AppointmentSpendingChartViewModel {
-    var appointments: [Appointment]
-
-    init(appointments: [Appointment]) {
-        self.appointments = appointments
-    }
-}
-
 struct AppointmentSpendingChart: View {
 
     @EnvironmentObject var userPreferences: UserPreferences

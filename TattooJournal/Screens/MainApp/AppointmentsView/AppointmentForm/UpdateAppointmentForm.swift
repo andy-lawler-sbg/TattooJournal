@@ -12,7 +12,9 @@ struct UpdateAppointmentForm: View {
 
     @Environment(\.modelContext) var context
     @Bindable var appointment: Appointment
+
     @State private var artistName: String = ""
+    @State private var tattooLocation: TattooLocation = .head
 
     var body: some View {
         AppointmentFormView(type: .update,
@@ -21,6 +23,7 @@ struct UpdateAppointmentForm: View {
                             price: $appointment.price,
                             design: $appointment.design,
                             notifyMe: $appointment.notifyMe,
+                            tattooLocation: $tattooLocation,
                             buttonAction: {
             /// SwiftData
             let artist = Artist(name: artistName)
@@ -28,12 +31,14 @@ struct UpdateAppointmentForm: View {
                 context.delete(currentArtist)
             }
             appointment.artist = artist
+            appointment.bodyPart = tattooLocation.rawValue
             context.insert(artist)
 
             /// Notifications
             NotificationsTrigger.testNotifications(with: appointment)
         })
         .onAppear {
+            tattooLocation = appointment.tattooLocation
             if let artist = appointment.artist {
                 artistName = artist.name
             }
