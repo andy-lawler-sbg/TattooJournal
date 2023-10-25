@@ -16,7 +16,7 @@ struct NavBarItem: View {
     var body: some View {
         ZStack {
             Circle()
-                .frame(width: 35, height: 35)
+                .frame(width: 40, height: 40)
                 .foregroundStyle(Color(.cellBackground))
                 .shadow(color: .black.opacity(0.1), radius: 5)
             Image(systemName: imageName)

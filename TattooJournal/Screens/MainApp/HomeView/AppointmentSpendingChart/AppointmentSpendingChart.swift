@@ -23,10 +23,12 @@ struct AppointmentSpendingChart: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             Chart(viewModel.appointments) {
                 LineMark(
-                    x: .value("Date", $0.date),
+                    x: .value("Date", $0.date.formatted()),
                     y: .value("Price", Double($0.price) ?? 0)
                 )
-                .foregroundStyle(userPreferences.appColor)
+                PointMark(x: .value("Date", $0.date.formatted()),
+                          y: .value("Price", Double($0.price) ?? 0)
+                ).foregroundStyle(userPreferences.appColor)
             }
             .background(Color.clear)
             .frame(maxHeight: 150)

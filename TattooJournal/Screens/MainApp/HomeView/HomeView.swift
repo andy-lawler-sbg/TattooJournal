@@ -25,9 +25,6 @@ struct HomeView: View {
                 if queriedAppointments.count >= 2 {
                     spendingChart
                 }
-                if !artists.isEmpty {
-                    artistsCollectionView
-                }
                 Spacer()
             }
             .background(Color(.background))

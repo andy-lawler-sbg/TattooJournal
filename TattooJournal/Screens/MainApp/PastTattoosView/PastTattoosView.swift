@@ -87,10 +87,8 @@ struct PastTattoosView: View {
         List {
             ForEach(appointments) { appointment in
                 AppointmentCell(viewModel: .init(appointment: appointment))
+                    .onTapGesture {}
                     .listRowSeparator(.hidden)
-                    .onTapGesture {
-                        viewModel.selectedAppointment = appointment
-                    }
                     .swipeActions {
                         Button(role: .destructive) {
                             withAnimation {

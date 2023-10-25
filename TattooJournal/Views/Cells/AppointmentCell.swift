@@ -30,16 +30,16 @@ struct AppointmentCell: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 15) {
                 if let artistName = viewModel.appointment.artist?.name {
                     Text(artistName)
-                        .foregroundColor(userPreferences.appColor)
+                        .foregroundStyle(userPreferences.appColor)
                         .font(.headline)
                         .fontWeight(.bold)
                 }
-                if viewModel.appointment.price != "" {
-                    HStack(spacing: 10) {
+                HStack(spacing: 10) {
+                    if viewModel.appointment.price != "" {
                         Text("\(userPreferences.currencyString)\(viewModel.appointment.price)")
                             .font(.caption).bold()
                             .foregroundStyle(Color.secondary)
@@ -48,6 +48,13 @@ struct AppointmentCell: View {
                             .background(Color(.buttonCapsule))
                             .clipShape(.capsule)
                     }
+                    Text(viewModel.appointment.bodyPart)
+                        .font(.caption).bold()
+                        .foregroundStyle(Color.white)
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 8)
+                        .background(userPreferences.appColor.opacity(0.75))
+                        .clipShape(.capsule)
                 }
                 Spacer()
             }
@@ -77,7 +84,6 @@ struct AppointmentCell: View {
         .padding()
         .background(Color(.cellBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .shadow(color: .black.opacity(0.02), radius: 10)
     }
 }
 
