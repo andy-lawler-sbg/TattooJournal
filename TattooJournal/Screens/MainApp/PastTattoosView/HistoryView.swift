@@ -1,5 +1,5 @@
 //
-//  PastTattoosView.swift
+//  HistoryView.swift
 //  TattooJournal
 //
 //  Created by Andy Lawler on 21/04/2023.
@@ -9,8 +9,8 @@ import SwiftUI
 import SwiftData
 import TipKit
 
-struct PastTattoosView: View {
-    
+struct HistoryView: View {
+
     @Environment(\.modelContext) var context
 
     @Query(
@@ -25,7 +25,7 @@ struct PastTattoosView: View {
     }
 
 
-    @Bindable var viewModel = PastTattoosViewModel()
+    @Bindable var viewModel = HistoryViewModel()
 
     var body: some View {
         NavigationStack {
@@ -66,7 +66,7 @@ struct PastTattoosView: View {
 
     /// Tip view which shows users how to use the page.
     private var tipView: some View {
-        TipView(PastTattoosTip(), arrowEdge: .bottom)
+        TipView(HistoryTip(), arrowEdge: .bottom)
             .tipBackground(Color(.cellBackground))
             .padding(.horizontal)
             .padding(.top, 7.5)
@@ -125,9 +125,9 @@ struct PastTattoosView: View {
 
 // MARK: - Constants
 
-private extension PastTattoosView {
+private extension HistoryView {
     enum Constants {
-        static let title = "Past Tattoos"
+        static let title = "History"
 
         enum ImageNames {
             static let visitedShops = "globe.desk"
@@ -145,7 +145,7 @@ private extension PastTattoosView {
 
 #Preview("Past Tattoos View") {
     TabView {
-        PastTattoosView()
+        HistoryView()
             .modelContainer(for: [Appointment.self, Artist.self, Shop.self])
             .tabItem {
                 Label("Past Tattoos", systemImage: "pencil.line")

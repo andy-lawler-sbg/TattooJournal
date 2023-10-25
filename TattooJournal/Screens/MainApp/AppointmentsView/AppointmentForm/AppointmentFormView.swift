@@ -54,6 +54,10 @@ struct AppointmentFormView: View {
                 switch alertType {
                 case .noPrice:
                     price = ""
+                case .multipleErrors(let errors):
+                    if errors.contains(.noPrice) {
+                        price = ""
+                    }
                 default:
                     break
                 }
@@ -77,7 +81,9 @@ struct AppointmentFormView: View {
 
     private var keyDetailsSection: some View {
         Section {
+            /// id is added to make the picker close when the selection is made
             DatePicker("Date", selection: $date)
+                .id(date.timeIntervalSince1970)
             TextField("Artist", text: $name)
                 .focused($focusedTextField, equals: .artist)
                 .onSubmit { focusedTextField = .price }
@@ -125,11 +131,15 @@ struct AppointmentFormView: View {
                 Task {
                     do {
                         try await validateUserInput()
-                        buttonAction()
-                        dismiss()
+                        withAnimation(.snappy) {
+                            buttonAction()
+                            dismiss()
+                        }
                     } catch {
                         if let error = error as? FormValidationError {
-                            alertType = error
+                            withAnimation {
+                                alertType = error
+                            }
                         }
                     }
                 }
@@ -145,16 +155,20 @@ struct AppointmentFormView: View {
 
     private func validateUserInput() async throws {
         var errorsToThrow = [FormValidationError]()
+        if datesMatch(dateOne: date, dateTwo: Date.now) || date < Date.now {
+            errorsToThrow.append(FormValidationError.invalidDate)
+        }
         if name.isEmpty {
             errorsToThrow.append(FormValidationError.noArtist)
-        } else if design.isEmpty {
+        }
+        if design.isEmpty {
             errorsToThrow.append(FormValidationError.noDesign)
         }
         if let _ = Double(price) {} else {
             errorsToThrow.append(FormValidationError.noPrice)
         }
         if errorsToThrow.count > 1 {
-            throw FormValidationError.multipleErrors
+            throw FormValidationError.multipleErrors(errors: errorsToThrow)
         } else {
             if let error = errorsToThrow.first {
                 throw error
@@ -162,39 +176,85 @@ struct AppointmentFormView: View {
         }
     }
 
+    private func datesMatch(dateOne: Date, dateTwo: Date) -> Bool {
+        let dateOneComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute], from: dateOne)
+        let dateTwoComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute], from: dateTwo)
+        if dateOneComponents.day == dateTwoComponents.day
+            && dateOneComponents.month == dateTwoComponents.month
+            && dateOneComponents.year == dateTwoComponents.year
+            && dateOneComponents.hour == dateTwoComponents.hour
+            && dateOneComponents.minute == dateTwoComponents.minute {
+            return true
+        } else {
+            return false
+        }
+    }
+
+
     private func dismissAlerts() {
         alertType = nil
     }
 
-    enum FormValidationError: Error {
+    enum FormValidationError: Error, Equatable {
+        case invalidDate
         case noArtist
         case noPrice
         case noDesign
-        case multipleErrors
+        case multipleErrors(errors: [FormValidationError])
 
         var title: String {
             switch self {
+            case .invalidDate:
+                return "📅 Invalid Date 📅"
             case .noArtist:
-                return "No Artist Entered"
+                return "👨‍🎨 No Artist Entered 👨‍🎨"
             case .noPrice:
-                return "No Valid Price Entered"
+                return "💰 No Valid Price Entered 💰"
             case .noDesign:
-                return "No Design Entered"
+                return "🎨 No Design Entered 🎨"
             case .multipleErrors:
-                return "Multiple Errors"
+                return "⚠️ Multiple Errors ⚠️"
             }
         }
 
         var description: String {
             switch self {
+            case .invalidDate:
+                return "Please enter a date in the future."
             case .noArtist:
                 return "Please enter your artist."
             case .noPrice:
                 return "Please enter a valid price."
             case .noDesign:
                 return "Please enter your design details."
-            case .multipleErrors:
-                return "Please enter appointment details."
+            case .multipleErrors(let errors):
+                var errorString = ""
+                for (index, error) in errors.enumerated() {
+                    guard let errorSubtitle = error.errorSubtitle else { break }
+                    let count = errors.count
+                    errorString += errorSubtitle
+                    if index == count - 2 {
+                        errorString += " & "
+                    } else if index != count - 1 {
+                        errorString += ", "
+                    }
+                }
+                return "Please fill in the \(errorString) fields."
+            }
+        }
+
+        var errorSubtitle: String? {
+            switch self {
+            case .invalidDate:
+                return "date"
+            case .noArtist:
+                return "artist"
+            case .noDesign:
+                return "design"
+            case .noPrice:
+                return "price"
+            default:
+                return nil
             }
         }
     }

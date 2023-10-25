@@ -1,5 +1,5 @@
 //
-//  PastTattoosViewModel.swift
+//  HistoryViewModel.swift
 //  TattooJournal
 //
 //  Created by Andy Lawler on 28/04/2023.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable
-final class PastTattoosViewModel {
+final class HistoryViewModel {
     var selectedAppointment: Appointment?
     var shouldShowVisitedShops = false
 }

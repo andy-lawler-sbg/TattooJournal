@@ -92,7 +92,7 @@ struct AppointmentsView: View {
                     .listRowSeparator(.hidden)
                     .swipeActions(allowsFullSwipe: false) {
                         Button(role: .destructive) {
-                            withAnimation {
+                            withAnimation(.easeOut(duration: 10)) {
                                 if let currentArtist = appointment.artist {
                                     context.delete(currentArtist)
                                 }
@@ -104,7 +104,9 @@ struct AppointmentsView: View {
                         }
 
                         Button {
-                            viewModel.selectedAppointment = appointment
+                            withAnimation(.linear) {
+                                viewModel.selectedAppointment = appointment
+                            }
                         } label: {
                             Label("Edit", systemImage: "pencil.and.list.clipboard")
                                 .symbolVariant(.fill)
@@ -112,11 +114,6 @@ struct AppointmentsView: View {
                         .tint(.yellow)
                     }
             }.listRowBackground(Color.clear)
-
-            if appointments.count <= 3 {
-                redactedAppointmentCell
-                redactedAppointmentCell
-            }
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
@@ -125,15 +122,7 @@ struct AppointmentsView: View {
 
     /// Collapsible popup which shows the total cost of all appointments with some details about the cost.
     private var appointmentsCollapsible: some View {
-        AppointmentsCollapsible(viewModel: .init(appointments: appointments), 
-                                collapsed: $viewModel.collapsedTotal)
-    }
-
-    private var redactedAppointmentCell: some View {
-        AppointmentCell(viewModel: .init(appointment: Appointment()))
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.clear)
-            .redacted(reason: .placeholder)
+        AppointmentsCollapsible(viewModel: .init(appointments: appointments))
     }
 
     // MARK: - Empty State View

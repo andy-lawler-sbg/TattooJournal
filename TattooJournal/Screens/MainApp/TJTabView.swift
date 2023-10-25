@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UserNotifications
 
 struct TJTabView: View {
 
@@ -23,9 +22,9 @@ struct TJTabView: View {
                 .tabItem {
                     Label("Appointments", systemImage: "list.clipboard.fill")
                 }
-            PastTattoosView()
+            HistoryView()
                 .tabItem {
-                    Label("Past Tattoos", systemImage: "doc.badge.clock")
+                    Label("History", systemImage: "doc.badge.clock")
                 }
         }
         .tint(userPreferences.appColor)

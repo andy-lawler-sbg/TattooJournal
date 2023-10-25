@@ -10,6 +10,5 @@ import SwiftUI
 @Observable
 final class AppointmentsViewModel {
     var shouldShowAppointmentsForm = false
-    var collapsedTotal = false
     var selectedAppointment: Appointment?
 }

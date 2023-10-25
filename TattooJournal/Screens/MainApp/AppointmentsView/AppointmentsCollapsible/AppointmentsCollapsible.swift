@@ -23,7 +23,7 @@ struct AppointmentsCollapsible: View {
     var viewModel: AppointmentsCollapsibleViewModel
 
     @EnvironmentObject var userPreferences: UserPreferences
-    @Binding var collapsed: Bool
+    @State var isShowing: Bool = true
 
     private var costWithTip: Double {
         let multiplier = 1.0 + (Double(userPreferences.tipAmount.amount) / 100)
@@ -37,7 +37,7 @@ struct AppointmentsCollapsible: View {
     var body: some View {
         VStack(spacing: 10) {
             collapsibleButton
-            if !collapsed {
+            if isShowing {
                 unCollapsedInfo
             }
         }
@@ -48,7 +48,9 @@ struct AppointmentsCollapsible: View {
     /// Collapsible Button which can toggle to show the uncollapsed information
     private var collapsibleButton: some View {
         Button {
-            collapsed.toggle()
+            withAnimation(.easeIn) {
+                isShowing.toggle()
+            }
         } label: {
             collapsibleButtonContent
         }
@@ -63,7 +65,7 @@ struct AppointmentsCollapsible: View {
             Text("\(userPreferences.currencyString)\(costWithTip, specifier: "%.2f")")
                 .font(.caption)
                 .foregroundStyle(userPreferences.appColor)
-            Image(systemName: collapsed ? "chevron.down" : "chevron.up")
+            Image(systemName: isShowing ? "chevron.down" : "chevron.up")
                 .resizable()
                 .frame(width: 10, height: 7)
                 .font(.callout.bold())
@@ -108,5 +110,5 @@ private extension AppointmentsCollapsible {
 // MARK: - Preview
 
 #Preview {
-    AppointmentsCollapsible(viewModel: .init(appointments: [Appointment()]), collapsed: .constant(false))
+    AppointmentsCollapsible(viewModel: .init(appointments: [Appointment()]), isShowing: false)
         .environmentObject(UserPreferences())}

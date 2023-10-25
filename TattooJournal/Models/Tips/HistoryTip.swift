@@ -1,5 +1,5 @@
 //
-//  PastTattoosTip.swift
+//  HistoryTip.swift
 //  TattooJournal
 //
 //  Created by Andy Lawler on 11/08/2023.
@@ -8,9 +8,9 @@
 import SwiftUI
 import TipKit
 
-struct PastTattoosTip: Tip {
+struct HistoryTip: Tip {
     var title: Text {
-        Text("Past Tattoos")
+        Text("Past Appointments")
     }
 
     var message: Text? {
