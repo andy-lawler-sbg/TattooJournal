@@ -42,6 +42,7 @@ struct AppointmentFormView: View {
         NavigationStack {
             Form {
                 keyDetailsSection
+                dateAndLocationSection
                 notificationSection
                 actionButtonSections
             }
@@ -79,11 +80,22 @@ struct AppointmentFormView: View {
         )
     }
 
-    private var keyDetailsSection: some View {
+    private var dateAndLocationSection: some View {
         Section {
             /// id is added to make the picker close when the selection is made
             DatePicker("Date", selection: $date)
                 .id(date.timeIntervalSince1970)
+        } header: {
+            Text("Date & Location")
+        } footer: {
+            Text("Only future dates are allowed.")
+                .font(.caption)
+                .foregroundColor(.gray)
+        }
+    }
+
+    private var keyDetailsSection: some View {
+        Section {
             TextField("Artist", text: $name)
                 .focused($focusedTextField, equals: .artist)
                 .onSubmit { focusedTextField = .price }
@@ -104,9 +116,9 @@ struct AppointmentFormView: View {
                 }
             }
         } header: {
-            Text("Key Details")
+            Text("Appointment Details")
         } footer: {
-            Text("This includes your date, artist, price, design & body part.")
+            Text("This includes your artist, price, design & body part fields.")
                 .font(.caption)
                 .foregroundColor(.gray)
         }
@@ -169,10 +181,8 @@ struct AppointmentFormView: View {
         }
         if errorsToThrow.count > 1 {
             throw FormValidationError.multipleErrors(errors: errorsToThrow)
-        } else {
-            if let error = errorsToThrow.first {
-                throw error
-            }
+        } else if let error = errorsToThrow.first {
+            throw error
         }
     }
 

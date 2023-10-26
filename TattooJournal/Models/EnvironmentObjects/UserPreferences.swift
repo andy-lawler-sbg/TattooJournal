@@ -30,7 +30,11 @@ final class UserPreferences: ObservableObject {
         appColor = getColor() ?? Color.accentColor
     }
 
-    func saveColor() {
+    func saveUserPreferences() {
+        saveColor()
+    }
+
+    private func saveColor() {
         guard let cgColor = appColor.cgColor,
               let array = cgColor.components else { return }
         UserDefaults.standard.set(array, forKey: "appColor")

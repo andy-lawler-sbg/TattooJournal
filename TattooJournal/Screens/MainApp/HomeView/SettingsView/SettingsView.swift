@@ -34,7 +34,7 @@ struct SettingsView: View {
                                      imageName: "paintbrush.fill",
                                      color: userPreferences.appColor)
                     Button {
-                        userPreferences.saveColor()
+                        userPreferences.saveUserPreferences()
                     } label: {
                         Text("Save Changes")
                             .multilineTextAlignment(.center)
@@ -43,7 +43,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Preferences")
                 } footer: {
-                    Text("Save must be pressed for changes to be applied.")
+                    Text("Save must be pressed for changes to be applied when you leave this page.")
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
