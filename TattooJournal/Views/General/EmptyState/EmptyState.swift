@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmptyState: View {
 
-    @EnvironmentObject var userPreferences: UserPreferences
+    @EnvironmentObject var themeHandler: AppThemeHandler
 
     let imageName: String
     let title: String
@@ -22,7 +22,7 @@ struct EmptyState: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 100)
-                    .foregroundColor(userPreferences.appColor)
+                    .foregroundColor(themeHandler.appColor)
                     .padding()
                 Text(title)
                     .font(.headline)
@@ -40,5 +40,5 @@ struct EmptyState: View {
     EmptyState(imageName: "list.clipboard",
                title: "Sorry",
                description: "You have not set any settings.")
-        .environmentObject(UserPreferences())
+        .environmentObject(AppThemeHandler())
 }

@@ -13,14 +13,13 @@ import TipKit
 struct TattooJournalApp: App {
 
     @AppStorage(Constants.AppStorage.shouldShowOnboarding) private var shouldShowOnboarding = true
-    
-    var userPreferences = UserPreferences()
+    var themeHandler = AppThemeHandler()
 
     var body: some Scene {
         WindowGroup {
             ZStack {
                 TJTabView(isShowingOnboarding: $shouldShowOnboarding)
-                    .environmentObject(userPreferences)
+                    .environmentObject(themeHandler)
                 if shouldShowOnboarding {
                     OnboardingView(isShowingOnboarding: $shouldShowOnboarding)
                 }
@@ -28,8 +27,9 @@ struct TattooJournalApp: App {
             .task {
                 try? Tips.configure([.displayFrequency(.immediate), .datastoreLocation(.applicationDefault)])
             }
+            .preferredColorScheme(themeHandler.colorScheme)
         }
-        .modelContainer(for: [Appointment.self, Artist.self, Shop.self])
+        .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self])
     }
 }
 

@@ -39,6 +39,6 @@ struct AppointmentForm: View {
 
 #Preview {
     AppointmentForm()
-        .tint(UserPreferences().appColor)
-        .modelContainer(for: [Appointment.self, Artist.self, Shop.self])
+        .tint(AppThemeHandler().appColor)
+        .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self])
 }

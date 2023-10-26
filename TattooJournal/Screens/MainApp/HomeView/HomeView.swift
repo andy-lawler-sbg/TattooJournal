@@ -69,6 +69,6 @@ extension HomeView {
             .tabItem {
                 Label("Home", systemImage: "house")
             }
-            .environmentObject(UserPreferences())
+            .environmentObject(AppThemeHandler())
     }
 }

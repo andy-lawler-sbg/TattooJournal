@@ -13,7 +13,7 @@ enum AppointmentFormType {
 
 struct AppointmentFormView: View {
 
-    @EnvironmentObject var userPreferences: UserPreferences
+    @EnvironmentObject var themeHandler: AppThemeHandler
     @Environment(\.dismiss) var dismiss
 
     @State private var alertType: FormValidationError? {
@@ -65,7 +65,7 @@ struct AppointmentFormView: View {
                 dismissAlerts()
             } label: {
                 Text("Ok")
-            }.tint(userPreferences.appColor)
+            }.tint(themeHandler.appColor)
         }, message: {
             if let alertType {
                 Text(alertType.description)
@@ -127,7 +127,7 @@ struct AppointmentFormView: View {
     private var notificationSection: some View {
         Section {
             Toggle("Notify Me", isOn: $notifyMe)
-                .tint(userPreferences.appColor)
+                .tint(themeHandler.appColor)
         } header: {
             Text("Notifications")
         } footer: {

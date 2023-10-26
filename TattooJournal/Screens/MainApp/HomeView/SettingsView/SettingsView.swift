@@ -6,84 +6,242 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SettingsView: View {
 
-    @EnvironmentObject var userPreferences: UserPreferences
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var themeHandler: AppThemeHandler
 
-    var selectedCurrency: Int { userPreferences.selectedCurrency }
-    var tipAmount: TipAmount { userPreferences.tipAmount }
-    var appTint: Color { userPreferences.appColor }
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
 
+    @State private var selectedAppTheme: ThemeType = .system
+    @State private var selectedAppColor: Color = .accentColor
+    @State private var selectedCurrency: CurrencyType = .sterling
+    @State private var selectedTipAmount: TipAmountType = .tenPercent
 
-    @State var selectedCurrencyIndex = 0
-    @State var selectedTipAmount = 0
+    @Query private var queriedUserPreferences: [UserPreferences]
+    private var userPreferences: UserPreferences {
+        queriedUserPreferences.first!
+    }
 
     var body: some View {
         NavigationStack {
             Form {
-                Section {
-                    SettingsItemView(itemView: currencyPicker,
-                                     imageName: currencyIconName,
-                                     color: .orange)
-                    SettingsItemView(itemView: tipAmountPicker,
-                                     imageName: "banknote.fill",
-                                     color: .green)
-                    SettingsItemView(itemView: colorPicker,
-                                     imageName: "paintbrush.fill",
-                                     color: userPreferences.appColor)
-                    Button {
-                        userPreferences.saveUserPreferences()
-                    } label: {
-                        Text("Save Changes")
-                            .multilineTextAlignment(.center)
-                            .tint(userPreferences.appColor)
-                    }
-                } header: {
-                    Text("Preferences")
-                } footer: {
-                    Text("Save must be pressed for changes to be applied when you leave this page.")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
+                themeSection
+                preferencesSection
+                saveSection
+                socialsSection
+                resetSection
             }
             .formStyle(.grouped)
-            .navigationTitle("Settings")
+            .navigationTitle(Constants.title)
         }
         .overlay(Button {
             dismiss()
         } label: {
             XMarkButton()
         }, alignment: .topTrailing)
+        .onAppear {
+            selectedAppTheme = themeHandler.selectedTheme
+            selectedAppColor = themeHandler.appColor
+            selectedCurrency = userPreferences.currency
+            selectedTipAmount = userPreferences.tipAmount
+        }
+        .preferredColorScheme(selectedAppTheme.colorScheme)
+    }
+
+    // MARK: - Theme
+
+    private var themeSection: some View {
+        Section {
+            SettingsItemView(itemView: themePicker,
+                             imageName: themeIconName,
+                             backgroundColor: themeBackgroundColor)
+            SettingsItemView(itemView: colorPicker,
+                             imageName: "paintbrush.fill",
+                             backgroundColor: selectedAppColor)
+        } header: {
+            Text("Theme")
+        } footer: {
+            Text("App tint can be controlled by light and dark mode or you can set it yourself.")
+                .font(.caption)
+                .foregroundColor(.gray)
+        }
+    }
+
+    private var themePicker: some View {
+        Picker("Theme", selection: $selectedAppTheme) {
+            ForEach(ThemeType.allCases, id: \.self) { theme in
+                Text(theme.title)
+            }
+        }
+    }
+
+    private var themeIconName: String {
+        switch selectedAppTheme {
+        case .system:
+            return colorScheme == .light ? ThemeType.light.themeIcon : ThemeType.dark.themeIcon
+        case .light, .dark:
+            return selectedAppTheme.themeIcon
+        }
+    }
+
+    private var themeBackgroundColor: Color {
+        let lightColor = Color.blue
+        let darkColor = Color.gray
+        switch selectedAppTheme {
+        case .system:
+            return colorScheme == .light ? lightColor : darkColor
+        case .light:
+            return lightColor
+        case .dark:
+            return darkColor
+        }
     }
 
     private var colorPicker: some View {
-        ColorPicker("App Tint", selection: $userPreferences.appColor)
+        ColorPicker("Color", selection: $selectedAppColor)
+    }
+
+    // MARK: - Preferences
+
+    private var preferencesSection: some View {
+        Section {
+            SettingsItemView(itemView: currencyPicker,
+                             imageName: currencyIconName,
+                             backgroundColor: .orange)
+            SettingsItemView(itemView: tipAmountPicker,
+                             imageName: "banknote.fill",
+                             backgroundColor: .green)
+        } header: {
+            Text("Preferences")
+        } footer: {
+            Text("Make changes to your currency and tip amounts here.")
+                .font(.caption)
+                .foregroundColor(.gray)
+        }
     }
 
     private var currencyPicker: some View {
-        Picker("Currency", selection: $userPreferences.selectedCurrency) {
-            ForEach(Preferences.Constants.currencies, id: \.id) { currency in
-                Text(currency.value)
+        Picker("Currency", selection: $selectedCurrency) {
+            ForEach(CurrencyType.allCases, id: \.self) { currency in
+                Text(currency.displayValue)
             }
         }
     }
 
     private var currencyIconName: String {
-        "\(userPreferences.currency.title)sign"
+        "\(selectedCurrency.rawValue)sign"
     }
 
     private var tipAmountPicker: some View {
-        Picker("Tip Amount", selection: $userPreferences.selectedTipAmount) {
-            ForEach(Preferences.Constants.tipAmounts, id: \.id) { tipAmount in
-                Text(tipAmount.title)
+        Picker("Tip Amount", selection: $selectedTipAmount) {
+            ForEach(TipAmountType.allCases, id: \.self) { tipAmount in
+                Text(tipAmount.displayValue)
             }
         }
+    }
+
+    // MARK: - Save & Reset
+
+    private var saveSection: some View {
+        Section {
+            Button {
+                themeHandler.appColor = selectedAppColor
+                themeHandler.selectedThemeType = selectedAppTheme.rawValue
+                themeHandler.saveThemes()
+
+                userPreferences.currencyString = selectedCurrency.rawValue
+                userPreferences.tipAmountString = selectedTipAmount.rawValue
+
+                dismiss()
+            } label: {
+                Text("Save Changes")
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.pink)
+            }
+        } footer: {
+            Text("Save must be pressed for changes to be applied next time you launch the app.")
+                .font(.caption)
+                .foregroundColor(.gray)
+        }
+    }
+
+    private var resetSection: some View {
+        Section {
+            Button {
+                themeHandler.reset()
+
+                context.delete(userPreferences)
+                let userPreferences = UserPreferences()
+                context.insert(userPreferences)
+                try? context.save()
+
+                dismiss()
+            } label: {
+                Text("Reset")
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .tint(.red)
+            }
+        } footer: {
+            VStack {
+                Text("Want to reset the app back to it's original state? You can here.")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                versionAndInfoView
+            }
+        }
+    }
+
+    // MARK: - Socials
+
+    private var socialLink: some View {
+        Link("Developer", destination: URL(string: "https://www.x.com/andylawlerdev")!)
+            .foregroundStyle(.primary)
+    }
+
+    private var socialsSection: some View {
+        Section {
+            SettingsItemView(itemView: socialLink, imageName: "person.fill", backgroundColor: .blue)
+        } header: {
+            Text("Developer Socials")
+        } footer: {
+            Text("Find out more about me.")
+                .font(.caption)
+                .foregroundColor(.gray)
+        }
+    }
+
+    // MARK: - Version & Info
+
+    private var versionAndInfoView: some View {
+        VStack(spacing: 10) {
+            Text("v1.0.0")
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+                .font(.callout)
+                .foregroundStyle(.primary)
+            Text("Made in the 🇬🇧.")
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.vertical)
+    }
+}
+
+private extension SettingsView {
+    enum Constants {
+        static let title = "Settings"
     }
 }
 
 #Preview {
     SettingsView()
-        .environmentObject(UserPreferences())
+        .environmentObject(AppThemeHandler())
 }

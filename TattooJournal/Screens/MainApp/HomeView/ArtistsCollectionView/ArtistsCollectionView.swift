@@ -54,13 +54,13 @@ struct ArtistsCollectionView: View {
 
 struct ArtistView: View {
 
-    @EnvironmentObject var userPreferences: UserPreferences
+    @EnvironmentObject var themeHandler: AppThemeHandler
     var artist: Artist
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .foregroundStyle(userPreferences.appColor)
+                .foregroundStyle(themeHandler.appColor)
             Image(systemName: "person.fill")
                 .resizable()
                 .scaledToFit()
@@ -82,5 +82,5 @@ struct ArtistView: View {
 
 #Preview {
     ArtistsCollectionView(viewModel: .init(artists: [Artist(name: "Andy Lawler")]))
-        .environmentObject(UserPreferences())
+        .environmentObject(AppThemeHandler())
 }

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import UserNotifications
+import SwiftData
 
 @Observable
 class AppointmentCellViewModel {
@@ -18,8 +18,12 @@ class AppointmentCellViewModel {
 }
 
 struct AppointmentCell: View {
-    
-    @EnvironmentObject var userPreferences: UserPreferences
+
+    @EnvironmentObject var themeHandler: AppThemeHandler
+    @Query private var queriedUserPreferences: [UserPreferences]
+    var userPreferences: UserPreferences {
+        queriedUserPreferences.first!
+    }
     var viewModel: AppointmentCellViewModel
 
     var dateString: String {
@@ -34,13 +38,13 @@ struct AppointmentCell: View {
             HStack(spacing: 15) {
                 if let artistName = viewModel.appointment.artist?.name {
                     Text(artistName)
-                        .foregroundStyle(userPreferences.appColor)
+                        .foregroundStyle(themeHandler.appColor)
                         .font(.headline)
                         .fontWeight(.bold)
                 }
                 HStack(spacing: 10) {
                     if viewModel.appointment.price != "" {
-                        Text("\(userPreferences.currencyString)\(viewModel.appointment.price)")
+                        Text("\(userPreferences.currency.displayValue)\(viewModel.appointment.price)")
                             .font(.caption).bold()
                             .foregroundStyle(Color.secondary)
                             .padding(.vertical, 5)
@@ -53,7 +57,7 @@ struct AppointmentCell: View {
                         .foregroundStyle(Color.white)
                         .padding(.vertical, 5)
                         .padding(.horizontal, 8)
-                        .background(userPreferences.appColor.opacity(0.75))
+                        .background(themeHandler.appColor.opacity(0.75))
                         .clipShape(.capsule)
                 }
                 Spacer()
@@ -75,7 +79,7 @@ struct AppointmentCell: View {
                 Image(systemName: viewModel.appointment.notifyMe ? "bell.fill" : "bell")
                     .resizable()
                     .frame(width: 13, height: 13)
-                    .foregroundStyle(viewModel.appointment.notifyMe ? userPreferences.appColor : Color.gray)
+                    .foregroundStyle(viewModel.appointment.notifyMe ? themeHandler.appColor : Color.gray)
                     .padding(6)
                     .background(Color(.buttonCapsule))
                     .clipShape(.circle)
@@ -91,7 +95,7 @@ struct AppointmentCell: View {
     VStack {
         Spacer()
         AppointmentCell(viewModel: .init(appointment: Appointment()))
-            .environmentObject(UserPreferences())
+            .environmentObject(AppThemeHandler())
         Spacer()
     }
     .padding()

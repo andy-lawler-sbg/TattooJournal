@@ -12,7 +12,7 @@ import Charts
 
 struct AppointmentSpendingChart: View {
 
-    @EnvironmentObject var userPreferences: UserPreferences
+    @EnvironmentObject var themeHandler: AppThemeHandler
     var viewModel: AppointmentSpendingChartViewModel
 
     var body: some View {
@@ -28,7 +28,7 @@ struct AppointmentSpendingChart: View {
                 )
                 PointMark(x: .value("Date", $0.date.formatted()),
                           y: .value("Price", Double($0.price) ?? 0)
-                ).foregroundStyle(userPreferences.appColor)
+                ).foregroundStyle(themeHandler.appColor)
             }
             .background(Color.clear)
             .frame(maxHeight: 150)
@@ -43,6 +43,6 @@ struct AppointmentSpendingChart: View {
 #Preview {
     VStack {
         AppointmentSpendingChart(viewModel: .init(appointments: [Appointment()]))
-            .environmentObject(UserPreferences())
+            .environmentObject(AppThemeHandler())
     }
 }

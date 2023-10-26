@@ -146,11 +146,10 @@ private extension HistoryView {
 #Preview("Past Tattoos View") {
     TabView {
         HistoryView()
-            .modelContainer(for: [Appointment.self, Artist.self, Shop.self])
+            .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self])
             .tabItem {
                 Label("Past Tattoos", systemImage: "pencil.line")
             }
-            .environmentObject(UserPreferences())
     }
 }
 

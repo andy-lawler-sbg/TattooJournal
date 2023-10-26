@@ -82,7 +82,7 @@ enum TattooLocation: String, Codable, CaseIterable {
 }
 
 @Model
-class Artist: Codable {
+final class Artist: Codable {
     var name: String
     var appointment: Appointment?
 
@@ -113,7 +113,7 @@ class Artist: Codable {
 }
 
 @Model
-class Shop: Codable {
+final class Shop: Codable {
     var name: String
     var contactNumber: String
     var appointment: Appointment?

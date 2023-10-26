@@ -26,5 +26,4 @@ struct VisitedShops: View {
 
 #Preview {
     VisitedShops(shouldShowVisitedShops: .constant(true))
-        .environmentObject(UserPreferences())
 }

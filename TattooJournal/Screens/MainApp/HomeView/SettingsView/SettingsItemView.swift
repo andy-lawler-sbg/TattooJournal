@@ -11,17 +11,18 @@ struct SettingsItemView<Content: View>: View {
 
     var itemView: Content
     var imageName: String
-    var color: Color
+    var imageColor: Color = .white
+    var backgroundColor: Color
 
     var body: some View {
         HStack(spacing: 10) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundStyle(color)
+                    .foregroundStyle(backgroundColor)
                 Image(systemName: imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .foregroundStyle(Color.white)
+                    .foregroundStyle(imageColor)
                     .padding(8)
             }
             .frame(width: 35, height: 35)
@@ -37,7 +38,7 @@ struct SettingsItemView<Content: View>: View {
             SettingsItemView(
                 itemView: ColorPicker("App Tint", selection: $selectedColor),
                 imageName: "paintbrush.fill",
-                color: .red)
+                backgroundColor: .red)
         }
     }
 }

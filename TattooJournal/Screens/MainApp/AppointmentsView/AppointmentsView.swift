@@ -13,12 +13,12 @@ import TipKit
 struct AppointmentsView: View {
 
     @Environment(\.modelContext) var context
-    @EnvironmentObject var userPreferences: UserPreferences
 
     @Query(
         sort: \Appointment.date,
         order: .forward
     ) private var queriedAppointments: [Appointment]
+
     @Query private var artists: [Artist]
 
     var appointments: [Appointment] {
@@ -164,8 +164,7 @@ private extension AppointmentsView {
             .tabItem {
                 Label("Appointments", systemImage: "list.clipboard.fill")
             }
-            .modelContainer(for: [Appointment.self, Artist.self, Shop.self])
-            .environmentObject(UserPreferences())
+            .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self])
     }            
     .task {
         try? Tips.configure([.displayFrequency(.immediate), .datastoreLocation(.applicationDefault)])

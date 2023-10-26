@@ -22,11 +22,16 @@ struct AppointmentsCollapsible: View {
 
     var viewModel: AppointmentsCollapsibleViewModel
 
-    @EnvironmentObject var userPreferences: UserPreferences
+    @Query private var queriedUserPreferences: [UserPreferences]
+    var userPreferences: UserPreferences {
+        queriedUserPreferences.first!
+    }
+
+    @EnvironmentObject var themeHandler: AppThemeHandler
     @State var isShowing: Bool = true
 
     private var costWithTip: Double {
-        let multiplier = 1.0 + (Double(userPreferences.tipAmount.amount) / 100)
+        let multiplier = 1.0 + (Double(userPreferences.tipAmount.intValue) / 100)
         let cost = viewModel.appointments.reduce(into: 0.0) { partialResult, appointment in
             guard let price = Double(appointment.price) else { return }
             partialResult += price
@@ -61,27 +66,27 @@ struct AppointmentsCollapsible: View {
         HStack(spacing: 0) {
             Text(Constants.total)
                 .font(.caption).bold()
-                .foregroundStyle(userPreferences.appColor)
-            Text("\(userPreferences.currencyString)\(costWithTip, specifier: "%.2f")")
+                .foregroundStyle(themeHandler.appColor)
+            Text("\(userPreferences.currency.displayValue)\(costWithTip, specifier: "%.2f")")
                 .font(.caption)
-                .foregroundStyle(userPreferences.appColor)
+                .foregroundStyle(themeHandler.appColor)
             Image(systemName: isShowing ? "chevron.down" : "chevron.up")
                 .resizable()
                 .frame(width: 10, height: 7)
                 .font(.callout.bold())
-                .foregroundStyle(userPreferences.appColor)
+                .foregroundStyle(themeHandler.appColor)
                 .padding(.leading, 10)
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 15)
-        .background(userPreferences.appColor.opacity(0.2))
+        .background(themeHandler.appColor.opacity(0.2))
         .clipShape(.capsule)
     }
 
     // MARK: - UnCollapsed Information
 
     private var unCollapsedInfoTip: Text {
-        Text("This price includes a \(userPreferences.tipAmount.amount)% tip.")
+        Text("This price includes a \(userPreferences.tipAmount.displayValue) tip.")
             .bold()
     }
 
@@ -90,10 +95,10 @@ struct AppointmentsCollapsible: View {
         Text("You will need the above amount to pay for all of your appointments. \(unCollapsedInfoTip)")
             .multilineTextAlignment(.center)
             .font(.caption)
-            .foregroundColor(userPreferences.appColor)
+            .foregroundColor(themeHandler.appColor)
             .padding(.horizontal)
             .padding()
-            .background(userPreferences.appColor.opacity(0.1))
+            .background(themeHandler.appColor.opacity(0.1))
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .shadow(color: .black.opacity(0.05), radius: 5, y: 3)
     }
@@ -111,4 +116,5 @@ private extension AppointmentsCollapsible {
 
 #Preview {
     AppointmentsCollapsible(viewModel: .init(appointments: [Appointment()]), isShowing: false)
-        .environmentObject(UserPreferences())}
+        .environmentObject(AppThemeHandler())
+}
