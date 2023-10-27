@@ -11,24 +11,30 @@ import SwiftData
 struct TJTabView: View {
     
     @Environment(\.modelContext) private var context
-    @EnvironmentObject var themeHandler: AppThemeHandler
+    @EnvironmentObject private var themeHandler: AppThemeHandler
+
     @Binding var isShowingOnboarding: Bool
     @Query private var queriedUserPreferences: [UserPreferences]
 
+    @State private var selectedPage = 1
+
     var body: some View {
-        TabView {
+        TabView(selection: $selectedPage) {
             HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
+                .tag(1)
             AppointmentsView()
                 .tabItem {
                     Label("Appointments", systemImage: "list.clipboard.fill")
                 }
-            HistoryView()
+                .tag(2)
+            HistoryView(selectedPage: $selectedPage)
                 .tabItem {
                     Label("History", systemImage: "doc.badge.clock")
                 }
+                .tag(3)
         }
         .task {
             await setupUserPreferences()
@@ -47,6 +53,6 @@ struct TJTabView: View {
 
 #Preview {
     /// `isShowingOnboarding = true` allows the permissions view to not show
-    TJTabView(isShowingOnboarding: .constant(true))
+    TJTabView(isShowingOnboarding: .constant(false))
         .environmentObject(AppThemeHandler())
 }

@@ -129,12 +129,11 @@ struct AppointmentsView: View {
 
     /// Empty state view that shows when you have no appointments.
     private var emptyStateView: some View {
-        VStack {
-            EmptyState(imageName: Constants.EmptyState.imageName,
-                       title: Constants.EmptyState.title,
-                       description: Constants.EmptyState.description)
-            Spacer()
-        }
+        EmptyState(imageName: Constants.EmptyState.imageName,
+                   title: Constants.EmptyState.title,
+                   description: Constants.EmptyState.description,
+                   buttonText: Constants.EmptyState.buttonText,
+                   action: { viewModel.shouldShowAppointmentsForm = true })
     }
 }
 
@@ -151,7 +150,8 @@ private extension AppointmentsView {
         enum EmptyState {
             static let imageName = "bookmark.slash"
             static let title = "No Appointments"
-            static let description = "You should add some appointments."
+            static let description = "You currently have no upcoming appointments. Maybe treat yourself and add one in?"
+            static let buttonText = "Add"
         }
     }
 }

@@ -11,7 +11,9 @@ import TipKit
 
 struct HistoryView: View {
 
-    @Environment(\.modelContext) var context
+    @Binding var selectedPage: Int
+
+    @Environment(\.modelContext) private var context
 
     @Query(
         
@@ -19,13 +21,13 @@ struct HistoryView: View {
         order: .forward
     ) private var queriedAppointments: [Appointment]
 
-    var appointments: [Appointment] {
+    private var appointments: [Appointment] {
         let startDate: Date = Date()
         return queriedAppointments.filter({ $0.date < startDate })
     }
 
 
-    @Bindable var viewModel = HistoryViewModel()
+    @Bindable private var viewModel = HistoryViewModel()
 
     var body: some View {
         NavigationStack {
@@ -117,7 +119,9 @@ struct HistoryView: View {
         VStack {
             EmptyState(imageName: Constants.EmptyState.imageName,
                        title: Constants.EmptyState.title,
-                       description: Constants.EmptyState.description)
+                       description: Constants.EmptyState.description,
+                       buttonText: Constants.EmptyState.buttonText,
+                       action: { selectedPage = 2 })
             Spacer()
         }
     }
@@ -136,7 +140,8 @@ private extension HistoryView {
         enum EmptyState {
             static let imageName = "list.clipboard"
             static let title = "No Completed Apointments"
-            static let description = "You should make some appointments."
+            static let description = "You currently have no completed appointments. You might want to add some on the appointments page."
+            static let buttonText = "Add"
         }
     }
 }
@@ -145,7 +150,7 @@ private extension HistoryView {
 
 #Preview("Past Tattoos View") {
     TabView {
-        HistoryView()
+        HistoryView(selectedPage: .constant(1))
             .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self])
             .tabItem {
                 Label("Past Tattoos", systemImage: "pencil.line")
