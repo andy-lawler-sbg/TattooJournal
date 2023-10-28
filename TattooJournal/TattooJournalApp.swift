@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftData
 import TipKit
-import Combine
 
 @main
 struct TattooJournalApp: App {
@@ -44,13 +43,5 @@ private extension TattooJournalApp {
         enum AppStorage {
             static let shouldShowOnboarding = "shouldShowOnboarding"
         }
-    }
-}
-
-final class AppEventHandler: ObservableObject {
-    let eventPublisher = PassthroughSubject<AppEvent, Never>()
-
-    enum AppEvent {
-        case addAppointment
     }
 }

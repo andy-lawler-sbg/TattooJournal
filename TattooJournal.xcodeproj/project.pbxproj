@@ -21,6 +21,12 @@
 		2B9E0C6D2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9E0C6C2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift */; };
 		2B9E0C702AE7A180000D50DB /* ArtistsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9E0C6F2AE7A180000D50DB /* ArtistsCollectionView.swift */; };
 		2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */; };
+		2BC420142AED3120003838D3 /* ReviewAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC420132AED3120003838D3 /* ReviewAppointmentView.swift */; };
+		2BC420162AED312E003838D3 /* ReviewAppointmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC420152AED312E003838D3 /* ReviewAppointmentViewModel.swift */; };
+		2BC420192AED315B003838D3 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC420182AED315B003838D3 /* StarRatingView.swift */; };
+		2BC4201C2AED317D003838D3 /* StarRatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4201B2AED317D003838D3 /* StarRatingButton.swift */; };
+		2BC4201E2AED3480003838D3 /* AppEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4201D2AED3480003838D3 /* AppEventHandler.swift */; };
+		2BC420202AED3522003838D3 /* TJTabView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4201F2AED3522003838D3 /* TJTabView+Extensions.swift */; };
 		2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */; };
 		2BD3184A29F275DF0059F9A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3184929F275DF0059F9A8 /* Assets.xcassets */; };
 		2BD3184D29F275DF0059F9A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3184C29F275DF0059F9A8 /* Preview Assets.xcassets */; };
@@ -80,6 +86,12 @@
 		2B9E0C6C2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentSpendingChartViewModel.swift; sourceTree = "<group>"; };
 		2B9E0C6F2AE7A180000D50DB /* ArtistsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionView.swift; sourceTree = "<group>"; };
 		2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		2BC420132AED3120003838D3 /* ReviewAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAppointmentView.swift; sourceTree = "<group>"; };
+		2BC420152AED312E003838D3 /* ReviewAppointmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAppointmentViewModel.swift; sourceTree = "<group>"; };
+		2BC420182AED315B003838D3 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		2BC4201B2AED317D003838D3 /* StarRatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingButton.swift; sourceTree = "<group>"; };
+		2BC4201D2AED3480003838D3 /* AppEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEventHandler.swift; sourceTree = "<group>"; };
+		2BC4201F2AED3522003838D3 /* TJTabView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TJTabView+Extensions.swift"; sourceTree = "<group>"; };
 		2BD3184229F275DD0059F9A8 /* TattooJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TattooJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooJournalApp.swift; sourceTree = "<group>"; };
 		2BD3184929F275DF0059F9A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				2BD3187529F276830059F9A8 /* TJTabView.swift */,
+				2BC4201F2AED3522003838D3 /* TJTabView+Extensions.swift */,
+				2BC420122AED3102003838D3 /* ReviewAppointmentView */,
 				2BD3188B29F2B53E0059F9A8 /* HomeView */,
 				2BD3189229F2B5FA0059F9A8 /* AppointmentsView */,
 				2BD3189D29F2C0C10059F9A8 /* HistoryView */,
@@ -229,6 +243,33 @@
 				2B9E0C6F2AE7A180000D50DB /* ArtistsCollectionView.swift */,
 			);
 			path = ArtistsCollectionView;
+			sourceTree = "<group>";
+		};
+		2BC420122AED3102003838D3 /* ReviewAppointmentView */ = {
+			isa = PBXGroup;
+			children = (
+				2BC420172AED314D003838D3 /* StarRatingView */,
+				2BC420132AED3120003838D3 /* ReviewAppointmentView.swift */,
+				2BC420152AED312E003838D3 /* ReviewAppointmentViewModel.swift */,
+			);
+			path = ReviewAppointmentView;
+			sourceTree = "<group>";
+		};
+		2BC420172AED314D003838D3 /* StarRatingView */ = {
+			isa = PBXGroup;
+			children = (
+				2BC4201A2AED3175003838D3 /* StarRatingButton */,
+				2BC420182AED315B003838D3 /* StarRatingView.swift */,
+			);
+			path = StarRatingView;
+			sourceTree = "<group>";
+		};
+		2BC4201A2AED3175003838D3 /* StarRatingButton */ = {
+			isa = PBXGroup;
+			children = (
+				2BC4201B2AED317D003838D3 /* StarRatingButton.swift */,
+			);
+			path = StarRatingButton;
 			sourceTree = "<group>";
 		};
 		2BD3183929F275DD0059F9A8 = {
@@ -358,6 +399,7 @@
 				2B7F418C2A7FA6EB00ADF919 /* Haptics */,
 				2BD3189529F2B63A0059F9A8 /* Modifiers */,
 				64EAF4AE2AE5B2B900AFD196 /* NotificationsHandler.swift */,
+				2BC4201D2AED3480003838D3 /* AppEventHandler.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -553,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BC420192AED315B003838D3 /* StarRatingView.swift in Sources */,
 				64EAF4B32AE5B54600AFD196 /* UpdateAppointmentForm.swift in Sources */,
 				2B64D22A2A7D649300090EB6 /* OnboardingPageView.swift in Sources */,
 				64EAF4AF2AE5B2B900AFD196 /* NotificationsHandler.swift in Sources */,
@@ -566,12 +609,15 @@
 				2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */,
 				2B53D28429F31B0B0051F6B9 /* SettingsView.swift in Sources */,
 				2BD3188029F285E90059F9A8 /* Appointment.swift in Sources */,
+				2BC4201C2AED317D003838D3 /* StarRatingButton.swift in Sources */,
 				2BD3187829F2768F0059F9A8 /* HomeView.swift in Sources */,
 				64C899322AE5C1B5002E8096 /* SettingsItemView.swift in Sources */,
 				64EAF4B12AE5B43F00AFD196 /* AppointmentForm.swift in Sources */,
 				2B64D22C2A7D64D400090EB6 /* OnboardingPage.swift in Sources */,
+				2BC420142AED3120003838D3 /* ReviewAppointmentView.swift in Sources */,
 				2BD3189029F2B5D60059F9A8 /* AppointmentsViewModel.swift in Sources */,
 				2B9E0C6D2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift in Sources */,
+				2BC420162AED312E003838D3 /* ReviewAppointmentViewModel.swift in Sources */,
 				640B18302AE70D5A00F5BF1E /* AppointmentSpendingChart.swift in Sources */,
 				2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */,
 				2BF6BD5E2A868585006A7602 /* AppointmentsTip.swift in Sources */,
@@ -581,12 +627,14 @@
 				2B64D2282A7D536900090EB6 /* OnboardingView.swift in Sources */,
 				2BD3187629F276830059F9A8 /* TJTabView.swift in Sources */,
 				2B9E0C702AE7A180000D50DB /* ArtistsCollectionView.swift in Sources */,
+				2BC420202AED3522003838D3 /* TJTabView+Extensions.swift in Sources */,
 				2BF6BD622A86866A006A7602 /* HistoryTip.swift in Sources */,
 				2BF6BD602A8685B4006A7602 /* HomeTip.swift in Sources */,
 				2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */,
 				64EAF4AD2AE5B28700AFD196 /* AppointmentFormView.swift in Sources */,
 				2B6C8CF329FBFD8100A4BA6E /* HistoryViewModel.swift in Sources */,
 				2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */,
+				2BC4201E2AED3480003838D3 /* AppEventHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

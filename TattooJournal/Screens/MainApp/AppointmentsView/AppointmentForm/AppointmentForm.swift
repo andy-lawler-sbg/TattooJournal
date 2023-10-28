@@ -43,7 +43,10 @@ struct AppointmentForm: View {
             }
         })
         .onAppear {
-            date = calendar.date(byAdding: .minute, value: 1, to: appointment.date) ?? appointment.date
+            var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+            dateComponents.minute = (dateComponents.minute ?? 0) + 1
+            dateComponents.second = 0
+            date = calendar.date(from: dateComponents) ?? Date.now
         }
     }
 }

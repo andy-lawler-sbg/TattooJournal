@@ -10,12 +10,26 @@ import SwiftData
 
 struct TJTabView: View {
 
-    @Environment(\.modelContext) private var context
+    // MARK: - Environment
+
     @EnvironmentObject private var themeHandler: AppThemeHandler
     @EnvironmentObject private var notificationsHandler: NotificationsHandler
+    @Environment(\.modelContext) var context
+
+    // MARK: - Onboarding & Initial Setup
 
     @Binding var isShowingOnboarding: Bool
-    @Query private var queriedUserPreferences: [UserPreferences]
+    @Query var queriedUserPreferences: [UserPreferences]
+    
+    // MARK: - Review
+
+    @Environment(\.scenePhase) private var scenePhase
+    @Query(sort: \Appointment.date,
+           order: .forward
+    ) var queriedAppointments: [Appointment]
+    @State var shouldShowAppointmentReviewPage = false
+
+    // MARK: - DeepLinks
 
     @State private var selectedPage = 1
 
@@ -37,23 +51,31 @@ struct TJTabView: View {
                 }
                 .tag(3)
         }
+        .tint(themeHandler.appColor)
+        .sheet(isPresented: $shouldShowAppointmentReviewPage, onDismiss: {
+            UserDefaults.standard.removeObject(forKey: Constants.lastClosedAppKey)
+        }) {
+            if let filtered {
+                ReviewAppointmentView(viewModel: .init(appointments: filtered))
+                    .presentationDetents([.large])
+            }
+        }
         .task {
             await setupUserPreferences()
         }
-        .tint(themeHandler.appColor)
         .onAppear {
             notificationsHandler.requestAuthorization()
         }
-    }
-
-    private func setupUserPreferences() async {
-        guard queriedUserPreferences.count < 1 else { return }
-        let userPreferences = UserPreferences(currencyString: CurrencyType.sterling.rawValue,
-                                              tipAmountString: TipAmountType.tenPercent.rawValue)
-        context.insert(userPreferences)
-        try? context.save()
+        .onChange(of: scenePhase) {
+            if scenePhase == .background {
+                appDidEnterBackground()
+            } else if scenePhase == .active {
+                appDidEnterForeground()
+            }
+        }
     }
 }
+
 
 #Preview {
     /// `isShowingOnboarding = true` allows the permissions view to not show
