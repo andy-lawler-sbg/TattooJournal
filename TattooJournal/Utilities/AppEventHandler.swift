@@ -18,5 +18,6 @@ final class AppEventHandler: ObservableObject {
 
     enum AppEvent {
         case addAppointment
+        case goToSettings
     }
 }

@@ -86,8 +86,7 @@ struct HistoryView: View {
     private var pastTattoosList: some View {
         List {
             ForEach(appointments) { appointment in
-                AppointmentCell(viewModel: .init(appointment: appointment, 
-                                                 shouldShowNotificationsButton: false))
+                AppointmentCell(viewModel: .init(appointment: appointment, cellType: .history))
                     .onTapGesture {}
                     .listRowSeparator(.hidden)
                     .swipeActions {

@@ -23,7 +23,7 @@ struct AppointmentsView: View {
 
     @Query private var artists: [Artist]
 
-    var appointments: [Appointment] {
+    private var appointments: [Appointment] {
         let startDate: Date = Date()
         return queriedAppointments.filter({ $0.date >= startDate })
     }
@@ -97,7 +97,7 @@ struct AppointmentsView: View {
     private var appointmentsList: some View {
         List {
             ForEach(appointments) { appointment in
-                AppointmentCell(viewModel: .init(appointment: appointment))
+                AppointmentCell(viewModel: .init(appointment: appointment, cellType: .upcoming))
                     .listRowSeparator(.hidden)
                     .swipeActions(allowsFullSwipe: false) {
                         Button(role: .destructive) {

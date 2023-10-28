@@ -29,6 +29,8 @@ final class AppointmentsViewModel {
                 switch appEvent {
                 case .addAppointment:
                     shouldShowAppointmentsForm = true
+                case .goToSettings:
+                    print("➕ Going to settings not supported on Appointments ➕")
                 }
             }
             .store(in: &cancellables)

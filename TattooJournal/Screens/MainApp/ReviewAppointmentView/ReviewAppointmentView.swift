@@ -66,7 +66,7 @@ struct ReviewAppointmentView: View {
                         .font(.body)
                         .foregroundStyle(.secondary)
                         .padding(.bottom, 10)
-                    StarRatingView()
+                    StarRatingView(rating: .constant(1))
                 }
             }
         }

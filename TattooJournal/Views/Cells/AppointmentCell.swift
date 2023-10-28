@@ -11,30 +11,50 @@ import SwiftData
 @Observable
 class AppointmentCellViewModel {
     var appointment: Appointment
-    var shouldShowNotificationsButton: Bool
+    var cellType: AppointmentCellType
 
-    init(appointment: Appointment, shouldShowNotificationsButton: Bool = true) {
+    var accessoryToShow: AppointmentCellAccessory {
+        switch cellType {
+        case .upcoming:
+            return .notificationBell
+        case .history:
+            return .starRating
+        }
+    }
+
+    init(appointment: Appointment, 
+         cellType: AppointmentCellType = .upcoming
+    ) {
         self.appointment = appointment
-        self.shouldShowNotificationsButton = shouldShowNotificationsButton
+        self.cellType = cellType
+    }
+
+    enum AppointmentCellType {
+        case upcoming, history
+    }
+
+    enum AppointmentCellAccessory {
+        case notificationBell, starRating
     }
 }
 
 struct AppointmentCell: View {
-
     @EnvironmentObject var themeHandler: AppThemeHandler
     @EnvironmentObject var notificationsHandler: NotificationsHandler
     @Query private var queriedUserPreferences: [UserPreferences]
-    var userPreferences: UserPreferences {
+
+    private var userPreferences: UserPreferences {
         queriedUserPreferences.first!
     }
-    var viewModel: AppointmentCellViewModel
 
-    var dateString: String {
+    private var dateString: String {
         let formatter1 = DateFormatter()
         formatter1.dateStyle = .full
         formatter1.timeStyle = .short
         return formatter1.string(from: viewModel.appointment.date)
     }
+
+    var viewModel: AppointmentCellViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -76,7 +96,8 @@ struct AppointmentCell: View {
         }
         .padding()
         .overlay(alignment: .bottomTrailing) {
-            if viewModel.shouldShowNotificationsButton {
+            switch viewModel.accessoryToShow {
+            case .notificationBell:
                 Image(systemName: viewModel.appointment.notifyMe ? "bell.fill" : "bell")
                     .resizable()
                     .frame(width: 13, height: 13)
@@ -94,6 +115,20 @@ struct AppointmentCell: View {
                         } else {
                             notificationsHandler.deleteScheduledNotification(for: viewModel.appointment)
                         }
+                    }
+            case .starRating:
+                Image(systemName: true ? "star.fill" : "star")
+                    .resizable()
+                    .frame(width: 13, height: 13)
+                    .foregroundStyle(viewModel.appointment.notifyMe ? themeHandler.appColor : Color.gray)
+                    .padding(6)
+                    .background(Color(.buttonCapsule))
+                    .clipShape(.circle)
+                    .frame(width: 80, height: 80, alignment: .bottomTrailing)
+                    .background(Color(.cellBackground))
+                    .padding(10)
+                    .onTapGesture {
+                        print("Tapped Star")
                     }
             }
         }

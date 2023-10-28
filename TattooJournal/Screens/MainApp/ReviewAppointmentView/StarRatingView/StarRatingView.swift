@@ -15,34 +15,88 @@ struct StarRatingView: View {
     @State private var starFourSelected = false
     @State private var starFiveSelected = false
 
+    @Binding var rating: Int
+
     var body: some View {
         HStack(spacing: 10) {
             StarRatingButton(isStarred: $starOneSelected)
-                .disabled(isDisabled(for: .one))
             StarRatingButton(isStarred: $starTwoSelected)
-                .disabled(isDisabled(for: .two))
             StarRatingButton(isStarred: $starThreeSelected)
-                .disabled(isDisabled(for: .three))
             StarRatingButton(isStarred: $starFourSelected)
-                .disabled(isDisabled(for: .four))
             StarRatingButton(isStarred: $starFiveSelected)
-                .disabled(isDisabled(for: .five))
+        }
+        .onAppear {
+            configureStars(for: rating)
+        }
+        .onChange(of: starOneSelected) {
+            if starOneSelected {
+                rating = 1
+                configureStars(for: rating)
+            } else {
+                rating = 0
+                configureStars(for: rating)
+            }
+        }
+        .onChange(of: starTwoSelected) {
+            if starTwoSelected {
+                rating = 2
+                configureStars(for: rating)
+            } else {
+                rating = 0
+                configureStars(for: rating)
+            }
+        }
+        .onChange(of: starThreeSelected) {
+            if starThreeSelected {
+                rating = 3
+                configureStars(for: rating)
+            } else {
+                rating = 0
+                configureStars(for: rating)
+            }
+        }
+        .onChange(of: starFourSelected) {
+            if starFourSelected {
+                rating = 4
+                configureStars(for: rating)
+            } else {
+                rating = 0
+                configureStars(for: rating)
+            }
+        }
+        .onChange(of: starFiveSelected) {
+            if starFiveSelected {
+                rating = 5
+                configureStars(for: rating)
+            } else {
+                rating = 0
+                configureStars(for: rating)
+            }
         }
     }
 
-    /// This needs cleaning up, need to work out a better way to do this.
-    private func isDisabled(for rating: Ratings) -> Bool {
-        switch rating {
-        case .one:
-            return !true
-        case .two:
-            return !starOneSelected
-        case .three:
-            return !starTwoSelected
-        case .four:
-            return !starThreeSelected
-        case .five:
-            return !starFourSelected
+    private func configureStars(for rating: Int) {
+        if rating == 0 {
+            starOneSelected = false
+            starTwoSelected = false
+            starThreeSelected = false
+            starFourSelected = false
+            starFiveSelected = false
+        }
+        if rating >= 1 {
+            starOneSelected = true
+        }
+        if rating >= 2 {
+            starTwoSelected = true
+        }
+        if rating >= 3 {
+            starThreeSelected = true
+        }
+        if rating >= 4 {
+            starFourSelected = true
+        }
+        if rating == 5 {
+            starFiveSelected = true
         }
     }
 }
@@ -54,5 +108,5 @@ private extension StarRatingView {
 }
 
 #Preview {
-    StarRatingView()
+    StarRatingView(rating: .constant(5))
 }

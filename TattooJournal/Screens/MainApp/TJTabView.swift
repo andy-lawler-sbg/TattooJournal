@@ -35,7 +35,7 @@ struct TJTabView: View {
 
     var body: some View {
         TabView(selection: $selectedPage) {
-            HomeView()
+            HomeView(selectedPage: $selectedPage)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
@@ -57,7 +57,6 @@ struct TJTabView: View {
         }) {
             if let filtered {
                 ReviewAppointmentView(viewModel: .init(appointments: filtered))
-                    .presentationDetents([.large])
             }
         }
         .task {
