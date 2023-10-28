@@ -10,6 +10,7 @@ import SwiftData
 
 struct UpdateAppointmentForm: View {
 
+    @EnvironmentObject private var notificationsHandler: NotificationsHandler
     @Environment(\.modelContext) var context
     @Bindable var appointment: Appointment
 
@@ -25,17 +26,21 @@ struct UpdateAppointmentForm: View {
                             notifyMe: $appointment.notifyMe,
                             tattooLocation: $tattooLocation,
                             buttonAction: {
-            /// SwiftData
-            let artist = Artist(name: artistName)
-            if let currentArtist = appointment.artist {
-                context.delete(currentArtist)
+            withAnimation {
+                /// SwiftData
+                let artist = Artist(name: artistName)
+                if let currentArtist = appointment.artist {
+                    context.delete(currentArtist)
+                }
+                appointment.artist = artist
+                appointment.bodyPart = tattooLocation.rawValue
+                context.insert(artist)
+                
+                if appointment.notifyMe {
+                    notificationsHandler.deleteScheduledNotification(for: appointment)
+                    notificationsHandler.scheduleNotifications(for: appointment)
+                }
             }
-            appointment.artist = artist
-            appointment.bodyPart = tattooLocation.rawValue
-            context.insert(artist)
-
-            /// Notifications
-            NotificationsTrigger.testNotifications(with: appointment)
         })
         .onAppear {
             tattooLocation = appointment.tattooLocation

@@ -44,10 +44,12 @@ struct SettingsView: View {
             XMarkButton()
         }, alignment: .topTrailing)
         .onAppear {
-            selectedAppTheme = themeHandler.selectedTheme
-            selectedAppColor = themeHandler.appColor
-            selectedCurrency = userPreferences.currency
-            selectedTipAmount = userPreferences.tipAmount
+            withAnimation {
+                selectedAppTheme = themeHandler.selectedTheme
+                selectedAppColor = themeHandler.appColor
+                selectedCurrency = userPreferences.currency
+                selectedTipAmount = userPreferences.tipAmount
+            }
         }
         .preferredColorScheme(selectedAppTheme.colorScheme)
     }
@@ -149,14 +151,16 @@ struct SettingsView: View {
     private var saveSection: some View {
         Section {
             Button {
-                themeHandler.appColor = selectedAppColor
-                themeHandler.selectedThemeType = selectedAppTheme.rawValue
-                themeHandler.saveThemes()
+                withAnimation {
+                    themeHandler.appColor = selectedAppColor
+                    themeHandler.selectedThemeType = selectedAppTheme.rawValue
+                    themeHandler.saveThemes()
 
-                userPreferences.currencyString = selectedCurrency.rawValue
-                userPreferences.tipAmountString = selectedTipAmount.rawValue
+                    userPreferences.currencyString = selectedCurrency.rawValue
+                    userPreferences.tipAmountString = selectedTipAmount.rawValue
 
-                dismiss()
+                    dismiss()
+                }
             } label: {
                 Text("Save Changes")
                     .frame(maxWidth: .infinity)
@@ -173,14 +177,16 @@ struct SettingsView: View {
     private var resetSection: some View {
         Section {
             Button {
-                themeHandler.reset()
-
-                context.delete(userPreferences)
-                let userPreferences = UserPreferences()
-                context.insert(userPreferences)
-                try? context.save()
-
-                dismiss()
+                withAnimation {
+                    themeHandler.reset()
+                    
+                    context.delete(userPreferences)
+                    let userPreferences = UserPreferences()
+                    context.insert(userPreferences)
+                    try? context.save()
+                    
+                    dismiss()
+                }
             } label: {
                 Text("Reset")
                     .frame(maxWidth: .infinity)

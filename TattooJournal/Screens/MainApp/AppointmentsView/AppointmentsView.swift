@@ -11,7 +11,9 @@ import TipKit
 
 /// Appointments View to show the scheduled appointments a User has.
 struct AppointmentsView: View {
-
+    
+    @EnvironmentObject private var appEventHandler: AppEventHandler
+    @EnvironmentObject private var notificationsHandler: NotificationsHandler
     @Environment(\.modelContext) var context
 
     @Query(
@@ -45,7 +47,9 @@ struct AppointmentsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        viewModel.shouldShowAppointmentsForm = true
+                        withAnimation {
+                            viewModel.shouldShowAppointmentsForm = true
+                        }
                     } label: {
                         NavBarItem(imageName: Constants.ImageNames.add)
                     }
@@ -56,9 +60,14 @@ struct AppointmentsView: View {
                 AppointmentForm()
             }
             .sheet(item: $viewModel.selectedAppointment) {
-                viewModel.selectedAppointment = nil
+                withAnimation {
+                    viewModel.selectedAppointment = nil
+                }
             } content: { appointment in
                 UpdateAppointmentForm(appointment: appointment)
+            }
+            .onAppear {
+                viewModel.setup(appEventHandler: appEventHandler)
             }
         }
     }
@@ -93,6 +102,7 @@ struct AppointmentsView: View {
                     .swipeActions(allowsFullSwipe: false) {
                         Button(role: .destructive) {
                             withAnimation(.easeOut(duration: 10)) {
+                                notificationsHandler.deleteScheduledNotification(for: appointment)
                                 if let currentArtist = appointment.artist {
                                     context.delete(currentArtist)
                                 }
@@ -133,7 +143,7 @@ struct AppointmentsView: View {
                    title: Constants.EmptyState.title,
                    description: Constants.EmptyState.description,
                    buttonText: Constants.EmptyState.buttonText,
-                   action: { viewModel.shouldShowAppointmentsForm = true })
+                   action: { appEventHandler.eventPublisher.send(.addAppointment) })
     }
 }
 

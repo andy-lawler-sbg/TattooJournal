@@ -32,7 +32,9 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        viewModel.shouldShowSettingsScreen = true
+                        withAnimation {
+                            viewModel.shouldShowSettingsScreen = true
+                        }
                     } label: {
                         NavBarItem(imageName: Constants.ImageNames.settings)
                     }

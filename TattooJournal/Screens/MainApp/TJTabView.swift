@@ -9,9 +9,10 @@ import SwiftUI
 import SwiftData
 
 struct TJTabView: View {
-    
+
     @Environment(\.modelContext) private var context
     @EnvironmentObject private var themeHandler: AppThemeHandler
+    @EnvironmentObject private var notificationsHandler: NotificationsHandler
 
     @Binding var isShowingOnboarding: Bool
     @Query private var queriedUserPreferences: [UserPreferences]
@@ -40,6 +41,9 @@ struct TJTabView: View {
             await setupUserPreferences()
         }
         .tint(themeHandler.appColor)
+        .onAppear {
+            notificationsHandler.requestAuthorization()
+        }
     }
 
     private func setupUserPreferences() async {

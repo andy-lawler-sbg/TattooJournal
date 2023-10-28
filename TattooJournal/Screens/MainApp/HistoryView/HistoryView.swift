@@ -13,6 +13,7 @@ struct HistoryView: View {
 
     @Binding var selectedPage: Int
 
+    @EnvironmentObject private var appEventHandler: AppEventHandler
     @Environment(\.modelContext) private var context
 
     @Query(
@@ -46,7 +47,9 @@ struct HistoryView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        viewModel.shouldShowVisitedShops = true
+                        withAnimation {
+                            viewModel.shouldShowVisitedShops = true
+                        }
                     } label: {
                         NavBarItem(imageName: Constants.ImageNames.visitedShops)
                     }
@@ -55,11 +58,6 @@ struct HistoryView: View {
             }
             .sheet(isPresented: $viewModel.shouldShowVisitedShops) {
                 VisitedShops(shouldShowVisitedShops: $viewModel.shouldShowVisitedShops)
-            }
-            .sheet(item: $viewModel.selectedAppointment) {
-                viewModel.selectedAppointment = nil
-            } content: { appointment in
-                UpdateAppointmentForm(appointment: appointment)
             }
         }
     }
@@ -88,7 +86,8 @@ struct HistoryView: View {
     private var pastTattoosList: some View {
         List {
             ForEach(appointments) { appointment in
-                AppointmentCell(viewModel: .init(appointment: appointment))
+                AppointmentCell(viewModel: .init(appointment: appointment, 
+                                                 shouldShowNotificationsButton: false))
                     .onTapGesture {}
                     .listRowSeparator(.hidden)
                     .swipeActions {
@@ -116,14 +115,19 @@ struct HistoryView: View {
 
     /// Empty state view that shows when you have no completed appointments
     private var emptyStateView: some View {
-        VStack {
-            EmptyState(imageName: Constants.EmptyState.imageName,
-                       title: Constants.EmptyState.title,
-                       description: Constants.EmptyState.description,
-                       buttonText: Constants.EmptyState.buttonText,
-                       action: { selectedPage = 2 })
-            Spacer()
-        }
+        EmptyState(imageName: Constants.EmptyState.imageName,
+                   title: Constants.EmptyState.title,
+                   description: Constants.EmptyState.description,
+                   buttonText: Constants.EmptyState.buttonText,
+                   action: {
+            selectedPage = 2
+            /// Our appointments view does not sink on the publisher until it shows for the first time. If a user doesn't open
+            /// the appointments page first and hits this button, we need this delay to ensure we are currently waiting for this call.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                appEventHandler.eventPublisher.send(.addAppointment)
+            }
+        })
+
     }
 }
 
@@ -140,7 +144,7 @@ private extension HistoryView {
         enum EmptyState {
             static let imageName = "list.clipboard"
             static let title = "No Completed Apointments"
-            static let description = "You currently have no completed appointments. You might want to add some on the appointments page."
+            static let description = "You currently have no completed appointments. You might want to add some."
             static let buttonText = "Add"
         }
     }

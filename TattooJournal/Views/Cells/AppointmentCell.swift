@@ -11,15 +11,18 @@ import SwiftData
 @Observable
 class AppointmentCellViewModel {
     var appointment: Appointment
+    var shouldShowNotificationsButton: Bool
 
-    init(appointment: Appointment) {
+    init(appointment: Appointment, shouldShowNotificationsButton: Bool = true) {
         self.appointment = appointment
+        self.shouldShowNotificationsButton = shouldShowNotificationsButton
     }
 }
 
 struct AppointmentCell: View {
 
     @EnvironmentObject var themeHandler: AppThemeHandler
+    @EnvironmentObject var notificationsHandler: NotificationsHandler
     @Query private var queriedUserPreferences: [UserPreferences]
     var userPreferences: UserPreferences {
         queriedUserPreferences.first!
@@ -71,11 +74,9 @@ struct AppointmentCell: View {
                 .font(.caption2)
                 .foregroundColor(.secondary)
         }
-        .frame(maxWidth: .infinity)
+        .padding()
         .overlay(alignment: .bottomTrailing) {
-            Button {
-                viewModel.appointment.notifyMe.toggle()
-            } label: {
+            if viewModel.shouldShowNotificationsButton {
                 Image(systemName: viewModel.appointment.notifyMe ? "bell.fill" : "bell")
                     .resizable()
                     .frame(width: 13, height: 13)
@@ -83,11 +84,25 @@ struct AppointmentCell: View {
                     .padding(6)
                     .background(Color(.buttonCapsule))
                     .clipShape(.circle)
+                    .frame(width: 80, height: 80, alignment: .bottomTrailing)
+                    .background(Color(.cellBackground))
+                    .padding(10)
+                    .onTapGesture {
+                        viewModel.appointment.notifyMe.toggle()
+                        if viewModel.appointment.notifyMe {
+                            notificationsHandler.scheduleNotifications(for: viewModel.appointment)
+                        } else {
+                            notificationsHandler.deleteScheduledNotification(for: viewModel.appointment)
+                        }
+                    }
             }
         }
-        .padding()
         .background(Color(.cellBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
+        .shadow(color: themeHandler.appColor,
+                radius: 0,
+                x: 0,
+                y: 2)
     }
 }
 

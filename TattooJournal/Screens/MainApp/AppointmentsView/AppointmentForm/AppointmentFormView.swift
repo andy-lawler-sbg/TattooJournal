@@ -12,7 +12,7 @@ enum AppointmentFormType {
 }
 
 struct AppointmentFormView: View {
-
+    
     @EnvironmentObject var themeHandler: AppThemeHandler
     @Environment(\.dismiss) var dismiss
 
@@ -51,18 +51,20 @@ struct AppointmentFormView: View {
         }
         .alert(alertType?.title ?? "Generic Error", isPresented: $showingAlert, actions: {
             Button {
-                guard let alertType else { return }
-                switch alertType {
-                case .noPrice:
-                    price = ""
-                case .multipleErrors(let errors):
-                    if errors.contains(.noPrice) {
+                withAnimation {
+                    guard let alertType else { return }
+                    switch alertType {
+                    case .noPrice:
                         price = ""
+                    case .multipleErrors(let errors):
+                        if errors.contains(.noPrice) {
+                            price = ""
+                        }
+                    default:
+                        break
                     }
-                default:
-                    break
+                    dismissAlerts()
                 }
-                dismissAlerts()
             } label: {
                 Text("Ok")
             }.tint(themeHandler.appColor)

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct NavBarItem: View {
 
-    @State private var symbolAnimationValue = 10
+    @EnvironmentObject private var themeHandler: AppThemeHandler
+    @State private var symbolAnimationValue = 0
 
     var imageName: String
 
@@ -18,13 +19,17 @@ struct NavBarItem: View {
             Circle()
                 .frame(width: 40, height: 40)
                 .foregroundStyle(Color(.cellBackground))
-                .shadow(color: .black.opacity(0.1), radius: 5)
+                .shadow(color: .black.opacity(0.05), radius: 5)
             Image(systemName: imageName)
                 .imageScale(.medium)
                 .frame(width: 60, height: 60)
-                .foregroundColor(.secondary)
+                .foregroundColor(themeHandler.appColor)
                 .bold()
                 .symbolEffect(.pulse, value: symbolAnimationValue)
+        }.onAppear {
+            withAnimation {
+                symbolAnimationValue = 10
+            }
         }
     }
 }

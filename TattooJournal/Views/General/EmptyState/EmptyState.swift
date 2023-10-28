@@ -11,6 +11,8 @@ struct EmptyState: View {
 
     @EnvironmentObject private var themeHandler: AppThemeHandler
 
+    @State private var symbolAnimationValue = 0
+
     private let imageName: String
     private let title: String
     private let description: String
@@ -39,10 +41,11 @@ struct EmptyState: View {
         VStack(spacing: 10) {
             Image(systemName: imageName)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 100)
+                .scaledToFit()
+                .frame(width: 140, height: 140)
                 .foregroundColor(themeHandler.appColor)
                 .padding()
+                .symbolEffect(.bounce, value: symbolAnimationValue)
             Text(title)
                 .font(.title3)
                 .fontWeight(.semibold)
@@ -57,15 +60,13 @@ struct EmptyState: View {
                 Button(action: {
                     action()
                 }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 200, height: 40)
-                            .foregroundStyle(themeHandler.appColor.opacity(0.2))
-                        Text(buttonText)
-                            .bold()
-                            .foregroundStyle(themeHandler.appColor)
-                    }
+                    Text(buttonText)
+                        .bold()
+                        .foregroundStyle(themeHandler.appColor)
+                        .frame(width: 180, height: 30)
                 })
+                .buttonStyle(.bordered)
+                .controlSize(.regular)
             }
         }
         .background(.clear)
@@ -73,6 +74,9 @@ struct EmptyState: View {
         .padding(.bottom, isShowingActions ? 60 : 10)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
+        .onAppear {
+            symbolAnimationValue = 10
+        }
     }
 }
 

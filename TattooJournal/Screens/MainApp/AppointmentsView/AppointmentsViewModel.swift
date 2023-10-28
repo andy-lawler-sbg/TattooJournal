@@ -6,9 +6,31 @@
 //
 
 import SwiftUI
+import Combine
 
 @Observable
 final class AppointmentsViewModel {
+    private var appEventHandler: AppEventHandler?
+    private var cancellables = Set<AnyCancellable>()
+
     var shouldShowAppointmentsForm = false
     var selectedAppointment: Appointment?
+
+    func setup(appEventHandler: AppEventHandler) {
+        self.appEventHandler = appEventHandler
+        subscribe()
+    }
+
+    func subscribe() {
+        guard let appEventHandler else { return }
+        appEventHandler.eventPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [self] appEvent in
+                switch appEvent {
+                case .addAppointment:
+                    shouldShowAppointmentsForm = true
+                }
+            }
+            .store(in: &cancellables)
+    }
 }
