@@ -27,11 +27,19 @@ struct HomeView: View {
     }
 
     @Query private var artists: [Artist]
-    
+    @Query private var shops: [Shop]
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
+                    VStack {
+                        ForEach(shops) { shop in
+                            ForEach(shop.artists, id: \.self) { artist in
+                                Text(artist.name)
+                            }
+                        }
+                    }
                     artistsCollectionView
                     if upcomingAppointments.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {

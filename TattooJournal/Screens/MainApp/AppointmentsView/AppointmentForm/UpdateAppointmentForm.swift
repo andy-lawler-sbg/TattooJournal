@@ -40,49 +40,8 @@ struct UpdateAppointmentForm: View {
                             shop: $shop,
                             shopName: $shopName,
                             newShopToggle: $newShopToggle,
-                            buttonAction: {
-            withAnimation {
-                // MARK: - Shop
-                if newShopToggle {
-                    let newShop = Shop(name: shopName)
-                    context.insert(newShop)
-                    appointment.shop = newShop
-                    newShop.appointments.append(appointment)
-                } else {
-                    if appointment.shop != shop {
-                        appointment.shop = shop
-                        shop.appointments.append(appointment)
-                    }
-                }
-
-                // MARK: - Artist
-                if newArtistToggle {
-                    let newArtist = Artist(name: artistName, instagramHandle: artistInstagramHandle)
-                    context.insert(newArtist)
-                    appointment.artist = newArtist
-                    newArtist.appointments.append(appointment)
-                    shop.artist = newArtist
-                } else {
-                    if appointment.artist != artist {
-                        appointment.artist = artist
-                        artist.appointments.append(appointment)
-                    }
-                    if newShopToggle {
-                        shop.artist = artist
-                    }
-                }
-
-                // MARK: - Appointment
-                appointment.shop = shop
-                appointment.bodyPart = tattooLocation.rawValue
-
-                if appointment.notifyMe {
-                    notificationsHandler.deleteScheduledNotification(for: appointment)
-                    notificationsHandler.scheduleNotifications(for: appointment)
-                }
-            }
-        })
-        .onAppear {
+                            buttonAction: { withAnimation { appointmentFormUpdateAction() } }
+        ).onAppear {
             tattooLocation = appointment.tattooLocation
             if let artist = appointment.artist {
                 self.artist = artist
@@ -90,6 +49,58 @@ struct UpdateAppointmentForm: View {
             if let shop = appointment.shop {
                 self.shop = shop
             }
+        }
+    }
+
+    private func appointmentFormUpdateAction() {
+        // MARK: - Shop
+        if newShopToggle {
+            let newShop = Shop(name: shopName)
+            shop = newShop
+            context.insert(newShop)
+            appointment.shop = newShop
+            newShop.appointments.append(appointment)
+        } else if appointment.shop != shop {
+            if let appointmentShop = appointment.shop {
+                appointmentShop.appointments.removeAll(where: { $0 == appointment })
+            }
+            appointment.shop = shop
+            shop.appointments.append(appointment)
+        }
+
+        // MARK: - Artist
+        if newArtistToggle {
+            let newArtist = Artist(name: artistName, instagramHandle: artistInstagramHandle)
+            context.insert(newArtist)
+            artist = newArtist
+
+            appointment.artist = newArtist
+
+            newArtist.appointments.append(appointment)
+            newArtist.shop = shop
+
+            shop.artists.append(newArtist)
+        } else if appointment.artist != artist {
+            if let appointmentArtist = appointment.artist {
+                appointmentArtist.appointments.removeAll(where: { $0 == appointment })
+            }
+
+            appointment.artist = artist
+            artist.appointments.append(appointment)
+            
+            /// If its a new shop but current artist, add it in
+            if newShopToggle {
+                shop.artists.append(artist)
+            }
+
+        }
+
+        // MARK: - Appointment
+        appointment.bodyPart = tattooLocation.rawValue
+
+        if appointment.notifyMe {
+            notificationsHandler.deleteScheduledNotification(for: appointment)
+            notificationsHandler.scheduleNotifications(for: appointment)
         }
     }
 }

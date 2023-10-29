@@ -45,51 +45,9 @@ struct AppointmentForm: View {
                             shop: $shop,
                             shopName: $shopName,
                             newShopToggle: $newShopToggle,
-                            buttonAction: {
-            withAnimation {
-                context.insert(appointment)
-
-                // MARK: - Appointment
-                appointment.date = date
-                appointment.bodyPart = tattooLocation.rawValue
-
-                // MARK: - Shop
-                if newShopToggle || shops.isEmpty {
-                    let newShop = Shop(name: shopName)
-                    shop = newShop
-                    context.insert(newShop)
-                    appointment.shop = newShop
-                    shop.appointments.append(appointment)
-                } else {
-                    appointment.shop = shop
-                    shop.appointments.append(appointment)
-                }
-
-                // MARK: - Artist
-                if newArtistToggle || artists.isEmpty {
-                    let newArtist = Artist(name: artistName, instagramHandle: artistInstagramHandle)
-                    artist = newArtist
-                    context.insert(newArtist)
-                    appointment.artist = newArtist
-                    newArtist.appointments.append(appointment)
-                    newArtist.shop = shop
-                } else {
-                    appointment.artist = artist
-                    artist.appointments.append(appointment)
-                    shop.artist = artist
-                }
-
-                // MARK: - Notifications
-                if appointment.notifyMe {
-                    notificationsHandler.scheduleNotifications(for: appointment)
-                }
-            }
-        })
-        .onAppear {
-            var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-            dateComponents.minute = (dateComponents.minute ?? 0) + 1
-            dateComponents.second = 0
-            date = calendar.date(from: dateComponents) ?? Date.now
+                            buttonAction: { withAnimation { appointmentFormCreateAction() }}
+        ).onAppear {
+            configureDate()
             if let firstArtist = artists.first {
                 artist = firstArtist
             }
@@ -97,6 +55,48 @@ struct AppointmentForm: View {
                 shop = firstShop
             }
         }
+    }
+
+    /// Setting the date to be at 0 mins and 0 seconds of the hour. This enables notifications to work better.
+    private func configureDate() {
+        var dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        dateComponents.minute = (dateComponents.minute ?? 0) + 1
+        dateComponents.second = 0
+        date = calendar.date(from: dateComponents) ?? Date.now
+    }
+
+    private func appointmentFormCreateAction() {
+        context.insert(appointment)
+
+        // MARK: - Appointment
+        appointment.date = date
+        appointment.bodyPart = tattooLocation.rawValue
+
+        // MARK: - Shop
+        if newShopToggle || shops.isEmpty {
+            let newShop = Shop(name: shopName)
+            context.insert(newShop)
+            shop = newShop
+        }
+
+        appointment.shop = shop
+        shop.appointments.append(appointment)
+
+        // MARK: - Artist
+        if newArtistToggle || artists.isEmpty {
+            let newArtist = Artist(name: artistName, instagramHandle: artistInstagramHandle)
+            context.insert(newArtist)
+            artist = newArtist
+            newArtist.shop = shop
+        }
+
+        appointment.artist = artist
+        artist.appointments.append(appointment)
+        shop.artists.append(artist)
+
+        // MARK: - Notifications
+        guard appointment.notifyMe else { return }
+        notificationsHandler.scheduleNotifications(for: appointment)
     }
 }
 

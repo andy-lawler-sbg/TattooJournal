@@ -94,8 +94,8 @@ final class Artist: Codable {
     @Attribute(.unique) var instagramHandle: String
 
     var appointments: [Appointment] = []
-
-    @Relationship(inverse: \Shop.artist) var shop: Shop?
+    
+    @Relationship(deleteRule: .nullify, inverse: \Shop.artists) var shop: Shop?
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -135,38 +135,37 @@ final class Artist: Codable {
 
 @Model
 final class Shop: Codable {
-
     @Attribute(.unique) var name: String
 
     var appointments: [Appointment] = []
-    var artist: Artist?
+    var artists: [Artist] = []
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(appointments, forKey: .appointments)
-        try container.encode(artist, forKey: .artist)
+        try container.encode(artists, forKey: .artists)
     }
 
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
         appointments = try values.decode([Appointment].self, forKey: .appointments)
-        artist = try values.decodeIfPresent(Artist.self, forKey: .artist)
+        artists = try values.decode([Artist].self, forKey: .artists)
     }
 
     enum CodingKeys: String, CodingKey {
         case name
         case appointments
-        case artist
+        case artists
     }
 
     init(name: String = "",
          appointments: [Appointment] = [],
-         artist: Artist? = nil
+         artists: [Artist] = []
     ) {
         self.name = name
         self.appointments = appointments
-        self.artist = artist
+        self.artists = artists
     }
 }
