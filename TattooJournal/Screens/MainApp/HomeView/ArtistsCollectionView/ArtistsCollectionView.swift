@@ -67,14 +67,18 @@ struct ArtistView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 .offset(y: 5)
                 .foregroundStyle(.white.opacity(0.25))
-            Text(artist.name)
-                .foregroundStyle(.white)
-                .font(.title)
-                .bold()
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                .padding()
-                .multilineTextAlignment(.leading)
-                .minimumScaleFactor(0.5)
+            VStack {
+                Text(artist.name)
+                ForEach(artist.appointments) { appointment in
+                    Text(appointment.date.formatted())
+                        .foregroundStyle(.white)
+                        .bold()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                        .padding()
+                        .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.5)
+                }
+            }
         }
         .frame(minHeight: 150)
     }

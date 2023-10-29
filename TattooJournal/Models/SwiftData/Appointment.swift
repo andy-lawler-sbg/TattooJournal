@@ -10,10 +10,11 @@ import SwiftData
 
 @Model
 final class Appointment: Codable {
-    let id = UUID().uuidString
 
-    @Relationship(inverse: \Artist.appointment) var artist: Artist?
-    @Relationship(inverse: \Shop.appointment) var shop: Shop?
+    let id = UUID().uuidString
+    @Relationship(deleteRule: .nullify, inverse: \Artist.appointments) var artist: Artist?
+    @Relationship(deleteRule: .nullify, inverse: \Shop.appointments) var shop: Shop?
+
     var date = Date()
     var price: String
     var design: String
@@ -88,67 +89,84 @@ enum TattooLocation: String, Codable, CaseIterable {
 
 @Model
 final class Artist: Codable {
-    var name: String
-    var appointment: Appointment?
+
+    @Attribute(.unique) var name: String
+    @Attribute(.unique) var instagramHandle: String
+
+    var appointments: [Appointment] = []
+
+    @Relationship(inverse: \Shop.artist) var shop: Shop?
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        try container.encode(appointment, forKey: .appointment)
+        try container.encode(instagramHandle, forKey: .instagramHandle)
+        try container.encode(appointments, forKey: .appointments)
+        try container.encode(shop, forKey: .shop)
     }
 
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        appointment = try values.decodeIfPresent(Appointment.self, forKey: .appointment)
+        instagramHandle = try values.decode(String.self, forKey: .instagramHandle)
+        appointments = try values.decode([Appointment].self, forKey: .appointments)
+        shop = try values.decodeIfPresent(Shop.self, forKey: .shop)
     }
 
     enum CodingKeys: String, CodingKey {
         case name
-        case shop
+        case instagramHandle
         case appointment
+        case appointments
+        case shop
     }
 
     init(name: String = "",
-         appointment: Appointment? = nil
+         instagramHandle: String = "",
+         appointments: [Appointment] = [],
+         shop: Shop? = nil
     ) {
         self.name = name
-        self.appointment = appointment
+        self.instagramHandle = instagramHandle
+        self.appointments = appointments
+        self.shop = shop
     }
 }
 
 @Model
 final class Shop: Codable {
-    var name: String
-    var contactNumber: String
-    var appointment: Appointment?
+
+    @Attribute(.unique) var name: String
+
+    var appointments: [Appointment] = []
+    var artist: Artist?
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        try container.encode(contactNumber, forKey: .contactNumber)
-        try container.encode(appointment, forKey: .appointment)
+        try container.encode(appointments, forKey: .appointments)
+        try container.encode(artist, forKey: .artist)
     }
 
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        contactNumber = try values.decode(String.self, forKey: .contactNumber)
-        appointment = try values.decodeIfPresent(Appointment.self, forKey: .appointment)
+        appointments = try values.decode([Appointment].self, forKey: .appointments)
+        artist = try values.decodeIfPresent(Artist.self, forKey: .artist)
     }
 
     enum CodingKeys: String, CodingKey {
         case name
-        case contactNumber
-        case appointment
+        case appointments
+        case artist
     }
 
     init(name: String = "",
-         contactNumber: String = "",
-         appointment: Appointment? = nil
+         appointments: [Appointment] = [],
+         artist: Artist? = nil
     ) {
         self.name = name
-        self.contactNumber = contactNumber
-        self.appointment = appointment
+        self.appointments = appointments
+        self.artist = artist
     }
 }

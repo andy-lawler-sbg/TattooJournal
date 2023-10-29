@@ -21,8 +21,6 @@ struct AppointmentsView: View {
         order: .forward
     ) private var queriedAppointments: [Appointment]
 
-    @Query private var artists: [Artist]
-
     private var appointments: [Appointment] {
         let startDate: Date = Date()
         return queriedAppointments.filter({ $0.date >= startDate })
@@ -103,9 +101,6 @@ struct AppointmentsView: View {
                         Button(role: .destructive) {
                             withAnimation(.easeOut(duration: 10)) {
                                 notificationsHandler.deleteScheduledNotification(for: appointment)
-                                if let currentArtist = appointment.artist {
-                                    context.delete(currentArtist)
-                                }
                                 context.delete(appointment)
                             }
                         } label: {

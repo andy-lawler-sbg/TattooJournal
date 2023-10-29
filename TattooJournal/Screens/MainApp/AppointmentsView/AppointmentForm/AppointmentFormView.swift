@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 enum AppointmentFormType {
     case create, update
 }
 
 struct AppointmentFormView: View {
-    
+
+    @Query private var artists: [Artist]
+    @Query private var shops: [Shop]
+
     @EnvironmentObject var themeHandler: AppThemeHandler
     @Environment(\.dismiss) var dismiss
 
@@ -23,26 +27,40 @@ struct AppointmentFormView: View {
     }
     @State private var showingAlert: Bool = false
 
-    var type: AppointmentFormType
-    @Binding var date: Date
-    @Binding var name: String
-    @Binding var price: String
-    @Binding var design: String
-    @Binding var notifyMe: Bool    
-    @Binding var tattooLocation: TattooLocation
-
-    var buttonAction: (() -> Void)
-
     @FocusState private var focusedTextField: FormTextField?
     enum FormTextField {
-        case artist, price, design
+        case artistName, artistInstagramHandle, price, design, shopName
     }
+
+    // MARK: - Inputs
+
+    var type: AppointmentFormType
+    @Binding var date: Date
+
+    @Binding var artist: Artist
+    @Binding var artistName: String
+    @Binding var artistInstagramHandle: String
+    @Binding var newArtistToggle: Bool
+
+    @Binding var price: String
+    @Binding var design: String
+    @Binding var tattooLocation: TattooLocation
+
+    @Binding var notifyMe: Bool
+
+    @Binding var shop: Shop
+    @Binding var shopName: String
+    @Binding var newShopToggle: Bool
+
+    var buttonAction: (() -> Void)
 
     var body: some View {
         NavigationStack {
             Form {
-                keyDetailsSection
                 dateAndLocationSection
+                artistSection
+                keyDetailsSection
+                shopSection
                 notificationSection
                 actionButtonSections
             }
@@ -96,13 +114,35 @@ struct AppointmentFormView: View {
         }
     }
 
+    private var artistSection: some View {
+        Section {
+            if !artists.isEmpty {
+                Picker("Artist", selection: $artist) {
+                    ForEach(artists, id: \.self) { artist in
+                        Text(artist.name)
+                    }
+                }
+                Toggle("Create new artist?", isOn: $newArtistToggle)
+            }
+            if newArtistToggle || artists.isEmpty {
+                TextField("Artist Name", text: $artistName)
+                    .focused($focusedTextField, equals: .artistName)
+                    .onSubmit { focusedTextField = .artistInstagramHandle }
+                    .submitLabel(.next)
+                    .autocorrectionDisabled()
+                TextField("Instagram @", text: $artistInstagramHandle)
+                    .focused($focusedTextField, equals: .artistInstagramHandle)
+                    .onSubmit { focusedTextField = .price }
+                    .submitLabel(.next)
+                    .autocorrectionDisabled()
+            }
+        } header: {
+            Text("Artist Details")
+        }
+    }
+
     private var keyDetailsSection: some View {
         Section {
-            TextField("Artist", text: $name)
-                .focused($focusedTextField, equals: .artist)
-                .onSubmit { focusedTextField = .price }
-                .submitLabel(.next)
-                .autocorrectionDisabled()
             TextField("Price", text: $price)
                 .keyboardType(.numbersAndPunctuation)
                 .focused($focusedTextField, equals: .price)
@@ -123,6 +163,27 @@ struct AppointmentFormView: View {
             Text("This includes your artist, price, design & body part fields.")
                 .font(.caption)
                 .foregroundColor(.gray)
+        }
+    }
+
+    private var shopSection: some View {
+        Section {
+            if !shops.isEmpty {
+                Picker("Shop", selection: $shop) {
+                    ForEach(shops, id: \.self) { shop in
+                        Text(shop.name)
+                    }
+                }
+                Toggle("Create new shop?", isOn: $newShopToggle)
+            }
+            if newShopToggle || shops.isEmpty {
+                TextField("Shop", text: $shopName)
+                    .focused($focusedTextField, equals: .shopName)
+                    .onSubmit { focusedTextField = nil }
+                    .submitLabel(.continue)
+            }
+        } header: {
+            Text("Shop Details")
         }
     }
 
@@ -172,14 +233,24 @@ struct AppointmentFormView: View {
         if datesMatch(dateOne: date, dateTwo: Date.now) || date < Date.now {
             errorsToThrow.append(FormValidationError.invalidDate)
         }
-        if name.isEmpty {
+        if !newArtistToggle && artists.isEmpty && (artistName.isEmpty || artistInstagramHandle.isEmpty) {
             errorsToThrow.append(FormValidationError.noArtist)
+        }
+        if newArtistToggle && (artistName.isEmpty || artistInstagramHandle.isEmpty) {
+            errorsToThrow.append(FormValidationError.noArtist)
+        }
+        if let _ = Double(price) {} else {
+            errorsToThrow.append(FormValidationError.noPrice)
         }
         if design.isEmpty {
             errorsToThrow.append(FormValidationError.noDesign)
         }
-        if let _ = Double(price) {} else {
-            errorsToThrow.append(FormValidationError.noPrice)
+
+        if !newShopToggle && shops.isEmpty && (shopName.isEmpty) {
+            errorsToThrow.append(FormValidationError.noShop)
+        }
+        if newShopToggle && (shopName.isEmpty) {
+            errorsToThrow.append(FormValidationError.noShop)
         }
         if errorsToThrow.count > 1 {
             throw FormValidationError.multipleErrors(errors: errorsToThrow)
@@ -212,6 +283,7 @@ struct AppointmentFormView: View {
         case noArtist
         case noPrice
         case noDesign
+        case noShop
         case multipleErrors(errors: [FormValidationError])
 
         var title: String {
@@ -226,6 +298,8 @@ struct AppointmentFormView: View {
                 return "🎨 No Design Entered 🎨"
             case .multipleErrors:
                 return "⚠️ Multiple Errors ⚠️"
+            case .noShop:
+                return "🏚️ No Shop Entered 🏚️"
             }
         }
 
@@ -252,6 +326,8 @@ struct AppointmentFormView: View {
                     }
                 }
                 return "Please fill in the \(errorString) fields."
+            case .noShop:
+                return "Please enter a shop"
             }
         }
 
@@ -265,6 +341,8 @@ struct AppointmentFormView: View {
                 return "design"
             case .noPrice:
                 return "price"
+            case .noShop:
+                return "shop"
             default:
                 return nil
             }
@@ -275,11 +353,16 @@ struct AppointmentFormView: View {
 #Preview {
     AppointmentFormView(type: .create,
                         date: .constant(.now),
-                        name: .constant("Andy Lawler"),
+                        artist: .constant(Artist()),
+                        artistName: .constant("Andy Lawler"),
+                        artistInstagramHandle: .constant(""),
+                        newArtistToggle: .constant(false),
                         price: .constant("250"),
                         design: .constant("Eagle"),
-                        notifyMe: .constant(true),
-                        tattooLocation: .constant(.arms),
+                        tattooLocation: .constant(.arms), notifyMe: .constant(true),
+                        shop: .constant(Shop()),
+                        shopName: .constant(""),
+                        newShopToggle: .constant(false),
                         buttonAction: {}
     )
 }

@@ -32,6 +32,7 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack {
+                    artistsCollectionView
                     if upcomingAppointments.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("You have no appointments")

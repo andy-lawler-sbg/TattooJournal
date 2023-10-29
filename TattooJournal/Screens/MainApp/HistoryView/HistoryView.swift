@@ -92,9 +92,6 @@ struct HistoryView: View {
                     .swipeActions {
                         Button(role: .destructive) {
                             withAnimation {
-                                if let currentArtist = appointment.artist {
-                                    context.delete(currentArtist)
-                                }
                                 context.delete(appointment)
                             }
                         } label: {
