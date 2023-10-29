@@ -14,7 +14,7 @@ struct UpdateAppointmentForm: View {
     @Environment(\.modelContext) var context
     @Bindable var appointment: Appointment
 
-    @State private var artist = Artist()
+    @State private var artist: Artist? = Artist()
     @State private var artistName: String = ""
     @State private var artistInstagramHandle: String = ""
     @State private var newArtistToggle: Bool = false
@@ -22,7 +22,7 @@ struct UpdateAppointmentForm: View {
     @State private var date = Date()
     @State private var tattooLocation: TattooLocation = .head
 
-    @State private var shop = Shop()
+    @State private var shop: Shop? = Shop()
     @State private var shopName: String = ""
     @State private var newShopToggle: Bool = false
 
@@ -54,22 +54,36 @@ struct UpdateAppointmentForm: View {
 
     private func appointmentFormUpdateAction() {
         // MARK: - Shop
-        if newShopToggle {
+        var addedNewShop = false
+
+        if let shop {
+            /// Remove appointment from past shops appointments
+            guard let appointmentShop = appointment.shop, appointmentShop != shop else { return }
+            appointmentShop.appointments.removeAll(where: { $0 == appointment })
+            appointment.shop = shop
+            shop.appointments.append(appointment)
+        } else {
             let newShop = Shop(name: shopName)
             shop = newShop
+            addedNewShop = true
             context.insert(newShop)
             appointment.shop = newShop
             newShop.appointments.append(appointment)
-        } else if appointment.shop != shop {
-            if let appointmentShop = appointment.shop {
-                appointmentShop.appointments.removeAll(where: { $0 == appointment })
-            }
-            appointment.shop = shop
-            shop.appointments.append(appointment)
         }
 
         // MARK: - Artist
-        if newArtistToggle {
+        if let artist {
+            guard let appointmentArtist = appointment.artist, appointmentArtist != artist else { return }
+            appointmentArtist.appointments.removeAll(where: { $0 == appointment })
+            appointment.artist = artist
+            artist.appointments.append(appointment)
+
+            /// If its a new shop but current artist, add it in
+            if addedNewShop {
+                shop?.artists.append(artist)
+            }
+
+        } else {
             let newArtist = Artist(name: artistName, instagramHandle: artistInstagramHandle)
             context.insert(newArtist)
             artist = newArtist
@@ -79,20 +93,7 @@ struct UpdateAppointmentForm: View {
             newArtist.appointments.append(appointment)
             newArtist.shop = shop
 
-            shop.artists.append(newArtist)
-        } else if appointment.artist != artist {
-            if let appointmentArtist = appointment.artist {
-                appointmentArtist.appointments.removeAll(where: { $0 == appointment })
-            }
-
-            appointment.artist = artist
-            artist.appointments.append(appointment)
-            
-            /// If its a new shop but current artist, add it in
-            if newShopToggle {
-                shop.artists.append(artist)
-            }
-
+            shop?.artists.append(newArtist)
         }
 
         // MARK: - Appointment

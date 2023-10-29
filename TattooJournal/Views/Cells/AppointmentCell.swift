@@ -57,16 +57,14 @@ struct AppointmentCell: View {
     var viewModel: AppointmentCellViewModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading) {
             HStack(spacing: 15) {
-                if let artistName = viewModel.appointment.artist?.name {
-                    Text(artistName)
-                        .foregroundStyle(themeHandler.appColor)
-                        .font(.headline)
-                        .fontWeight(.bold)
-                }
+                Text(viewModel.appointment.artist?.name ?? "No Artist")
+                    .foregroundStyle(themeHandler.appColor)
+                    .font(.headline)
+                    .fontWeight(.bold)
                 HStack(spacing: 10) {
-                    if viewModel.appointment.price != "" {
+                    if !viewModel.appointment.price.isEmpty {
                         Text("\(userPreferences.currency.displayValue)\(viewModel.appointment.price)")
                             .font(.caption).bold()
                             .foregroundStyle(Color.secondary)
@@ -85,14 +83,17 @@ struct AppointmentCell: View {
                 }
                 Spacer()
             }
-            if let shopName = viewModel.appointment.shop?.name {
-                Text(shopName)
-                    .font(.caption)
-                    .fontWeight(.medium)
-            }
+            Text(viewModel.appointment.shop?.name ?? "No Shop")
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .padding(.bottom, 3)
             Text(dateString)
-                .font(.caption2)
+                .font(.caption)
                 .foregroundColor(.secondary)
+                .padding(.bottom, 3)
+            Text(viewModel.appointment.design)
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
         }
         .padding()
         .overlay(alignment: .bottomTrailing) {

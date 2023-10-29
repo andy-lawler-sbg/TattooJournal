@@ -19,7 +19,7 @@ struct AppointmentForm: View {
 
     @State private var appointment = Appointment()
 
-    @State private var artist = Artist()
+    @State private var artist: Artist? = Artist()
     @State private var artistName: String = ""
     @State private var artistInstagramHandle: String = ""
     @State private var newArtistToggle: Bool = false
@@ -27,7 +27,7 @@ struct AppointmentForm: View {
     @State private var date = Date()
     @State private var tattooLocation: TattooLocation = .head
 
-    @State private var shop = Shop()
+    @State private var shop: Shop? = Shop()
     @State private var shopName: String = ""
     @State private var newShopToggle: Bool = false
 
@@ -73,26 +73,32 @@ struct AppointmentForm: View {
         appointment.bodyPart = tattooLocation.rawValue
 
         // MARK: - Shop
-        if newShopToggle || shops.isEmpty {
+        if let shop {
+            shop.appointments.append(appointment)
+            appointment.shop = shop
+        } else {
             let newShop = Shop(name: shopName)
-            context.insert(newShop)
             shop = newShop
+            context.insert(newShop)
+            newShop.appointments.append(appointment)
+            appointment.shop = newShop
         }
 
-        appointment.shop = shop
-        shop.appointments.append(appointment)
-
         // MARK: - Artist
-        if newArtistToggle || artists.isEmpty {
+        if let artist {
+            appointment.artist = artist
+            artist.appointments.append(appointment)
+            artist.shop = shop
+            shop?.artists.append(artist)
+        } else {
             let newArtist = Artist(name: artistName, instagramHandle: artistInstagramHandle)
             context.insert(newArtist)
             artist = newArtist
+            appointment.artist = artist
             newArtist.shop = shop
+            newArtist.appointments.append(appointment)
+            shop?.artists.append(newArtist)
         }
-
-        appointment.artist = artist
-        artist.appointments.append(appointment)
-        shop.artists.append(artist)
 
         // MARK: - Notifications
         guard appointment.notifyMe else { return }

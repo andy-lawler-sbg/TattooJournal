@@ -37,7 +37,7 @@ struct AppointmentFormView: View {
     var type: AppointmentFormType
     @Binding var date: Date
 
-    @Binding var artist: Artist
+    @Binding var artist: Artist?
     @Binding var artistName: String
     @Binding var artistInstagramHandle: String
     @Binding var newArtistToggle: Bool
@@ -48,7 +48,7 @@ struct AppointmentFormView: View {
 
     @Binding var notifyMe: Bool
 
-    @Binding var shop: Shop
+    @Binding var shop: Shop?
     @Binding var shopName: String
     @Binding var newShopToggle: Bool
 
@@ -120,11 +120,13 @@ struct AppointmentFormView: View {
                 Picker("Artist", selection: $artist) {
                     ForEach(artists, id: \.self) { artist in
                         Text(artist.name)
+                            .tag(artist as Artist?)
                     }
+                    Text("👨🏻‍🎨 New 👨🏻‍🎨")
+                        .tag(nil as Artist?)
                 }
-                Toggle("Create new artist?", isOn: $newArtistToggle)
             }
-            if newArtistToggle || artists.isEmpty {
+            if artist == nil || artists.isEmpty {
                 TextField("Artist Name", text: $artistName)
                     .focused($focusedTextField, equals: .artistName)
                     .onSubmit { focusedTextField = .artistInstagramHandle }
@@ -172,12 +174,14 @@ struct AppointmentFormView: View {
                 Picker("Shop", selection: $shop) {
                     ForEach(shops, id: \.self) { shop in
                         Text(shop.name)
+                            .tag(shop as Shop?)
                     }
+                    Text("🏪 New 🏪")
+                        .tag(nil as Shop?)
                 }
-                Toggle("Create new shop?", isOn: $newShopToggle)
             }
-            if newShopToggle || shops.isEmpty {
-                TextField("Shop", text: $shopName)
+            if shop == nil || shops.isEmpty {
+                TextField("Shop Name", text: $shopName)
                     .focused($focusedTextField, equals: .shopName)
                     .onSubmit { focusedTextField = nil }
                     .submitLabel(.continue)
