@@ -19,7 +19,7 @@ struct HistoryView: View {
     @Query(
         
         sort: \Appointment.date,
-        order: .forward
+        order: .reverse
     ) private var queriedAppointments: [Appointment]
 
     private var appointments: [Appointment] {

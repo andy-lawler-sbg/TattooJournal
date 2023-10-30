@@ -19,17 +19,15 @@ struct AppointmentForm: View {
 
     @State private var appointment = Appointment()
 
-    @State private var artist: Artist? = Artist()
+    @State private var artist: Artist? = nil
     @State private var artistName: String = ""
     @State private var artistInstagramHandle: String = ""
-    @State private var newArtistToggle: Bool = false
 
     @State private var date = Date()
     @State private var tattooLocation: TattooLocation = .head
 
-    @State private var shop: Shop? = Shop()
+    @State private var shop: Shop? = nil
     @State private var shopName: String = ""
-    @State private var newShopToggle: Bool = false
 
     var body: some View {
         AppointmentFormView(type: .create,
@@ -37,14 +35,12 @@ struct AppointmentForm: View {
                             artist: $artist, 
                             artistName: $artistName,
                             artistInstagramHandle: $artistInstagramHandle,
-                            newArtistToggle: $newArtistToggle,
                             price: $appointment.price,
                             design: $appointment.design,
                             tattooLocation: $tattooLocation,
                             notifyMe: $appointment.notifyMe,
                             shop: $shop,
                             shopName: $shopName,
-                            newShopToggle: $newShopToggle,
                             buttonAction: { withAnimation { appointmentFormCreateAction() }}
         ).onAppear {
             configureDate()
@@ -74,13 +70,12 @@ struct AppointmentForm: View {
 
         // MARK: - Shop
         if let shop {
-            shop.appointments.append(appointment)
             appointment.shop = shop
+            shop.appointments.append(appointment)
         } else {
             let newShop = Shop(name: shopName)
-            shop = newShop
-            context.insert(newShop)
             newShop.appointments.append(appointment)
+            context.insert(newShop)
             appointment.shop = newShop
         }
 
@@ -88,16 +83,11 @@ struct AppointmentForm: View {
         if let artist {
             appointment.artist = artist
             artist.appointments.append(appointment)
-            artist.shop = shop
-            shop?.artists.append(artist)
         } else {
             let newArtist = Artist(name: artistName, instagramHandle: artistInstagramHandle)
             context.insert(newArtist)
-            artist = newArtist
             appointment.artist = artist
-            newArtist.shop = shop
             newArtist.appointments.append(appointment)
-            shop?.artists.append(newArtist)
         }
 
         // MARK: - Notifications

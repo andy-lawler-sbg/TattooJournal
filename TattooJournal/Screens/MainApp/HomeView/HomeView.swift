@@ -8,38 +8,48 @@
 import SwiftUI
 import SwiftData
 
-@Observable
-final class ShopListViewModel {
-    let shops: [Shop]
+struct ArtistListView: View {
+    @Environment(\.modelContext) private var context
+    @Query private var artists: [Artist]
 
-    init(shops: [Shop]) {
-        self.shops = shops
+    var body: some View {
+        List(artists) { artist in
+            Text(artist.name)
+                .font(.headline).bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 5)
+                .swipeActions {
+                    Button {
+                        context.delete(artist)
+                    } label: {
+                        Text("Delete")
+                    }
+
+                }
+        }
     }
 }
 
 struct ShopListView: View {
-    let viewModel: ShopListViewModel
-    @State var selectedArtist: Artist?
+
+    @Environment(\.modelContext) private var context
+    @Query private var shops: [Shop]
 
     var body: some View {
-        VStack {
-            ForEach(viewModel.shops) { shop in
-                Text(shop.name)
-                    .font(.headline).bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 5)
-                ForEach(shop.artists) { artist in
-                    Text("\u{2022} " + artist.name)
-                        .font(.body)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    ForEach(artist.appointments) { appointment in
-                        Text("\u{2022} " + appointment.date.formatted() + " - " + appointment.design)
-                            .font(.body)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }.padding(.leading, 15)
-                }.padding(.bottom, 5)
-            }
-        }.padding()
+        List(shops) { shop in
+            Text(shop.name)
+                .font(.headline).bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 5)
+                .swipeActions {
+                    Button {
+                        context.delete(shop)
+                    } label: {
+                        Text("Delete")
+                    }
+
+                }
+        }
     }
 }
 
@@ -62,29 +72,11 @@ struct HomeView: View {
         return queriedAppointments.filter({ $0.date >= startDate })
     }
 
-    @Query private var artists: [Artist]
-    @Query private var shops: [Shop]
-
     var body: some View {
         NavigationStack {
             VStack {
-                ShopListView(viewModel: .init(shops: shops))
-                List {
-                    ForEach(shops) { shop in
-                        Text(shop.name)
-                            .font(.body)
-                            .foregroundStyle(.primary)
-                            .listRowSeparator(.hidden)
-                            .swipeActions(allowsFullSwipe: false) {
-                                Button(role: .destructive) {
-                                    context.delete(shop)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                        .symbolVariant(.fill)
-                                }
-                            }
-                    }
-                }
+                ShopListView()
+                ArtistListView()
             }
             .background(Color(.background))
             .navigationTitle(Constants.title)
@@ -113,9 +105,6 @@ struct HomeView: View {
         AppointmentSpendingChart(viewModel: .init(appointments: queriedAppointments))
     }
 
-    private var artistsCollectionView: some View {
-        ArtistsCollectionView(viewModel: .init(artists: artists))
-    }
 
     private var homeTiles: some View {
         VStack {

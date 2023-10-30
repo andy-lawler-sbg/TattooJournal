@@ -40,7 +40,6 @@ struct AppointmentFormView: View {
     @Binding var artist: Artist?
     @Binding var artistName: String
     @Binding var artistInstagramHandle: String
-    @Binding var newArtistToggle: Bool
 
     @Binding var price: String
     @Binding var design: String
@@ -50,7 +49,6 @@ struct AppointmentFormView: View {
 
     @Binding var shop: Shop?
     @Binding var shopName: String
-    @Binding var newShopToggle: Bool
 
     var buttonAction: (() -> Void)
 
@@ -143,6 +141,29 @@ struct AppointmentFormView: View {
         }
     }
 
+    private var shopSection: some View {
+        Section {
+            if !shops.isEmpty {
+                Picker("Shop", selection: $shop) {
+                    ForEach(shops, id: \.self) { shop in
+                        Text(shop.name)
+                            .tag(shop as Shop?)
+                    }
+                    Text("🏪 New 🏪")
+                        .tag(nil as Shop?)
+                }
+            }
+            if shop == nil || shops.isEmpty {
+                TextField("Shop Name", text: $shopName)
+                    .focused($focusedTextField, equals: .shopName)
+                    .onSubmit { focusedTextField = nil }
+                    .submitLabel(.continue)
+            }
+        } header: {
+            Text("Shop Details")
+        }
+    }
+
     private var keyDetailsSection: some View {
         Section {
             TextField("Price", text: $price)
@@ -168,29 +189,6 @@ struct AppointmentFormView: View {
         }
     }
 
-    private var shopSection: some View {
-        Section {
-            if !shops.isEmpty {
-                Picker("Shop", selection: $shop) {
-                    ForEach(shops, id: \.self) { shop in
-                        Text(shop.name)
-                            .tag(shop as Shop?)
-                    }
-                    Text("🏪 New 🏪")
-                        .tag(nil as Shop?)
-                }
-            }
-            if shop == nil || shops.isEmpty {
-                TextField("Shop Name", text: $shopName)
-                    .focused($focusedTextField, equals: .shopName)
-                    .onSubmit { focusedTextField = nil }
-                    .submitLabel(.continue)
-            }
-        } header: {
-            Text("Shop Details")
-        }
-    }
-
     private var notificationSection: some View {
         Section {
             Toggle("Notify Me", isOn: $notifyMe)
@@ -213,6 +211,7 @@ struct AppointmentFormView: View {
                         withAnimation(.snappy) {
                             buttonAction()
                             dismiss()
+//                            dismiss()
                         }
                     } catch {
                         if let error = error as? FormValidationError {
@@ -237,10 +236,7 @@ struct AppointmentFormView: View {
         if datesMatch(dateOne: date, dateTwo: Date.now) || date < Date.now {
             errorsToThrow.append(FormValidationError.invalidDate)
         }
-        if !newArtistToggle && artists.isEmpty && (artistName.isEmpty || artistInstagramHandle.isEmpty) {
-            errorsToThrow.append(FormValidationError.noArtist)
-        }
-        if newArtistToggle && (artistName.isEmpty || artistInstagramHandle.isEmpty) {
+        if artist == nil && (artistName.isEmpty || artistInstagramHandle.isEmpty) {
             errorsToThrow.append(FormValidationError.noArtist)
         }
         if let _ = Double(price) {} else {
@@ -249,12 +245,8 @@ struct AppointmentFormView: View {
         if design.isEmpty {
             errorsToThrow.append(FormValidationError.noDesign)
         }
-
-        if !newShopToggle && shops.isEmpty && (shopName.isEmpty) {
-            errorsToThrow.append(FormValidationError.noShop)
-        }
-        if newShopToggle && (shopName.isEmpty) {
-            errorsToThrow.append(FormValidationError.noShop)
+        if shop == nil && shopName.isEmpty {
+            errorsToThrow.append(FormValidationError.noArtist)
         }
         if errorsToThrow.count > 1 {
             throw FormValidationError.multipleErrors(errors: errorsToThrow)
@@ -360,13 +352,11 @@ struct AppointmentFormView: View {
                         artist: .constant(Artist()),
                         artistName: .constant("Andy Lawler"),
                         artistInstagramHandle: .constant(""),
-                        newArtistToggle: .constant(false),
                         price: .constant("250"),
                         design: .constant("Eagle"),
                         tattooLocation: .constant(.arms), notifyMe: .constant(true),
                         shop: .constant(Shop()),
                         shopName: .constant(""),
-                        newShopToggle: .constant(false),
                         buttonAction: {}
     )
 }

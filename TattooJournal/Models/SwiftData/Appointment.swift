@@ -12,10 +12,11 @@ import SwiftData
 final class Appointment: Codable {
 
     let id = UUID().uuidString
-    @Relationship(deleteRule: .nullify, inverse: \Artist.appointments) var artist: Artist?
-    @Relationship(deleteRule: .nullify, inverse: \Shop.appointments) var shop: Shop?
+    
+    var artist: Artist?
+    var shop: Shop?
 
-    var date = Date()
+    var date: Date
     var price: String
     var design: String
     var notifyMe: Bool
@@ -92,17 +93,13 @@ final class Artist: Codable {
 
     @Attribute(.unique) var name: String
     @Attribute(.unique) var instagramHandle: String
-
-    var appointments: [Appointment] = []
-    
-    @Relationship(deleteRule: .nullify, inverse: \Shop.artists) var shop: Shop?
+    @Relationship(deleteRule: .nullify, inverse: \Appointment.artist) var appointments = [Appointment]()
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(instagramHandle, forKey: .instagramHandle)
         try container.encode(appointments, forKey: .appointments)
-        try container.encode(shop, forKey: .shop)
     }
 
     required init(from decoder: Decoder) throws {
@@ -110,7 +107,6 @@ final class Artist: Codable {
         name = try values.decode(String.self, forKey: .name)
         instagramHandle = try values.decode(String.self, forKey: .instagramHandle)
         appointments = try values.decode([Appointment].self, forKey: .appointments)
-        shop = try values.decodeIfPresent(Shop.self, forKey: .shop)
     }
 
     enum CodingKeys: String, CodingKey {
@@ -118,54 +114,45 @@ final class Artist: Codable {
         case instagramHandle
         case appointment
         case appointments
-        case shop
     }
 
     init(name: String = "",
          instagramHandle: String = "",
-         appointments: [Appointment] = [],
-         shop: Shop? = nil
+         appointments: [Appointment] = []
     ) {
         self.name = name
         self.instagramHandle = instagramHandle
         self.appointments = appointments
-        self.shop = shop
     }
 }
 
 @Model
 final class Shop: Codable {
-    @Attribute(.unique) var name: String
 
-    var appointments: [Appointment] = []
-    var artists: [Artist] = []
+    @Attribute(.unique) var name: String
+    @Relationship(deleteRule: .nullify, inverse: \Appointment.shop) var appointments = [Appointment]()
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(appointments, forKey: .appointments)
-        try container.encode(artists, forKey: .artists)
     }
 
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
         appointments = try values.decode([Appointment].self, forKey: .appointments)
-        artists = try values.decode([Artist].self, forKey: .artists)
     }
 
     enum CodingKeys: String, CodingKey {
         case name
         case appointments
-        case artists
     }
 
     init(name: String = "",
-         appointments: [Appointment] = [],
-         artists: [Artist] = []
+         appointments: [Appointment] = []
     ) {
         self.name = name
         self.appointments = appointments
-        self.artists = artists
     }
 }
