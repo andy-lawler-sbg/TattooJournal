@@ -92,7 +92,7 @@ enum TattooLocation: String, Codable, CaseIterable {
 final class Artist: Codable {
 
     @Attribute(.unique) var name: String
-    @Attribute(.unique) var instagramHandle: String
+    @Attribute(.unique) var instagramHandle: String?
     @Relationship(deleteRule: .nullify, inverse: \Appointment.artist) var appointments = [Appointment]()
 
     func encode(to encoder: Encoder) throws {
@@ -105,7 +105,7 @@ final class Artist: Codable {
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        instagramHandle = try values.decode(String.self, forKey: .instagramHandle)
+        instagramHandle = try values.decodeIfPresent(String.self, forKey: .instagramHandle)
         appointments = try values.decode([Appointment].self, forKey: .appointments)
     }
 
@@ -117,7 +117,7 @@ final class Artist: Codable {
     }
 
     init(name: String = "",
-         instagramHandle: String = "",
+         instagramHandle: String? = nil,
          appointments: [Appointment] = []
     ) {
         self.name = name

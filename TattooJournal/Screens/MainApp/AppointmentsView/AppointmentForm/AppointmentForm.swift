@@ -41,7 +41,7 @@ struct AppointmentForm: View {
                             notifyMe: $appointment.notifyMe,
                             shop: $shop,
                             shopName: $shopName,
-                            buttonAction: { withAnimation { appointmentFormCreateAction() }}
+                            buttonAction: { appointmentFormCreateAction() }
         ).onAppear {
             configureDate()
             if let firstArtist = artists.first {
@@ -84,7 +84,8 @@ struct AppointmentForm: View {
             appointment.artist = artist
             artist.appointments.append(appointment)
         } else {
-            let newArtist = Artist(name: artistName, instagramHandle: artistInstagramHandle)
+            let newArtistInstagramHandle = artistInstagramHandle.isEmpty ? nil : artistInstagramHandle
+            let newArtist = Artist(name: artistName, instagramHandle: newArtistInstagramHandle)
             context.insert(newArtist)
             appointment.artist = artist
             newArtist.appointments.append(appointment)

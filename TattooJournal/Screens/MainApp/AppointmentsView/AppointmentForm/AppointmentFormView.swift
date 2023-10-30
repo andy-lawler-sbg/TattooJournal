@@ -125,7 +125,7 @@ struct AppointmentFormView: View {
                 }
             }
             if artist == nil || artists.isEmpty {
-                TextField("Artist Name", text: $artistName)
+                TextField("Artist Name", text: $artistName, prompt: Text("Required"))
                     .focused($focusedTextField, equals: .artistName)
                     .onSubmit { focusedTextField = .artistInstagramHandle }
                     .submitLabel(.next)
@@ -135,6 +135,12 @@ struct AppointmentFormView: View {
                     .onSubmit { focusedTextField = .price }
                     .submitLabel(.next)
                     .autocorrectionDisabled()
+                    .overlay(alignment: .trailing) {
+                        Text("Optional")
+                            .font(.caption)
+                            .italic()
+                            .foregroundStyle(.red)
+                    }
             }
         } header: {
             Text("Artist Details")
@@ -154,7 +160,7 @@ struct AppointmentFormView: View {
                 }
             }
             if shop == nil || shops.isEmpty {
-                TextField("Shop Name", text: $shopName)
+                TextField("Shop Name", text: $shopName, prompt: Text("Required"))
                     .focused($focusedTextField, equals: .shopName)
                     .onSubmit { focusedTextField = nil }
                     .submitLabel(.continue)
@@ -211,7 +217,6 @@ struct AppointmentFormView: View {
                         withAnimation(.snappy) {
                             buttonAction()
                             dismiss()
-//                            dismiss()
                         }
                     } catch {
                         if let error = error as? FormValidationError {

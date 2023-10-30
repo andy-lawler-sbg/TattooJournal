@@ -36,7 +36,7 @@ struct UpdateAppointmentForm: View {
                             notifyMe: $appointment.notifyMe,
                             shop: $shop,
                             shopName: $shopName,
-                            buttonAction: { withAnimation { appointmentFormUpdateAction() } }
+                            buttonAction: { appointmentFormUpdateAction() }
         ).onAppear {
             tattooLocation = appointment.tattooLocation
             if let artist = appointment.artist {
@@ -75,7 +75,8 @@ struct UpdateAppointmentForm: View {
             appointment.artist = artist
             artist.appointments.append(appointment)
         } else {
-            let newArtist = Artist(name: artistName, instagramHandle: artistInstagramHandle)
+            let newArtistInstagramHandle = artistInstagramHandle.isEmpty ? nil : artistInstagramHandle
+            let newArtist = Artist(name: artistName, instagramHandle: newArtistInstagramHandle)
             context.insert(newArtist)
             appointment.artist = newArtist
             newArtist.appointments.append(appointment)
