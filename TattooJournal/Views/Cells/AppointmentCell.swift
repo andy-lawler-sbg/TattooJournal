@@ -93,7 +93,7 @@ struct AppointmentCell: View {
                 .padding(.bottom, 3)
             Text(viewModel.appointment.design)
                 .font(.caption2)
-                .foregroundStyle(.tertiary)
+                .foregroundStyle(.secondary)
         }
         .padding()
         .overlay(alignment: .bottomTrailing) {

@@ -125,7 +125,7 @@ struct AppointmentFormView: View {
                 }
             }
             if artist == nil || artists.isEmpty {
-                TextField("Artist Name", text: $artistName, prompt: Text("Required"))
+                TextField("Artist Name", text: $artistName)
                     .focused($focusedTextField, equals: .artistName)
                     .onSubmit { focusedTextField = .artistInstagramHandle }
                     .submitLabel(.next)
@@ -139,7 +139,7 @@ struct AppointmentFormView: View {
                         Text("Optional")
                             .font(.caption)
                             .italic()
-                            .foregroundStyle(.red)
+                            .foregroundStyle(.tertiary)
                     }
             }
         } header: {
@@ -160,7 +160,7 @@ struct AppointmentFormView: View {
                 }
             }
             if shop == nil || shops.isEmpty {
-                TextField("Shop Name", text: $shopName, prompt: Text("Required"))
+                TextField("Shop Name", text: $shopName)
                     .focused($focusedTextField, equals: .shopName)
                     .onSubmit { focusedTextField = nil }
                     .submitLabel(.continue)
@@ -241,7 +241,7 @@ struct AppointmentFormView: View {
         if datesMatch(dateOne: date, dateTwo: Date.now) || date < Date.now {
             errorsToThrow.append(FormValidationError.invalidDate)
         }
-        if artist == nil && (artistName.isEmpty || artistInstagramHandle.isEmpty) {
+        if artist == nil && artistName.isEmpty {
             errorsToThrow.append(FormValidationError.noArtist)
         }
         if let _ = Double(price) {} else {

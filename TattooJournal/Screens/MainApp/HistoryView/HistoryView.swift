@@ -78,6 +78,14 @@ struct HistoryView: View {
     private var pastTattoosListView: some View {
         VStack {
             pastTattoosList
+                .mask(LinearGradient(gradient: Gradient(stops: [
+                            .init(color: .black, location: 0.75),
+                            .init(color: .black, location: 0.85),
+                            .init(color: .black, location: 0.95),
+                            .init(color: .clear, location: 1)
+                        ]
+                ), startPoint: .top, endPoint: .bottom))
+            AppointmentsCollapsible(viewModel: .init(appointments: appointments, type: .history))
             Spacer()
         }
     }

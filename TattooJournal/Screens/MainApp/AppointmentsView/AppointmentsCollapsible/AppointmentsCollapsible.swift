@@ -12,9 +12,35 @@ import SwiftData
 final class AppointmentsCollapsibleViewModel {
 
     var appointments: [Appointment]
+    let type: AppointmentsCollapsibleType
 
-    init(appointments: [Appointment]) {
+    init(appointments: [Appointment], 
+         type: AppointmentsCollapsibleType = .appointments
+    ) {
         self.appointments = appointments
+        self.type = type
+    }
+
+    enum AppointmentsCollapsibleType {
+        case appointments, history
+
+        var enabledState: String {
+            switch self {
+            case .appointments:
+                return "chevron.up"
+            case .history:
+                return "chevron.down"
+            }
+        }
+
+        var disabledState: String {
+            switch self {
+            case .appointments:
+                return "chevron.down"
+            case .history:
+                return "chevron.up"
+            }
+        }
     }
 }
 
@@ -70,7 +96,7 @@ struct AppointmentsCollapsible: View {
             Text("\(userPreferences.currency.displayValue)\(costWithTip, specifier: "%.2f")")
                 .font(.caption)
                 .foregroundStyle(themeHandler.appColor)
-            Image(systemName: isShowing ? "chevron.down" : "chevron.up")
+            Image(systemName: isShowing ? viewModel.type.enabledState : viewModel.type.disabledState)
                 .resizable()
                 .frame(width: 10, height: 7)
                 .font(.callout.bold())
@@ -90,9 +116,18 @@ struct AppointmentsCollapsible: View {
             .bold()
     }
 
+    private var unCollapsedInfoText: Text {
+        switch viewModel.type {
+        case .appointments:
+            return Text("You will need the above amount to pay for all of your appointments. \(unCollapsedInfoTip)")
+        case .history:
+           return Text("This is the total amount you have spent on appointments in the past.")
+        }
+    }
+
     /// UnCollapsed Information which shows when the button is tapped
     private var unCollapsedInfo: some View {
-        Text("You will need the above amount to pay for all of your appointments. \(unCollapsedInfoTip)")
+        unCollapsedInfoText
             .multilineTextAlignment(.center)
             .font(.caption)
             .foregroundColor(themeHandler.appColor)

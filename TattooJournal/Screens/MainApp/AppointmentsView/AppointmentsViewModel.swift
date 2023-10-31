@@ -14,6 +14,7 @@ final class AppointmentsViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     var shouldShowAppointmentsForm = false
+    var shouldShowArtistAndShopList = false
     var selectedAppointment: Appointment?
 
     func setup(appEventHandler: AppEventHandler) {

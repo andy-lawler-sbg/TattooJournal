@@ -20,6 +20,8 @@ struct AppointmentsView: View {
         sort: \Appointment.date,
         order: .forward
     ) private var queriedAppointments: [Appointment]
+    @Query private var artists: [Artist]
+    @Query private var shops: [Shop]
 
     private var appointments: [Appointment] {
         let startDate: Date = Date()
@@ -43,19 +45,24 @@ struct AppointmentsView: View {
             .background(Color(.background))
             .navigationTitle(Constants.title)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        withAnimation {
-                            viewModel.shouldShowAppointmentsForm = true
+                if !artists.isEmpty || !shops.isEmpty {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            withAnimation {
+                                viewModel.shouldShowArtistAndShopList = true
+                            }
+                        } label: {
+                            NavBarItem(imageName: Constants.ImageNames.saved)
                         }
-                    } label: {
-                        NavBarItem(imageName: Constants.ImageNames.add)
+                        .onTapGesture(perform: Haptics.shared.successHaptic)
                     }
-                    .onTapGesture(perform: Haptics.shared.successHaptic)
                 }
             }
             .sheet(isPresented: $viewModel.shouldShowAppointmentsForm) {
                 AppointmentForm()
+            }
+            .sheet(isPresented: $viewModel.shouldShowArtistAndShopList) {
+                ArtistAndShopList()
             }
             .sheet(item: $viewModel.selectedAppointment) {
                 withAnimation {
@@ -85,9 +92,30 @@ struct AppointmentsView: View {
     /// Main appointments view.  Contains the tip, list and collapsible.
     private var appointmentsView: some View {
         VStack {
-            appointmentsList
             appointmentsCollapsible
+                .padding(.top, 10)
+            appointmentsList
+                .mask(LinearGradient(gradient: Gradient(stops: [
+                            .init(color: .black, location: 0.75),
+                            .init(color: .black, location: 0.85),
+                            .init(color: .black, location: 0.95),
+                            .init(color: .clear, location: 1)
+                        ]
+                ), startPoint: .top, endPoint: .bottom))
             Spacer()
+        }
+        .overlay(alignment: .bottomTrailing) {
+            Button {
+                withAnimation {
+                    viewModel.shouldShowAppointmentsForm = true
+                }
+            } label: {
+                NavBarItem(imageName: Constants.ImageNames.add,
+                           circleSize: 60,
+                           imageSize: 20)
+                    .padding(30)
+            }
+            .onTapGesture(perform: Haptics.shared.successHaptic)
         }
     }
 
@@ -150,6 +178,7 @@ private extension AppointmentsView {
 
         enum ImageNames {
             static let add = "plus"
+            static let saved = "heart.fill"
         }
 
         enum EmptyState {
