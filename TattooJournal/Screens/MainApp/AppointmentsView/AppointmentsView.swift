@@ -112,7 +112,9 @@ struct AppointmentsView: View {
             } label: {
                 NavBarItem(imageName: Constants.ImageNames.add,
                            circleSize: 60,
-                           imageSize: 20)
+                           imageSize: 20,
+                           shadowOpacity: 0.3,
+                           shadowRadius: 10)
                     .padding(30)
             }
             .onTapGesture(perform: Haptics.shared.successHaptic)

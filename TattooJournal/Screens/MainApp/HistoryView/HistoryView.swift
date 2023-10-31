@@ -27,7 +27,6 @@ struct HistoryView: View {
         return queriedAppointments.filter({ $0.date < startDate })
     }
 
-
     @Bindable private var viewModel = HistoryViewModel()
 
     var body: some View {
@@ -58,6 +57,13 @@ struct HistoryView: View {
             }
             .sheet(isPresented: $viewModel.shouldShowVisitedShops) {
                 VisitedShops(shouldShowVisitedShops: $viewModel.shouldShowVisitedShops)
+            }
+            .sheet(item: $viewModel.selectedAppointment) {
+                withAnimation {
+                    viewModel.selectedAppointment = nil
+                }
+            } content: { appointment in
+                ReviewAppointmentView(viewModel: .init(appointments: [appointment]))
             }
         }
     }
@@ -106,6 +112,16 @@ struct HistoryView: View {
                             Label("Delete", systemImage: "trash")
                                 .symbolVariant(.fill)
                         }
+
+                        Button(role: .destructive) {
+                            withAnimation {
+                                viewModel.selectedAppointment = appointment
+                            }
+                        } label: {
+                            Label("Review", systemImage: "star.fill")
+                                .symbolVariant(.fill)
+                        }
+                        .tint(.yellow)
                     }
             }
             .listRowBackground(Color.clear)
