@@ -64,9 +64,9 @@ struct AppointmentsView: View {
             .sheet(isPresented: $viewModel.shouldShowArtistAndShopList) {
                 ArtistAndShopList()
             }
-            .sheet(item: $viewModel.selectedAppointment) {
+            .sheet(item: $viewModel.appointmentToEdit) {
                 withAnimation {
-                    viewModel.selectedAppointment = nil
+                    viewModel.appointmentToEdit = nil
                 }
             } content: { appointment in
                 UpdateAppointmentForm(appointment: appointment)
@@ -74,6 +74,15 @@ struct AppointmentsView: View {
             .onAppear {
                 viewModel.setup(appEventHandler: appEventHandler)
             }
+            .sheet(item: $viewModel.appointmentToShowDetailView) {
+                withAnimation {
+                    viewModel.appointmentToShowDetailView = nil
+                }
+            } content: { appointment in
+                AppointmentPopUpView(viewModel: .init(appointment: appointment, type: .appointments))
+                    .presentationDetents([.height(550)])
+            }
+
         }
     }
 
@@ -125,29 +134,32 @@ struct AppointmentsView: View {
     private var appointmentsList: some View {
         List {
             ForEach(appointments) { appointment in
-                AppointmentCell(viewModel: .init(appointment: appointment, cellType: .upcoming))
-                    .listRowSeparator(.hidden)
-                    .swipeActions(allowsFullSwipe: false) {
-                        Button(role: .destructive) {
-                            withAnimation(.easeOut(duration: 10)) {
-                                notificationsHandler.deleteScheduledNotification(for: appointment)
-                                context.delete(appointment)
-                            }
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                                .symbolVariant(.fill)
-                        }
-
-                        Button {
-                            withAnimation(.linear) {
-                                viewModel.selectedAppointment = appointment
-                            }
-                        } label: {
-                            Label("Edit", systemImage: "pencil.and.list.clipboard")
-                                .symbolVariant(.fill)
-                        }
-                        .tint(.yellow)
+                AppointmentCell(viewModel: .init(appointment: appointment, cellType: .upcoming, didTapAppointmentCell: {
+                    withAnimation {
+                        viewModel.appointmentToShowDetailView = appointment
                     }
+                }))
+                .listRowSeparator(.hidden)
+                .swipeActions(allowsFullSwipe: false) {
+                    Button(role: .destructive) {
+                        withAnimation(.easeOut(duration: 10)) {
+                            notificationsHandler.deleteScheduledNotification(for: appointment)
+                            context.delete(appointment)
+                        }
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                            .symbolVariant(.fill)
+                    }
+                    Button {
+                        withAnimation(.linear) {
+                            viewModel.appointmentToEdit = appointment
+                        }
+                    } label: {
+                        Label("Edit", systemImage: "pencil.and.list.clipboard")
+                            .symbolVariant(.fill)
+                    }
+                    .tint(.yellow)
+                }
             }.listRowBackground(Color.clear)
         }
         .listStyle(.plain)

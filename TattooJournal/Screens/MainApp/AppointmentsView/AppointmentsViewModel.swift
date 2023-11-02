@@ -15,7 +15,9 @@ final class AppointmentsViewModel {
 
     var shouldShowAppointmentsForm = false
     var shouldShowArtistAndShopList = false
-    var selectedAppointment: Appointment?
+    
+    var appointmentToEdit: Appointment?
+    var appointmentToShowDetailView: Appointment?
 
     func setup(appEventHandler: AppEventHandler) {
         self.appEventHandler = appEventHandler

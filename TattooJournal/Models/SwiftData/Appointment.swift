@@ -22,6 +22,15 @@ final class Appointment: Codable {
     var notifyMe: Bool
     var bodyPart: TattooLocation.RawValue
 
+    var notifyMeDescription: String {
+        switch notifyMe {
+        case true:
+            "Notifications On"
+        case false:
+            "Notifications Off"
+        }
+    }
+
     init(artist: Artist? = nil,
          shop: Shop? = nil,
          date: Date = .now,

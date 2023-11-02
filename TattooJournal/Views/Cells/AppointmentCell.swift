@@ -10,8 +10,12 @@ import SwiftData
 
 @Observable
 class AppointmentCellViewModel {
+
     var appointment: Appointment
     var cellType: AppointmentCellType
+
+    var reviewAccessoryIconTap: (() -> Void)?
+    var didTapAppointmentCell: (() -> Void)?
 
     var accessoryToShow: AppointmentCellAccessory {
         switch cellType {
@@ -23,10 +27,14 @@ class AppointmentCellViewModel {
     }
 
     init(appointment: Appointment, 
-         cellType: AppointmentCellType = .upcoming
+         cellType: AppointmentCellType = .upcoming,
+         reviewAccessoryIconTap: (() -> Void)? = nil,
+         didTapAppointmentCell: (() -> Void)? = nil
     ) {
         self.appointment = appointment
         self.cellType = cellType
+        self.reviewAccessoryIconTap = reviewAccessoryIconTap
+        self.didTapAppointmentCell = didTapAppointmentCell
     }
 
     enum AppointmentCellType {
@@ -39,6 +47,7 @@ class AppointmentCellViewModel {
 }
 
 struct AppointmentCell: View {
+
     @EnvironmentObject var themeHandler: AppThemeHandler
     @EnvironmentObject var notificationsHandler: NotificationsHandler
     @Query private var queriedUserPreferences: [UserPreferences]
@@ -106,7 +115,7 @@ struct AppointmentCell: View {
                     .padding(6)
                     .background(Color(.buttonCapsule))
                     .clipShape(.circle)
-                    .frame(width: 80, height: 80, alignment: .bottomTrailing)
+                    .frame(width: 50, height: 50, alignment: .bottomTrailing)
                     .background(Color(.cellBackground))
                     .padding(10)
                     .onTapGesture {
@@ -125,11 +134,11 @@ struct AppointmentCell: View {
                     .padding(6)
                     .background(Color(.buttonCapsule))
                     .clipShape(.circle)
-                    .frame(width: 80, height: 80, alignment: .bottomTrailing)
+                    .frame(width: 50, height: 50, alignment: .bottomTrailing)
                     .background(Color(.cellBackground))
                     .padding(10)
                     .onTapGesture {
-                        print("Tapped Star")
+                        viewModel.reviewAccessoryIconTap?()
                     }
             }
         }
@@ -139,6 +148,9 @@ struct AppointmentCell: View {
                 radius: 0,
                 x: 0,
                 y: 2)
+        .onTapGesture {
+            viewModel.didTapAppointmentCell?()
+        }
     }
 }
 

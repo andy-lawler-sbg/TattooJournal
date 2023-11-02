@@ -100,29 +100,20 @@ struct HistoryView: View {
     private var pastTattoosList: some View {
         List {
             ForEach(appointments) { appointment in
-                AppointmentCell(viewModel: .init(appointment: appointment, cellType: .history))
-                    .onTapGesture {}
-                    .listRowSeparator(.hidden)
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            withAnimation {
-                                context.delete(appointment)
-                            }
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                                .symbolVariant(.fill)
+                AppointmentCell(viewModel: .init(appointment: appointment, cellType: .history, reviewAccessoryIconTap: {
+                    viewModel.selectedAppointment = appointment
+                }))
+                .listRowSeparator(.hidden)
+                .swipeActions {
+                    Button(role: .destructive) {
+                        withAnimation {
+                            context.delete(appointment)
                         }
-
-                        Button(role: .destructive) {
-                            withAnimation {
-                                viewModel.selectedAppointment = appointment
-                            }
-                        } label: {
-                            Label("Review", systemImage: "star.fill")
-                                .symbolVariant(.fill)
-                        }
-                        .tint(.yellow)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                            .symbolVariant(.fill)
                     }
+                }
             }
             .listRowBackground(Color.clear)
         }

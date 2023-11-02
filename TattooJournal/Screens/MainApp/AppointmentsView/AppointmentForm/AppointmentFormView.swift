@@ -93,7 +93,7 @@ struct AppointmentFormView: View {
             Button {
                 dismiss()
             } label: {
-                XMarkButton()
+               XMarkButton()
             }, alignment: .topTrailing
         )
     }
@@ -164,6 +164,11 @@ struct AppointmentFormView: View {
                     .focused($focusedTextField, equals: .shopName)
                     .onSubmit { focusedTextField = nil }
                     .submitLabel(.continue)
+                NavigationLink {
+                    ShopMapView()
+                } label: {
+                    Text("Shop Location")
+                }
             }
         } header: {
             Text("Shop Details")
