@@ -9,22 +9,54 @@ import SwiftUI
 import MapKit
 
 struct ShopMapView: View {
+
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var themeHandler: AppThemeHandler
+
     @State private var position = MapCameraPosition.automatic
     @State private var searchResults = [SearchResult]()
-    @State private var selectedLocation: SearchResult?
     @State private var isSheetPresented: Bool = true
+
+    @Binding var shopName: String
+    @Binding var selectedLocation: SearchResult?
 
     var body: some View {
         NavigationStack {
-            Map(position: $position, selection: $selectedLocation) {
-                ForEach(searchResults) { result in
-                    Marker(coordinate: result.location) {
-                        Image(systemName: "mappin")
+            ZStack {
+                Map(position: $position, selection: $selectedLocation) {
+                    ForEach(searchResults) { result in
+                        Marker(coordinate: result.location) {
+                            Image(systemName: "house.fill")
+                        }
+                        .tag(result)
                     }
-                    .tag(result)
+                }
+                .mapStyle(.hybrid)
+                .ignoresSafeArea()
+                if !shopName.isEmpty {
+                    VStack {
+                        Spacer()
+                        Button {
+                            selectedLocation = nil
+                            searchResults.removeAll()
+                            self.shopName = ""
+                        } label: {
+                            HStack {
+                                Text("\(shopName)")
+                                    .font(.body)
+                                    .foregroundStyle(.white)
+                                Image(systemName: "xmark.circle")
+                                    .font(.body)
+                                    .foregroundStyle(.white)
+                            }
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 15)
+                            .background(themeHandler.appColor)
+                            .clipShape(.capsule)
+                        }
+                    }
                 }
             }
-            .ignoresSafeArea()
             .onChange(of: selectedLocation) {
                 isSheetPresented = selectedLocation == nil
             }
@@ -34,9 +66,15 @@ struct ShopMapView: View {
                 }
             }
             .sheet(isPresented: $isSheetPresented) {
-                SheetView(searchResults: $searchResults)
+                SheetView(searchResults: $searchResults, shopName: $shopName)
             }
             .navigationTitle("Shop Search")
+            .onAppear {
+                isSheetPresented = shopName.isEmpty
+                if let selectedLocation {
+                    searchResults.append(selectedLocation)
+                }
+            }
         }
     }
 }
@@ -47,6 +85,7 @@ struct SheetView: View {
     @State private var search: String = ""
 
     @Binding var searchResults: [SearchResult]
+    @Binding var shopName: String
 
     var body: some View {
         VStack {
@@ -98,6 +137,7 @@ struct SheetView: View {
         Task {
             if let singleLocation = try? await locationService.search(with: "\(completion.title) \(completion.subTitle)").first {
                 searchResults = [singleLocation]
+                shopName = completion.title
             }
         }
     }

@@ -23,6 +23,7 @@ struct UpdateAppointmentForm: View {
 
     @State private var shop: Shop? = nil
     @State private var shopName: String = ""
+    @State private var selectedLocation: SearchResult? = nil
 
     var body: some View {
         AppointmentFormView(type: .update,
@@ -36,6 +37,7 @@ struct UpdateAppointmentForm: View {
                             notifyMe: $appointment.notifyMe,
                             shop: $shop,
                             shopName: $shopName,
+                            selectedLocation: $selectedLocation,
                             buttonAction: { appointmentFormUpdateAction() }
         ).onAppear {
             tattooLocation = appointment.tattooLocation

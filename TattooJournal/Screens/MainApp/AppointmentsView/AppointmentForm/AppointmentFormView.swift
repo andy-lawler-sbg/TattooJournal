@@ -49,6 +49,7 @@ struct AppointmentFormView: View {
 
     @Binding var shop: Shop?
     @Binding var shopName: String
+    @Binding var selectedLocation: SearchResult?
 
     var buttonAction: (() -> Void)
 
@@ -160,18 +161,25 @@ struct AppointmentFormView: View {
                 }
             }
             if shop == nil || shops.isEmpty {
-                TextField("Shop Name", text: $shopName)
-                    .focused($focusedTextField, equals: .shopName)
-                    .onSubmit { focusedTextField = nil }
-                    .submitLabel(.continue)
+                if shopName != "" {
+                    TextField("Shop Name", text: $shopName)
+                        .focused($focusedTextField, equals: .shopName)
+                        .onSubmit { focusedTextField = nil }
+                        .submitLabel(.continue)
+                }
                 NavigationLink {
-                    ShopMapView()
+                    ShopMapView(shopName: $shopName, 
+                                selectedLocation: $selectedLocation)
                 } label: {
                     Text("Shop Location")
                 }
             }
         } header: {
             Text("Shop Details")
+        } footer: {
+            Text("Your shops name and location will be saved via Apple Maps.")
+                .font(.caption)
+                .foregroundColor(.gray)
         }
     }
 
@@ -367,6 +375,7 @@ struct AppointmentFormView: View {
                         tattooLocation: .constant(.arms), notifyMe: .constant(true),
                         shop: .constant(Shop()),
                         shopName: .constant(""),
+                        selectedLocation: .constant(nil),
                         buttonAction: {}
     )
 }

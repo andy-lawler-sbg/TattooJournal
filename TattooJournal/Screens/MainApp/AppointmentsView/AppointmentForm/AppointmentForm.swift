@@ -28,6 +28,7 @@ struct AppointmentForm: View {
 
     @State private var shop: Shop? = nil
     @State private var shopName: String = ""
+    @State private var selectedLocation: SearchResult? = nil
 
     var body: some View {
         AppointmentFormView(type: .create,
@@ -41,6 +42,7 @@ struct AppointmentForm: View {
                             notifyMe: $appointment.notifyMe,
                             shop: $shop,
                             shopName: $shopName,
+                            selectedLocation: $selectedLocation,
                             buttonAction: { appointmentFormCreateAction() }
         ).onAppear {
             configureDate()

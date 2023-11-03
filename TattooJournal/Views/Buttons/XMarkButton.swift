@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct XMarkButton: View {
+
+    var icon: String = Constants.xmark
+
     var body: some View {
         ZStack {
             Circle()
                 .frame(width: 30, height: 30)
                 .foregroundStyle(Color(.cellBackground))
-            Image(systemName: Constants.systemName)
+            Image(systemName: icon)
                 .imageScale(.small)
                 .frame(width: 44, height: 44)
                 .foregroundStyle(Color(.oppositeStyle))
@@ -23,7 +26,7 @@ struct XMarkButton: View {
 
 private extension XMarkButton {
     enum Constants {
-        static let systemName = "xmark"
+        static let xmark = "xmark"
     }
 }
 
