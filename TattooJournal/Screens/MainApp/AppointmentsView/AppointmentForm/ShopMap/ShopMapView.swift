@@ -14,11 +14,13 @@ struct ShopMapView: View {
     @EnvironmentObject private var themeHandler: AppThemeHandler
 
     @State private var position = MapCameraPosition.automatic
-    @State private var searchResults = [SearchResult]()
     @State private var isSheetPresented: Bool = true
 
+    @State private var searchResults = [SearchResult]()
+    @State private var selectedLocation: SearchResult?
+
     @Binding var shopName: String
-    @Binding var selectedLocation: SearchResult?
+    @Binding var shopLocation: CLLocationCoordinate2D?
 
     var body: some View {
         NavigationStack {
@@ -58,6 +60,7 @@ struct ShopMapView: View {
                 }
             }
             .onChange(of: selectedLocation) {
+                shopLocation = selectedLocation?.location
                 isSheetPresented = selectedLocation == nil
             }
             .onChange(of: searchResults) {
@@ -70,9 +73,11 @@ struct ShopMapView: View {
             }
             .navigationTitle("Shop Search")
             .onAppear {
-                isSheetPresented = shopName.isEmpty
-                if let selectedLocation {
-                    searchResults.append(selectedLocation)
+                isSheetPresented = shopName.isEmpty || shopLocation == nil
+                if let shopLocation {
+                    let location = SearchResult(location: shopLocation)
+                    selectedLocation = location
+                    searchResults.append(location)
                 }
             }
         }
@@ -111,10 +116,6 @@ struct SheetView: View {
                                 .font(.headline)
                                 .fontDesign(.rounded)
                             Text(completion.subTitle)
-                            if let url = completion.url {
-                                Link(url.absoluteString, destination: url)
-                                    .lineLimit(1)
-                            }
                         }
                     }
                     .listRowBackground(Color.clear)
@@ -218,6 +219,45 @@ class LocationService: NSObject, MKLocalSearchCompleterDelegate {
             guard let location = mapItem.placemark.location?.coordinate else { return nil }
 
             return .init(location: location)
+        }
+    }
+}
+
+
+struct EditShopMapView: View {
+
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var themeHandler: AppThemeHandler
+
+    @State private var position = MapCameraPosition.automatic
+    @State private var isSheetPresented: Bool = true
+
+    @State private var searchResults = [SearchResult]()
+    @State private var selectedLocation: SearchResult?
+
+    @Bindable var shop: Shop
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Map(position: $position, selection: $selectedLocation) {
+                    Marker(shop.name, systemImage: "house.fill", coordinate: shop.location ?? .init())
+                        .tag(selectedLocation)
+                }
+                .mapStyle(.imagery(elevation: .realistic))
+                .ignoresSafeArea()
+            }
+            .navigationTitle(shop.name)
+        }
+        .overlay(alignment: .topTrailing) {
+            Button {
+                dismiss()
+            } label: {
+                XMarkButton()
+            }
+        }
+        .onAppear {
+            selectedLocation = .init(location: shop.location ?? .init())
         }
     }
 }

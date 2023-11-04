@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import MapKit
 
 @Model
 final class Appointment: Codable {
@@ -139,6 +140,9 @@ final class Artist: Codable {
 final class Shop: Codable {
 
     @Attribute(.unique) var name: String
+    var locationLatitude: Double?
+    var locationLongitude: Double?
+
     @Relationship(deleteRule: .nullify, inverse: \Appointment.shop) var appointments = [Appointment]()
 
     func encode(to encoder: Encoder) throws {
@@ -150,18 +154,32 @@ final class Shop: Codable {
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
+        locationLatitude = try values.decodeIfPresent(Double.self, forKey: .locationLatitude)
+        locationLongitude = try values.decodeIfPresent(Double.self, forKey: .locationLongitude)
         appointments = try values.decode([Appointment].self, forKey: .appointments)
     }
 
     enum CodingKeys: String, CodingKey {
         case name
+        case locationLatitude
+        case locationLongitude
         case appointments
     }
 
     init(name: String = "",
+         locationLatitude: Double? = nil,
+         locationLongitude: Double? = nil,
          appointments: [Appointment] = []
     ) {
         self.name = name
+        self.locationLatitude = locationLatitude
+        self.locationLongitude = locationLongitude
         self.appointments = appointments
+    }
+
+    @Transient
+    var location: CLLocationCoordinate2D? {
+        guard let locationLatitude, let locationLongitude else { return nil }
+        return .init(latitude: locationLatitude, longitude: locationLongitude)
     }
 }

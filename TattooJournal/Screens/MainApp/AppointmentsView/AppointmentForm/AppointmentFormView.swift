@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import MapKit
 
 enum AppointmentFormType {
     case create, update
@@ -26,6 +27,7 @@ struct AppointmentFormView: View {
         }
     }
     @State private var showingAlert: Bool = false
+    @State private var isShowingMapView = false
 
     @FocusState private var focusedTextField: FormTextField?
     enum FormTextField {
@@ -49,7 +51,7 @@ struct AppointmentFormView: View {
 
     @Binding var shop: Shop?
     @Binding var shopName: String
-    @Binding var selectedLocation: SearchResult?
+    @Binding var shopLocation: CLLocationCoordinate2D?
 
     var buttonAction: (() -> Void)
 
@@ -169,7 +171,7 @@ struct AppointmentFormView: View {
                 }
                 NavigationLink {
                     ShopMapView(shopName: $shopName, 
-                                selectedLocation: $selectedLocation)
+                                shopLocation: $shopLocation)
                 } label: {
                     Text("Shop Location")
                 }
@@ -264,7 +266,7 @@ struct AppointmentFormView: View {
             errorsToThrow.append(FormValidationError.noDesign)
         }
         if shop == nil && shopName.isEmpty {
-            errorsToThrow.append(FormValidationError.noArtist)
+            errorsToThrow.append(FormValidationError.noShop)
         }
         if errorsToThrow.count > 1 {
             throw FormValidationError.multipleErrors(errors: errorsToThrow)
@@ -375,7 +377,7 @@ struct AppointmentFormView: View {
                         tattooLocation: .constant(.arms), notifyMe: .constant(true),
                         shop: .constant(Shop()),
                         shopName: .constant(""),
-                        selectedLocation: .constant(nil),
+                        shopLocation: .constant(nil),
                         buttonAction: {}
     )
 }

@@ -6,24 +6,38 @@
 //
 
 import SwiftUI
+import SwiftData
+import MapKit
 
 struct VisitedShops: View {
 
-    @Binding var shouldShowVisitedShops: Bool
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var themeHandler: AppThemeHandler
+
+    @Query private var shops: [Shop]
 
     var body: some View {
         NavigationStack {
-            Text("TBC ")
-                .navigationTitle("🌍 Visited Shops")
+            Map {
+                ForEach(shops) { shop in
+                    Marker(shop.name,
+                           systemImage: "house.fill",
+                           coordinate: shop.location ?? .init())
+                }
+            }
+            .mapStyle(.hybrid)
+            .navigationTitle("Visited Shops")
         }
-        .overlay(Button {
-            shouldShowVisitedShops = false
-        } label: {
-            XMarkButton()
-        }, alignment: .topTrailing)
+        .overlay(
+            Button {
+                dismiss()
+            } label: {
+                XMarkButton()
+            }, alignment: .topTrailing
+        )
     }
 }
 
 #Preview {
-    VisitedShops(shouldShowVisitedShops: .constant(true))
+    VisitedShops()
 }

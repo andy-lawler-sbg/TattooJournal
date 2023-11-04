@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import MapKit
 
 struct UpdateAppointmentForm: View {
 
@@ -23,7 +24,7 @@ struct UpdateAppointmentForm: View {
 
     @State private var shop: Shop? = nil
     @State private var shopName: String = ""
-    @State private var selectedLocation: SearchResult? = nil
+    @State private var shopLocation: CLLocationCoordinate2D? = nil
 
     var body: some View {
         AppointmentFormView(type: .update,
@@ -37,10 +38,11 @@ struct UpdateAppointmentForm: View {
                             notifyMe: $appointment.notifyMe,
                             shop: $shop,
                             shopName: $shopName,
-                            selectedLocation: $selectedLocation,
+                            shopLocation: $shopLocation,
                             buttonAction: { appointmentFormUpdateAction() }
         ).onAppear {
             tattooLocation = appointment.tattooLocation
+            shopLocation = appointment.shop?.location
             if let artist = appointment.artist {
                 self.artist = artist
             }
@@ -60,8 +62,10 @@ struct UpdateAppointmentForm: View {
             }
             appointment.shop = shop
             shop.appointments.append(appointment)
-        } else {
-            let newShop = Shop(name: shopName)
+        } else if let shopLocation {
+            let newShop = Shop(name: shopName,
+                               locationLatitude: shopLocation.latitude,
+                               locationLongitude: shopLocation.longitude)
             newShop.appointments.append(appointment)
             context.insert(newShop)
             appointment.shop = newShop

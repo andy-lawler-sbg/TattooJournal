@@ -10,7 +10,9 @@ import SwiftData
 
 struct ShopListView: View {
 
-    @State private var selectedShop: Shop?
+    @State private var selectedMapShop: Shop?
+    @State private var selectedEditShop: Shop?
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     @Query private var shops: [Shop]
@@ -37,44 +39,58 @@ struct ShopListView: View {
                                     .foregroundStyle(.primary)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                            .swipeActions {
-                                Button {
-                                    withAnimation {
-                                        context.delete(shop)
-                                        if shops.isEmpty {
-                                            dismiss()
-                                        }
-                                    }
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                        .symbolVariant(.fill)
-                                }
-
-                                Button {
-                                    withAnimation {
-                                        selectedShop = shop
-                                    }
-                                } label: {
-                                    Label("Edit", systemImage: "pencil.and.list.clipboard")
-                                        .symbolVariant(.fill)
-                                } .tint(.yellow)
-                            }
                         }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color(uiColor: UIColor.secondarySystemGroupedBackground))
                         .padding(.vertical, 2)
+                        .swipeActions {
+                            Button {
+                                withAnimation {
+                                    context.delete(shop)
+                                    if shops.isEmpty {
+                                        dismiss()
+                                    }
+                                }
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                                    .symbolVariant(.fill)
+                            }
+
+                            Button {
+                                withAnimation {
+                                    selectedEditShop = shop
+                                }
+                            } label: {
+                                Label("Edit", systemImage: "pencil.and.list.clipboard")
+                                    .symbolVariant(.fill)
+                            } .tint(.yellow)
+                        }
+                        .onTapGesture {
+                            selectedMapShop = shop
+                        }
                     }
                 } header: {
                     Text("Shops")
                 } footer: {
-                    Text("These are the shops you've been to before.")
+                    Text("These are the shops you've been to before. Tap on them to see where they are 📍.")
                 }
-                .sheet(item: $selectedShop) {
+                .sheet(item: $selectedEditShop) {
                     withAnimation {
-                        selectedShop = nil
+                        selectedEditShop = nil
                     }
                 } content: { shop in
                     ShopFormView(shop: shop)
                 }
-            }.navigationTitle("Shops")
+                .sheet(item: $selectedMapShop) {
+                    withAnimation {
+                        selectedMapShop = nil
+                    }
+                } content: { shop in
+                    EditShopMapView(shop: shop)
+                        .presentationDetents([.height(550), .large])
+                }
+            }
+            .navigationTitle("Shops")
         }
     }
 }

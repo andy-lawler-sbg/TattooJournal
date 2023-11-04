@@ -28,11 +28,11 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Image("dinosaur")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity)
-                spendingChart
+//                Image("dinosaur")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(maxWidth: .infinity)
+//                spendingChart
             }
             .background(Color(.background))
             .navigationTitle(Constants.title)

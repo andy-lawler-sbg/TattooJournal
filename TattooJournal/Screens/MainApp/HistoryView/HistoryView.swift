@@ -56,7 +56,7 @@ struct HistoryView: View {
                 }
             }
             .sheet(isPresented: $viewModel.shouldShowVisitedShops) {
-                VisitedShops(shouldShowVisitedShops: $viewModel.shouldShowVisitedShops)
+                VisitedShops()
             }
             .sheet(item: $viewModel.selectedAppointment) {
                 withAnimation {
