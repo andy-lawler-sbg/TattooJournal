@@ -65,6 +65,14 @@ struct HistoryView: View {
             } content: { appointment in
                 ReviewAppointmentView(viewModel: .init(appointments: [appointment]))
             }
+            .sheet(item: $viewModel.appointmentToShowDetailView) {
+                withAnimation {
+                    viewModel.appointmentToShowDetailView = nil
+                }
+            } content: { appointment in
+                AppointmentPopUpView(viewModel: .init(appointment: appointment, type: .history))
+                    .presentationDetents([.height(550)])
+            }
         }
     }
 
@@ -101,7 +109,13 @@ struct HistoryView: View {
         List {
             ForEach(appointments) { appointment in
                 AppointmentCell(viewModel: .init(appointment: appointment, cellType: .history, reviewAccessoryIconTap: {
-                    viewModel.selectedAppointment = appointment
+                    withAnimation {
+                        viewModel.selectedAppointment = appointment
+                    }
+                }, didTapAppointmentCell: {
+                    withAnimation {
+                        viewModel.appointmentToShowDetailView = appointment
+                    }
                 }))
                 .listRowSeparator(.hidden)
                 .swipeActions {

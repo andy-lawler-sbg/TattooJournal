@@ -73,7 +73,7 @@ struct ArtistListView: View {
                 } header: {
                     Text("Artists")
                 } footer: {
-                    Text("These are the artists you've booked in with before.")
+                    Text("These are the artists you've booked in with before. Tap on an artists @ to view their instagram page.")
                 }
                 .sheet(item: $selectedArtist) {
                     withAnimation {

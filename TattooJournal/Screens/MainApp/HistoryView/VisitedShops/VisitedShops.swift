@@ -25,7 +25,6 @@ struct VisitedShops: View {
                            coordinate: shop.location ?? .init())
                 }
             }
-            .mapStyle(.hybrid)
             .navigationTitle("Visited Shops")
         }
         .overlay(

@@ -62,7 +62,7 @@ struct AppointmentsView: View {
                 AppointmentForm()
             }
             .sheet(isPresented: $viewModel.shouldShowArtistAndShopList) {
-                ArtistAndShopList()
+                PersistedDataList()
             }
             .sheet(item: $viewModel.appointmentToEdit) {
                 withAnimation {
@@ -82,7 +82,6 @@ struct AppointmentsView: View {
                 AppointmentPopUpView(viewModel: .init(appointment: appointment, type: .appointments))
                     .presentationDetents([.height(550)])
             }
-
         }
     }
 

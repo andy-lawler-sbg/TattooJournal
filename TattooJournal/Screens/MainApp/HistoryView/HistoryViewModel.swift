@@ -11,5 +11,6 @@ import SwiftUI
 final class HistoryViewModel {
     var shouldShowVisitedShops = false
     var selectedAppointment: Appointment?
+    var appointmentToShowDetailView: Appointment?
 }
 

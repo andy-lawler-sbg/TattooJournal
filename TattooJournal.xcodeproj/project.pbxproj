@@ -10,13 +10,13 @@
 		2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */; };
 		2B208AFF2A7D383A000EDCE3 /* AppointmentsCollapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B208AFE2A7D383A000EDCE3 /* AppointmentsCollapsible.swift */; };
 		2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D27C29F312C00051F6B9 /* EmptyState.swift */; };
-		2B53D28129F316930051F6B9 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D28029F316930051F6B9 /* UserPreferences.swift */; };
+		2B53D28129F316930051F6B9 /* AppThemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D28029F316930051F6B9 /* AppThemeHandler.swift */; };
 		2B53D28429F31B0B0051F6B9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D28329F31B0B0051F6B9 /* SettingsView.swift */; };
 		2B5443A32AF174F500521104 /* ShopFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5443A22AF174F500521104 /* ShopFormView.swift */; };
 		2B5443A52AF1750B00521104 /* ArtistFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5443A42AF1750B00521104 /* ArtistFormView.swift */; };
 		2B5443A72AF1751900521104 /* ArtistListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5443A62AF1751900521104 /* ArtistListView.swift */; };
 		2B5443A92AF1753100521104 /* ShopListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5443A82AF1753100521104 /* ShopListView.swift */; };
-		2B5443AC2AF181E900521104 /* ArtistAndShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5443AB2AF181E900521104 /* ArtistAndShopList.swift */; };
+		2B5443AC2AF181E900521104 /* PersistedDataList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5443AB2AF181E900521104 /* PersistedDataList.swift */; };
 		2B5443AF2AF24DDF00521104 /* ShopMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5443AE2AF24DDF00521104 /* ShopMapView.swift */; };
 		2B64D2282A7D536900090EB6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64D2272A7D536900090EB6 /* OnboardingView.swift */; };
 		2B64D22A2A7D649300090EB6 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64D2292A7D649300090EB6 /* OnboardingPageView.swift */; };
@@ -48,6 +48,10 @@
 		2BD3189729F2B6410059F9A8 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3189629F2B6410059F9A8 /* Modifiers.swift */; };
 		2BD3189F29F2C0CD0059F9A8 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3189E29F2C0CD0059F9A8 /* HistoryView.swift */; };
 		2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */; };
+		2BE240B72AFD80560019540E /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE240B62AFD80560019540E /* Artist.swift */; };
+		2BE240B92AFD80590019540E /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE240B82AFD80590019540E /* Shop.swift */; };
+		2BE240BB2AFD805E0019540E /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE240BA2AFD805E0019540E /* Review.swift */; };
+		2BE240BD2AFD80A60019540E /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE240BC2AFD80A60019540E /* UserPreferences.swift */; };
 		2BF6BD5E2A868585006A7602 /* AppointmentsTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6BD5D2A868585006A7602 /* AppointmentsTip.swift */; };
 		2BF6BD602A8685B4006A7602 /* HomeTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6BD5F2A8685B4006A7602 /* HomeTip.swift */; };
 		2BF6BD622A86866A006A7602 /* HistoryTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6BD612A86866A006A7602 /* HistoryTip.swift */; };
@@ -58,7 +62,6 @@
 		64EAF4AF2AE5B2B900AFD196 /* NotificationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EAF4AE2AE5B2B900AFD196 /* NotificationsHandler.swift */; };
 		64EAF4B12AE5B43F00AFD196 /* AppointmentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EAF4B02AE5B43F00AFD196 /* AppointmentForm.swift */; };
 		64EAF4B32AE5B54600AFD196 /* UpdateAppointmentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EAF4B22AE5B54600AFD196 /* UpdateAppointmentForm.swift */; };
-		64EAF4B62AE5B88600AFD196 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EAF4B52AE5B88600AFD196 /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,13 +85,13 @@
 		2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		2B208AFE2A7D383A000EDCE3 /* AppointmentsCollapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsCollapsible.swift; sourceTree = "<group>"; };
 		2B53D27C29F312C00051F6B9 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
-		2B53D28029F316930051F6B9 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		2B53D28029F316930051F6B9 /* AppThemeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeHandler.swift; sourceTree = "<group>"; };
 		2B53D28329F31B0B0051F6B9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2B5443A22AF174F500521104 /* ShopFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopFormView.swift; sourceTree = "<group>"; };
 		2B5443A42AF1750B00521104 /* ArtistFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistFormView.swift; sourceTree = "<group>"; };
 		2B5443A62AF1751900521104 /* ArtistListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistListView.swift; sourceTree = "<group>"; };
 		2B5443A82AF1753100521104 /* ShopListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListView.swift; sourceTree = "<group>"; };
-		2B5443AB2AF181E900521104 /* ArtistAndShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistAndShopList.swift; sourceTree = "<group>"; };
+		2B5443AB2AF181E900521104 /* PersistedDataList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistedDataList.swift; sourceTree = "<group>"; };
 		2B5443AE2AF24DDF00521104 /* ShopMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopMapView.swift; sourceTree = "<group>"; };
 		2B64D2272A7D536900090EB6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		2B64D2292A7D649300090EB6 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
@@ -123,6 +126,10 @@
 		2BD3189629F2B6410059F9A8 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		2BD3189E29F2C0CD0059F9A8 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentCell.swift; sourceTree = "<group>"; };
+		2BE240B62AFD80560019540E /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		2BE240B82AFD80590019540E /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		2BE240BA2AFD805E0019540E /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		2BE240BC2AFD80A60019540E /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		2BF6BD5D2A868585006A7602 /* AppointmentsTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsTip.swift; sourceTree = "<group>"; };
 		2BF6BD5F2A8685B4006A7602 /* HomeTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTip.swift; sourceTree = "<group>"; };
 		2BF6BD612A86866A006A7602 /* HistoryTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTip.swift; sourceTree = "<group>"; };
@@ -133,7 +140,6 @@
 		64EAF4AE2AE5B2B900AFD196 /* NotificationsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsHandler.swift; sourceTree = "<group>"; };
 		64EAF4B02AE5B43F00AFD196 /* AppointmentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentForm.swift; sourceTree = "<group>"; };
 		64EAF4B22AE5B54600AFD196 /* UpdateAppointmentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppointmentForm.swift; sourceTree = "<group>"; };
-		64EAF4B52AE5B88600AFD196 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,14 +227,14 @@
 			path = ShopFormView;
 			sourceTree = "<group>";
 		};
-		2B5443AA2AF181E100521104 /* ArtistAndShopList */ = {
+		2B5443AA2AF181E100521104 /* PersistedDataList */ = {
 			isa = PBXGroup;
 			children = (
 				2B54439F2AF174DE00521104 /* ShopListView */,
 				2B54439E2AF174D800521104 /* ArtistListView */,
-				2B5443AB2AF181E900521104 /* ArtistAndShopList.swift */,
+				2B5443AB2AF181E900521104 /* PersistedDataList.swift */,
 			);
-			path = ArtistAndShopList;
+			path = PersistedDataList;
 			sourceTree = "<group>";
 		};
 		2B5443AD2AF24DD200521104 /* ShopMap */ = {
@@ -411,7 +417,6 @@
 		2BD3188B29F2B53E0059F9A8 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				2B5443AA2AF181E100521104 /* ArtistAndShopList */,
 				640B182E2AE70D3F00F5BF1E /* AppointmentSpendingChart */,
 				2B53D28229F31B040051F6B9 /* SettingsView */,
 				2BD3187729F2768F0059F9A8 /* HomeView.swift */,
@@ -423,7 +428,7 @@
 		2BD3188C29F2B54E0059F9A8 /* EnvironmentObjects */ = {
 			isa = PBXGroup;
 			children = (
-				2B53D28029F316930051F6B9 /* UserPreferences.swift */,
+				2B53D28029F316930051F6B9 /* AppThemeHandler.swift */,
 			);
 			path = EnvironmentObjects;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 		2BD3189229F2B5FA0059F9A8 /* AppointmentsView */ = {
 			isa = PBXGroup;
 			children = (
+				2B5443AA2AF181E100521104 /* PersistedDataList */,
 				2B7B78902AF41FA500284DF7 /* AppointmentPopUpView */,
 				2BD3189329F2B61A0059F9A8 /* AppointmentForm */,
 				2B64D21E2A7D520A00090EB6 /* AppointmentsCollapsible */,
@@ -529,7 +535,10 @@
 			isa = PBXGroup;
 			children = (
 				2BD3187F29F285E90059F9A8 /* Appointment.swift */,
-				64EAF4B52AE5B88600AFD196 /* Preferences.swift */,
+				2BE240B62AFD80560019540E /* Artist.swift */,
+				2BE240B82AFD80590019540E /* Shop.swift */,
+				2BE240BA2AFD805E0019540E /* Review.swift */,
+				2BE240BC2AFD80A60019540E /* UserPreferences.swift */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -670,7 +679,6 @@
 				2B64D22A2A7D649300090EB6 /* OnboardingPageView.swift in Sources */,
 				2B5443A72AF1751900521104 /* ArtistListView.swift in Sources */,
 				64EAF4AF2AE5B2B900AFD196 /* NotificationsHandler.swift in Sources */,
-				64EAF4B62AE5B88600AFD196 /* Preferences.swift in Sources */,
 				2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */,
 				2B7F418E2A7FA6F000ADF919 /* Haptics.swift in Sources */,
 				2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */,
@@ -680,6 +688,7 @@
 				2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */,
 				2B53D28429F31B0B0051F6B9 /* SettingsView.swift in Sources */,
 				2BD3188029F285E90059F9A8 /* Appointment.swift in Sources */,
+				2BE240B92AFD80590019540E /* Shop.swift in Sources */,
 				2BC4201C2AED317D003838D3 /* StarRatingButton.swift in Sources */,
 				2B7B78922AF41FB700284DF7 /* AppointmentPopUpView.swift in Sources */,
 				2BD3187829F2768F0059F9A8 /* HomeView.swift in Sources */,
@@ -689,14 +698,16 @@
 				2BC420142AED3120003838D3 /* ReviewAppointmentView.swift in Sources */,
 				2BD3189029F2B5D60059F9A8 /* AppointmentsViewModel.swift in Sources */,
 				2B9E0C6D2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift in Sources */,
+				2BE240BD2AFD80A60019540E /* UserPreferences.swift in Sources */,
+				2BE240B72AFD80560019540E /* Artist.swift in Sources */,
 				2BC420162AED312E003838D3 /* ReviewAppointmentViewModel.swift in Sources */,
 				640B18302AE70D5A00F5BF1E /* AppointmentSpendingChart.swift in Sources */,
-				2B5443AC2AF181E900521104 /* ArtistAndShopList.swift in Sources */,
+				2B5443AC2AF181E900521104 /* PersistedDataList.swift in Sources */,
 				2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */,
 				2BF6BD5E2A868585006A7602 /* AppointmentsTip.swift in Sources */,
 				64C899302AE5C126002E8096 /* NavBarItem.swift in Sources */,
 				2B208AFF2A7D383A000EDCE3 /* AppointmentsCollapsible.swift in Sources */,
-				2B53D28129F316930051F6B9 /* UserPreferences.swift in Sources */,
+				2B53D28129F316930051F6B9 /* AppThemeHandler.swift in Sources */,
 				2B64D2282A7D536900090EB6 /* OnboardingView.swift in Sources */,
 				2BD3187629F276830059F9A8 /* TJTabView.swift in Sources */,
 				2B7B78942AF4274800284DF7 /* AppointmentDetailViewTip.swift in Sources */,
@@ -707,6 +718,7 @@
 				2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */,
 				64EAF4AD2AE5B28700AFD196 /* AppointmentFormView.swift in Sources */,
 				2B5443AF2AF24DDF00521104 /* ShopMapView.swift in Sources */,
+				2BE240BB2AFD805E0019540E /* Review.swift in Sources */,
 				2B6C8CF329FBFD8100A4BA6E /* HistoryViewModel.swift in Sources */,
 				2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */,
 				2B5443A32AF174F500521104 /* ShopFormView.swift in Sources */,

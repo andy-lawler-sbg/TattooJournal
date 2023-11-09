@@ -1,5 +1,5 @@
 //
-//  ArtistAndShopList.swift
+//  PersistedDataList.swift
 //  TattooJournal
 //
 //  Created by Andy Lawler on 31/10/2023.
@@ -8,21 +8,29 @@
 import SwiftUI
 import SwiftData
 
-struct ArtistAndShopList: View {
+struct PersistedDataList: View {
+    
+    @EnvironmentObject private var themeHandler: AppThemeHandler
+    @Environment(\.dismiss) private var dismiss
 
     @Query private var artists: [Artist]
     @Query private var shops: [Shop]
 
+    private var descriptionText: some View {
+        Text("View all of the artists and shops you have saved within the app.")
+            .frame(maxWidth: .infinity)
+            .multilineTextAlignment(.center)
+            .font(.callout)
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 20)
+            .padding(.top)
+            .padding(.bottom, 7)
+    }
+
     var body: some View {
         NavigationStack {
             VStack {
-                Text("View all of the artists and shops you have used in past appointments.")
-                    .frame(maxWidth: .infinity)
-                    .multilineTextAlignment(.center)
-                    .font(.body)
-                    .foregroundStyle(.secondary)
-                    .padding(.horizontal)
-                    .padding(.vertical, 7)
+                descriptionText
                 List {
                     if !artists.isEmpty {
                         NavigationLink {
@@ -31,7 +39,7 @@ struct ArtistAndShopList: View {
                             HStack(spacing: 10) {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)
-                                        .foregroundStyle(Color.accentColor)
+                                        .foregroundStyle(Color.pink)
                                     Image(systemName: Constants.artistIcon)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -54,7 +62,7 @@ struct ArtistAndShopList: View {
                             HStack(spacing: 10) {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)
-                                        .foregroundStyle(Color.accentColor)
+                                        .foregroundStyle(Color.blue)
                                     Image(systemName: Constants.shopIcon)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -72,8 +80,15 @@ struct ArtistAndShopList: View {
                 }
             }
             .background(Color(.background))
-            .navigationTitle("Saved Data")
+            .navigationTitle("Saved Information")
         }
+        .overlay(
+            Button {
+                dismiss()
+            } label: {
+               XMarkButton()
+            }, alignment: .topTrailing
+        )
     }
 
     private var shopListView: some View {
@@ -85,7 +100,7 @@ struct ArtistAndShopList: View {
     }
 }
 
-private extension ArtistAndShopList {
+private extension PersistedDataList {
     enum Constants {
         static let artistIcon = "paintbrush.pointed.fill"
         static let artistText = "Artists"

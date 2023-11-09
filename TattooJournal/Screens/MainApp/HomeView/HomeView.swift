@@ -7,13 +7,17 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct HomeView: View {
 
     @Binding var selectedPage: Int
     @Bindable var viewModel = HomeViewModel()
-
+    
+    @EnvironmentObject private var themeHandler: AppThemeHandler
     @EnvironmentObject private var appEventHandler: AppEventHandler
+
+    @State var imageSelected: PhotosPickerItem? = nil
 
     @Query(
         sort: \Appointment.date,
@@ -28,12 +32,19 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-//                Image("dinosaur")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(maxWidth: .infinity)
-//                spendingChart
+                PhotosPicker(selection: $imageSelected,
+                             matching: .images,
+                             photoLibrary: .shared()) {
+                    Text("Add Image")
+                        .bold()
+                        .foregroundStyle(themeHandler.appColor)
+                        .frame(width: 180, height: 40)
+                        .background(themeHandler.appColor.opacity(0.1))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+                Spacer()
             }
+            .frame(maxWidth: .infinity)
             .background(Color(.background))
             .navigationTitle(Constants.title)
             .toolbar {

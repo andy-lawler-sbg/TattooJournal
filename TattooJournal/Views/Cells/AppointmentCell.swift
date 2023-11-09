@@ -127,10 +127,10 @@ struct AppointmentCell: View {
                         }
                     }
             case .starRating:
-                Image(systemName: true ? "star.fill" : "star")
+                Image(systemName: viewModel.appointment.review != nil ? "star.fill" : "star")
                     .resizable()
                     .frame(width: 13, height: 13)
-                    .foregroundStyle(viewModel.appointment.notifyMe ? themeHandler.appColor : Color.gray)
+                    .foregroundStyle(viewModel.appointment.review != nil ? themeHandler.appColor : Color.gray)
                     .padding(6)
                     .background(Color(.buttonCapsule))
                     .clipShape(.circle)

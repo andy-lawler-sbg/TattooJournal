@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SettingsItemView<Content: View>: View {
-
+    
+    let id = UUID()
     var itemView: Content
     var imageName: String
     var imageColor: Color = .white

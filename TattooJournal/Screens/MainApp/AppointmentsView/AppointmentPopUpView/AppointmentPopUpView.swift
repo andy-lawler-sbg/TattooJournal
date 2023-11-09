@@ -15,9 +15,46 @@ enum AppointmentPopUpType {
 
 @Observable
 final class AppointmentPopUpViewModel {
-    
+
+    var userPreferences: UserPreferences?
     var appointment: Appointment
     var type: AppointmentPopUpType
+
+    var dateString: String {
+        let formatter1 = DateFormatter()
+        formatter1.dateStyle = .full
+        formatter1.timeStyle = .short
+        return formatter1.string(from: appointment.date)
+    }
+
+    var pageTitle: String {
+        "Appointment Details"
+    }
+
+    var pageContent: [SettingsItemView<Text>] {
+        var items: [SettingsItemView<Text>] = []
+        
+        items.append(SettingsItemView(itemView: Text(dateString), imageName: "calendar", backgroundColor: .red))
+        if let artist = appointment.artist {
+            items.append(SettingsItemView(itemView: Text(artist.name), imageName: "person.fill", backgroundColor: .mint))
+        }
+        if let userPreferences {
+            items.append(SettingsItemView(itemView: Text(appointment.price), imageName: "\(userPreferences.currency.rawValue)sign", backgroundColor: .blue))
+        }
+        items.append(SettingsItemView(itemView: Text(appointment.design), imageName: "paintbrush.pointed.fill", backgroundColor: .green))
+        if let shop = appointment.shop {
+            items.append(SettingsItemView(itemView: Text(shop.name), imageName: "house.fill", backgroundColor: .purple))
+        }
+        items.append(SettingsItemView(itemView: Text(appointment.bodyPart), imageName: "figure.mind.and.body", backgroundColor: .pink))
+
+        switch type {
+        case .appointments:
+            items.append(SettingsItemView(itemView: Text(appointment.notifyMeDescription), imageName: appointment.notifyMe ? "bell.fill" : "bell", backgroundColor: .orange))
+        case .history:
+            items.append(SettingsItemView(itemView: Text(appointment.reviewDescription), imageName: appointment.review != nil ? "star.fill" : "star", backgroundColor: .orange))
+        }
+        return items
+    }
 
     init(appointment: Appointment, type: AppointmentPopUpType = .appointments) {
         self.appointment = appointment
@@ -26,40 +63,25 @@ final class AppointmentPopUpViewModel {
 }
 
 struct AppointmentPopUpView: View {
-
+    
+    @Environment(\.dismiss) private var dismiss
     @Query private var queriedUserPreferences: [UserPreferences]
     private var userPreferences: UserPreferences {
         queriedUserPreferences.first!
     }
 
-    @Environment(\.dismiss) private var dismiss
     var viewModel: AppointmentPopUpViewModel
-
-    private var dateString: String {
-        let formatter1 = DateFormatter()
-        formatter1.dateStyle = .full
-        formatter1.timeStyle = .short
-        return formatter1.string(from: viewModel.appointment.date)
-    }
 
     var body: some View {
         NavigationStack {
             List {
-                Section("Appointment Information") {
-                    SettingsItemView(itemView: Text(dateString), imageName: "calendar", backgroundColor: .red)
-                    if let artist = viewModel.appointment.artist {
-                        SettingsItemView(itemView: Text(artist.name), imageName: "person.fill", backgroundColor: .mint)
+                Section {
+                    ForEach(viewModel.pageContent, id: \.id) { page in
+                        page
                     }
-                    SettingsItemView(itemView: Text(viewModel.appointment.price), imageName: "\(userPreferences.currency.rawValue)sign", backgroundColor: .blue)
-                    SettingsItemView(itemView: Text(viewModel.appointment.design), imageName: "paintbrush.pointed.fill", backgroundColor: .green)
-                    if let shop = viewModel.appointment.shop {
-                        SettingsItemView(itemView: Text(shop.name), imageName: "house.fill", backgroundColor: .purple)
-                    }
-                    SettingsItemView(itemView: Text(viewModel.appointment.notifyMeDescription), imageName: viewModel.appointment.notifyMe ? "bell.fill" : "bell", backgroundColor: .orange)
-                    SettingsItemView(itemView: Text(viewModel.appointment.bodyPart), imageName: "figure.mind.and.body", backgroundColor: .pink)
                 }
             }
-            .navigationTitle("Appointment Details")
+            .navigationTitle(viewModel.pageTitle)
             .navigationBarTitleDisplayMode(.inline)
             .background(Color(.background))
             .popoverTip(AppointmentDetailViewTip(type: viewModel.type))
@@ -72,6 +94,9 @@ struct AppointmentPopUpView: View {
                 XMarkButton()
             }, alignment: .topTrailing
         )
+        .onAppear {
+            viewModel.userPreferences = userPreferences
+        }
     }
 }
 
