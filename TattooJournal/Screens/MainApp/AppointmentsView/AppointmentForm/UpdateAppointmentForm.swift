@@ -93,7 +93,7 @@ struct UpdateAppointmentForm: View {
 
         if appointment.notifyMe {
             notificationsHandler.deleteScheduledNotification(for: appointment)
-            notificationsHandler.scheduleNotifications(for: appointment)
+            try? notificationsHandler.scheduleNotifications(for: appointment)
         }
     }
 }

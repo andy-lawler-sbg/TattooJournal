@@ -8,13 +8,17 @@
 import SwiftUI
 import SwiftData
 import TipKit
+import Combine
+import UserNotifications
 
 /// Appointments View to show the scheduled appointments a User has.
 struct AppointmentsView: View {
     
+    @EnvironmentObject private var themeHandler: AppThemeHandler
     @EnvironmentObject private var appEventHandler: AppEventHandler
     @EnvironmentObject private var notificationsHandler: NotificationsHandler
-    @Environment(\.modelContext) var context
+    @Environment(\.modelContext) private var context
+    @Environment(\.dismiss) private var dismiss
 
     @Query(
         sort: \Appointment.date,
@@ -80,7 +84,28 @@ struct AppointmentsView: View {
                 }
             } content: { appointment in
                 AppointmentPopUpView(viewModel: .init(appointment: appointment, type: .appointments))
-                    .presentationDetents([.height(550)])
+                    .presentationDetents([.height(620), .large])
+                    .presentationDragIndicator(.visible)
+            }
+            .alert(viewModel.notificationAlertType.alertTitle,
+                   isPresented: $viewModel.shouldShowNotificationsAlert, actions: {
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Ok")
+                }
+                .tint(themeHandler.appColor)
+            }, message: {
+                Text(viewModel.notificationAlertType.alertButtonText)
+            })
+            .task {
+                notificationsHandler.notificationsAlertPublisher
+                    .receive(on: DispatchQueue.main)
+                    .sink { type in
+                        viewModel.shouldShowNotificationsAlert = true
+                        viewModel.notificationAlertType = type
+                    }
+                    .store(in: &viewModel.cancellables)
             }
         }
     }

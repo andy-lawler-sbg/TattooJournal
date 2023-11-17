@@ -11,13 +11,16 @@ import Combine
 @Observable
 final class AppointmentsViewModel {
     private var appEventHandler: AppEventHandler?
-    private var cancellables = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
 
     var shouldShowAppointmentsForm = false
     var shouldShowArtistAndShopList = false
     
     var appointmentToEdit: Appointment?
     var appointmentToShowDetailView: Appointment?
+
+    var shouldShowNotificationsAlert = false
+    var notificationAlertType: NotificationsHandler.AppointmentNotificationAlertType = .enabled
 
     func setup(appEventHandler: AppEventHandler) {
         self.appEventHandler = appEventHandler

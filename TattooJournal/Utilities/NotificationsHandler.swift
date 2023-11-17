@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import Combine
 import UserNotifications
 
 final class NotificationsHandler: ObservableObject {
 
     private let notificationCenter: UNUserNotificationCenter
     private let calendar: Calendar
+
+    let notificationsAlertPublisher: PassthroughSubject<AppointmentNotificationAlertType, Never> = .init()
 
     init(notificationCenter: UNUserNotificationCenter = .current(), calendar: Calendar = .current) {
         self.notificationCenter = notificationCenter
@@ -30,7 +33,7 @@ final class NotificationsHandler: ObservableObject {
         }
     }
 
-    func scheduleNotifications(for appointment: Appointment) {
+    func scheduleNotifications(for appointment: Appointment) throws {
         let notificationsToSchedule: [AppointmentNotificationType] = [.morningReminder, .timeReminder]
 
         for type in notificationsToSchedule {
@@ -40,14 +43,7 @@ final class NotificationsHandler: ObservableObject {
             let request = UNNotificationRequest(identifier: identifier,
                                                 content: content,
                                                 trigger: trigger)
-
-            notificationCenter.add(request) { (error) in
-                if let error {
-                    print("🔕 Failed To Schedule Notification. For: \(appointment.date). With: \(error.localizedDescription). 🔕")
-                } else {
-                    print("🔔 Successfully Scheduled Notification. For: \(appointment.date) 🔔")
-                }
-            }
+            notificationCenter.add(request)
         }
     }
 
@@ -68,6 +64,32 @@ final class NotificationsHandler: ObservableObject {
         content.body = type.body(for: appointment)
         content.sound = type.sound
         return content
+    }
+
+    enum AppointmentNotificationAlertType {
+        case enabled, disabled, failure
+
+        var alertTitle: String {
+            switch self {
+            case .enabled:
+                return "Scheduled Notifications"
+            case .disabled:
+                return "Disabled Notifications"
+            case .failure:
+                return "Failure Scheduling Notifications"
+            }
+        }
+
+        var alertButtonText: String {
+            switch self {
+            case .enabled:
+                return "You have scheduled a morning reminder & exact time reminder."
+            case .disabled:
+                return "You have disabled a morning reminder & exact time reminder."
+            case .failure:
+                return "Failed to schedule notifications."
+            }
+        }
     }
 
     enum AppointmentNotificationType: String, CaseIterable {

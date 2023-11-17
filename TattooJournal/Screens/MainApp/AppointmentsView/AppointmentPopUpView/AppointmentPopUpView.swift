@@ -64,6 +64,7 @@ final class AppointmentPopUpViewModel {
 
 struct AppointmentPopUpView: View {
     
+    @EnvironmentObject private var themeHandler: AppThemeHandler
     @Environment(\.dismiss) private var dismiss
     @Query private var queriedUserPreferences: [UserPreferences]
     private var userPreferences: UserPreferences {
@@ -79,21 +80,27 @@ struct AppointmentPopUpView: View {
                     ForEach(viewModel.pageContent, id: \.id) { page in
                         page
                     }
+                } footer: {
+                    Text("Change any of the information above by swiping to edit on the appointment screen or use the button above.")
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .font(.caption)
+                        .foregroundColor(themeHandler.appColor)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(themeHandler.appColor.opacity(0.1))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .shadow(color: .black.opacity(0.05), radius: 5, y: 3)
+                        .padding(.top)
                 }
             }
+            .scrollIndicators(.hidden)
             .navigationTitle(viewModel.pageTitle)
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.large)
             .background(Color(.background))
             .popoverTip(AppointmentDetailViewTip(type: viewModel.type))
             .tipBackground(Color(.cellBackground))
         }
-        .overlay(
-            Button {
-                dismiss()
-            } label: {
-                XMarkButton()
-            }, alignment: .topTrailing
-        )
         .onAppear {
             viewModel.userPreferences = userPreferences
         }

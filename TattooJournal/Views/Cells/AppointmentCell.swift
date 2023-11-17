@@ -121,9 +121,15 @@ struct AppointmentCell: View {
                     .onTapGesture {
                         viewModel.appointment.notifyMe.toggle()
                         if viewModel.appointment.notifyMe {
-                            notificationsHandler.scheduleNotifications(for: viewModel.appointment)
+                            do {
+                                try notificationsHandler.scheduleNotifications(for: viewModel.appointment)
+                                notificationsHandler.notificationsAlertPublisher.send(.enabled)
+                            } catch {
+                                notificationsHandler.notificationsAlertPublisher.send(.disabled)
+                            }
                         } else {
                             notificationsHandler.deleteScheduledNotification(for: viewModel.appointment)
+                            notificationsHandler.notificationsAlertPublisher.send(.disabled)
                         }
                     }
             case .starRating:

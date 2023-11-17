@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import PhotosUI
 
 struct HomeView: View {
 
@@ -17,33 +16,29 @@ struct HomeView: View {
     @EnvironmentObject private var themeHandler: AppThemeHandler
     @EnvironmentObject private var appEventHandler: AppEventHandler
 
-    @State var imageSelected: PhotosPickerItem? = nil
-
     @Query(
         sort: \Appointment.date,
         order: .forward
     ) private var queriedAppointments: [Appointment]
 
-    private var upcomingAppointments: [Appointment] {
+    private var nextAppointment: Appointment? {
         let startDate: Date = Date()
-        return queriedAppointments.filter({ $0.date >= startDate })
+        return queriedAppointments.filter({ $0.date >= startDate }).first
     }
 
     var body: some View {
         NavigationStack {
-            VStack {
-                PhotosPicker(selection: $imageSelected,
-                             matching: .images,
-                             photoLibrary: .shared()) {
-                    Text("Add Image")
-                        .bold()
-                        .foregroundStyle(themeHandler.appColor)
-                        .frame(width: 180, height: 40)
-                        .background(themeHandler.appColor.opacity(0.1))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                }
+            ScrollView {
+                VStack(spacing: 20) {
+                    if let nextAppointment {
+                        NextAppointmentView(appointment: nextAppointment)
+                    }
+                    AppointmentSpendingChart(viewModel: .init(appointments: queriedAppointments))
+                    PhotoJournal()
+                }.padding(.top)
                 Spacer()
             }
+            .scrollIndicators(.hidden)
             .frame(maxWidth: .infinity)
             .background(Color(.background))
             .navigationTitle(Constants.title)

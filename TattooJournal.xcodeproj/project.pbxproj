@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */; };
 		2B208AFF2A7D383A000EDCE3 /* AppointmentsCollapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B208AFE2A7D383A000EDCE3 /* AppointmentsCollapsible.swift */; };
+		2B52D0EF2B08125B00420C2D /* PhotoJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52D0EE2B08125B00420C2D /* PhotoJournal.swift */; };
+		2B52D0F32B08168400420C2D /* NextAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52D0F22B08168400420C2D /* NextAppointmentView.swift */; };
 		2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D27C29F312C00051F6B9 /* EmptyState.swift */; };
 		2B53D28129F316930051F6B9 /* AppThemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D28029F316930051F6B9 /* AppThemeHandler.swift */; };
 		2B53D28429F31B0B0051F6B9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53D28329F31B0B0051F6B9 /* SettingsView.swift */; };
@@ -84,6 +86,8 @@
 /* Begin PBXFileReference section */
 		2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		2B208AFE2A7D383A000EDCE3 /* AppointmentsCollapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsCollapsible.swift; sourceTree = "<group>"; };
+		2B52D0EE2B08125B00420C2D /* PhotoJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoJournal.swift; sourceTree = "<group>"; };
+		2B52D0F22B08168400420C2D /* NextAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextAppointmentView.swift; sourceTree = "<group>"; };
 		2B53D27C29F312C00051F6B9 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
 		2B53D28029F316930051F6B9 /* AppThemeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeHandler.swift; sourceTree = "<group>"; };
 		2B53D28329F31B0B0051F6B9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -174,6 +178,22 @@
 				64C8992F2AE5C126002E8096 /* NavBarItem.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2B52D0F02B08165200420C2D /* PhotoJournal */ = {
+			isa = PBXGroup;
+			children = (
+				2B52D0EE2B08125B00420C2D /* PhotoJournal.swift */,
+			);
+			path = PhotoJournal;
+			sourceTree = "<group>";
+		};
+		2B52D0F12B08167800420C2D /* NextAppointmentView */ = {
+			isa = PBXGroup;
+			children = (
+				2B52D0F22B08168400420C2D /* NextAppointmentView.swift */,
+			);
+			path = NextAppointmentView;
 			sourceTree = "<group>";
 		};
 		2B53D27B29F312B50051F6B9 /* EmptyState */ = {
@@ -417,6 +437,8 @@
 		2BD3188B29F2B53E0059F9A8 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				2B52D0F12B08167800420C2D /* NextAppointmentView */,
+				2B52D0F02B08165200420C2D /* PhotoJournal */,
 				640B182E2AE70D3F00F5BF1E /* AppointmentSpendingChart */,
 				2B53D28229F31B040051F6B9 /* SettingsView */,
 				2BD3187729F2768F0059F9A8 /* HomeView.swift */,
@@ -687,6 +709,7 @@
 				2BD3189729F2B6410059F9A8 /* Modifiers.swift in Sources */,
 				2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */,
 				2B53D28429F31B0B0051F6B9 /* SettingsView.swift in Sources */,
+				2B52D0EF2B08125B00420C2D /* PhotoJournal.swift in Sources */,
 				2BD3188029F285E90059F9A8 /* Appointment.swift in Sources */,
 				2BE240B92AFD80590019540E /* Shop.swift in Sources */,
 				2BC4201C2AED317D003838D3 /* StarRatingButton.swift in Sources */,
@@ -705,6 +728,7 @@
 				2B5443AC2AF181E900521104 /* PersistedDataList.swift in Sources */,
 				2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */,
 				2BF6BD5E2A868585006A7602 /* AppointmentsTip.swift in Sources */,
+				2B52D0F32B08168400420C2D /* NextAppointmentView.swift in Sources */,
 				64C899302AE5C126002E8096 /* NavBarItem.swift in Sources */,
 				2B208AFF2A7D383A000EDCE3 /* AppointmentsCollapsible.swift in Sources */,
 				2B53D28129F316930051F6B9 /* AppThemeHandler.swift in Sources */,

@@ -10,16 +10,18 @@ import SwiftUI
 struct XMarkButton: View {
 
     var icon: String = Constants.xmark
+    var buttonBackground: Color = Color(.cellBackground)
+    var imageColor: Color = Color(.oppositeStyle)
 
     var body: some View {
         ZStack {
             Circle()
                 .frame(width: 30, height: 30)
-                .foregroundStyle(Color(.cellBackground))
+                .foregroundStyle(buttonBackground)
             Image(systemName: icon)
                 .imageScale(.small)
                 .frame(width: 44, height: 44)
-                .foregroundStyle(Color(.oppositeStyle))
+                .foregroundStyle(imageColor)
         }.padding(1)
     }
 }

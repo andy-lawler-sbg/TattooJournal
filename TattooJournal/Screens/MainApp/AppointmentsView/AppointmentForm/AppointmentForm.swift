@@ -98,7 +98,7 @@ struct AppointmentForm: View {
 
         // MARK: - Notifications
         guard appointment.notifyMe else { return }
-        notificationsHandler.scheduleNotifications(for: appointment)
+        try? notificationsHandler.scheduleNotifications(for: appointment)
     }
 }
 

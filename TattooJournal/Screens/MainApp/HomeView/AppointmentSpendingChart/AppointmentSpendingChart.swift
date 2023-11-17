@@ -17,10 +17,14 @@ struct AppointmentSpendingChart: View {
 
     var body: some View {
         VStack(spacing: 15) {
-            Text("Spending")
-                .font(.headline)
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+                Text("Spending")
+                    .font(.body)
+                    .bold()
+                Spacer()
+            }
+            .padding(.horizontal, 6)
+            .padding(.bottom, 4)
             Chart(viewModel.appointments) {
                 LineMark(
                     x: .value("Date", $0.date.formatted()),
@@ -32,11 +36,12 @@ struct AppointmentSpendingChart: View {
             }
             .background(Color.clear)
             .frame(maxHeight: 150)
+            .padding()
+            .background(Color(.cellBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .padding(.horizontal)
         }
-        .padding(15)
-        .background(Color(.cellBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 15))
-        .padding()
+        .padding(.horizontal, 5)
     }
 }
 
