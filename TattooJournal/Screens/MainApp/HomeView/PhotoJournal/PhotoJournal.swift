@@ -39,6 +39,12 @@ enum MockImages {
 struct PhotoJournal: View {
 
     @EnvironmentObject private var themeHandler: AppThemeHandler
+    @Environment(\.dismiss) private var dismiss
+
+    @Query private var queriedUserPreferences: [UserPreferences]
+    private var userPreferences: UserPreferences {
+        queriedUserPreferences.first!
+    }
 
     @State private var imageSelected: PhotosPickerItem? = nil
     @State private var journalExpanded = false
@@ -138,29 +144,35 @@ struct PhotoJournal: View {
                 imageTapped = nil
             } content: { image in
                 NavigationStack {
-                    VStack(alignment: .leading) {
+                    VStack {
                         image.image
                             .resizable()
-                            .scaledToFit()
-                        ForEach(pageContent(for: image), id: \.id) { page in
-                            page
+                            .scaledToFill()
+                            .opacity(0.25)
+                            .frame(maxWidth: .infinity, maxHeight: 300)
+                            .ignoresSafeArea(edges: [.top])
+                        List {
+                            Section {
+                                ForEach(pageContent(for: image), id: \.id) { page in
+                                    page
+                                }
+                            }
                         }
+                        .padding(.horizontal)
+                        .scrollIndicators(.hidden)
                         Spacer()
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .navigationTitle("Image Details")
-                    .padding(.horizontal)
+                    .navigationBarTitleDisplayMode(.large)
+                    .background(Color(.background))
                 }
-                .presentationDetents([.large])
+                .background(Color(.background))
                 .presentationDragIndicator(.visible)
             }
 
         }
         .padding(.horizontal, 5)
-    }
-
-    @Query private var queriedUserPreferences: [UserPreferences]
-    private var userPreferences: UserPreferences {
-        queriedUserPreferences.first!
     }
 
     func pageContent(for image: JournalImage) -> [SettingsItemView<Text>] {
