@@ -16,6 +16,7 @@ final class Appointment: Codable {
     var artist: Artist?
     var shop: Shop?
     var review: Review?
+    var image: TattooImage?
 
     var date: Date
     var price: String

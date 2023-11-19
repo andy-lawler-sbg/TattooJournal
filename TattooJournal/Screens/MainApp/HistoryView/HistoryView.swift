@@ -180,7 +180,7 @@ private extension HistoryView {
 #Preview("Past Tattoos View") {
     TabView {
         HistoryView(selectedPage: .constant(1))
-            .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self])
+            .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self, TattooImage.self])
             .tabItem {
                 Label("Past Tattoos", systemImage: "pencil.line")
             }

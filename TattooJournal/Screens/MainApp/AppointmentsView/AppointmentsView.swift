@@ -236,7 +236,7 @@ private extension AppointmentsView {
             .tabItem {
                 Label("Appointments", systemImage: "list.clipboard.fill")
             }
-            .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self])
+            .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self, TattooImage.self])
     }            
     .task {
         try? Tips.configure([.displayFrequency(.immediate), .datastoreLocation(.applicationDefault)])

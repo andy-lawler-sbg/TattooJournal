@@ -105,5 +105,5 @@ struct AppointmentForm: View {
 #Preview {
     AppointmentForm()
         .tint(AppThemeHandler().appColor)
-        .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self])
+        .modelContainer(for: [Appointment.self, Artist.self, Shop.self, UserPreferences.self, TattooImage.self])
 }

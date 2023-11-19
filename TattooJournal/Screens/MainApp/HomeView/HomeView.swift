@@ -21,19 +21,10 @@ struct HomeView: View {
         order: .forward
     ) private var queriedAppointments: [Appointment]
 
-    private var nextAppointment: Appointment? {
-        let startDate: Date = Date()
-        return queriedAppointments.filter({ $0.date >= startDate }).first
-    }
-
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    if let nextAppointment {
-                        NextAppointmentView(appointment: nextAppointment)
-                    }
-                    AppointmentSpendingChart(viewModel: .init(appointments: queriedAppointments))
                     PhotoJournal()
                 }.padding(.top)
                 Spacer()
