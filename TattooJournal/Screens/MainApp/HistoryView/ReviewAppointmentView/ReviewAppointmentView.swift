@@ -91,9 +91,18 @@ struct ReviewAppointmentView: View {
                             ZStack {
                                 Image(uiImage: uiImage)
                                     .resizable()
-                                    .frame(width: 50)
-                                Text("Tap to change")
+                                    .scaledToFit()
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                Image(systemName: "square.and.arrow.up")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30)
+                                    .foregroundStyle(themeHandler.appColor)
+                                    .bold()
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                                    .padding(10)
                             }
+                            .frame(width: 100)
                         }
                     } else {
                         PhotosPicker(selection: $imageSelected,

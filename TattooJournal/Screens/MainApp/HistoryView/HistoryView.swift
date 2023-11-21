@@ -17,7 +17,6 @@ struct HistoryView: View {
     @Environment(\.modelContext) private var context
 
     @Query(
-        
         sort: \Appointment.date,
         order: .reverse
     ) private var queriedAppointments: [Appointment]
@@ -44,15 +43,17 @@ struct HistoryView: View {
             .background(Color(.background))
             .navigationTitle(Constants.title)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        withAnimation {
-                            viewModel.shouldShowVisitedShops = true
+                if queriedAppointments.contains(where: { $0.shop?.locationLatitude != nil || $0.shop?.locationLongitude != nil }) {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            withAnimation {
+                                viewModel.shouldShowVisitedShops = true
+                            }
+                        } label: {
+                            NavBarItem(imageName: Constants.ImageNames.visitedShops)
                         }
-                    } label: {
-                        NavBarItem(imageName: Constants.ImageNames.visitedShops)
+                        .onTapGesture(perform: Haptics.shared.successHaptic)
                     }
-                    .onTapGesture(perform: Haptics.shared.successHaptic)
                 }
             }
             .sheet(isPresented: $viewModel.shouldShowVisitedShops) {

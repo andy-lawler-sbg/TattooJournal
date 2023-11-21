@@ -32,10 +32,7 @@ struct HomeView: View {
                                                          systemImage: "paintbrush.pointed.fill",
                                                          button: EmptyView(),
                                                          pageContent: artistGrid))
-                    HomeScreenContainer(viewModel: .init(title: "Journal",
-                                                         systemImage: "photo.stack",
-                                                         button: photoJournal.headerViewButton,
-                                                         pageContent: photoJournal))
+                    photoJournal
                 }.padding(.top)
                 Spacer()
             }

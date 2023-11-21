@@ -19,38 +19,42 @@ struct PhotoJournal: View {
 
     @State private var imageTappedToScale: TattooImage? = nil
     @State private var imageTapped: TattooImage? = nil
-    @State private var imageLongTapped: TattooImage? = nil
+    @State private var imageDeleteAlert: Bool = false
 
     @Query private var queriedImages: [TattooImage]
 
-    var images: [TattooImage] {
+    private var images: [TattooImage] {
         journalExpanded ? queriedImages : Array(queriedImages.prefix(4))
     }
 
+    var headerViewButton: some View {
+        PhotosPicker(selection: $imageSelected,
+                     matching: .images,
+                     photoLibrary: .shared()) {
+            XMarkButton(icon: "plus")
+        }
+    }
+
     var body: some View {
-        photoGrid
-            .task(id: imageSelected) {
-                if let data = try? await imageSelected?.loadTransferable(type: Data.self) {
-                    let image = TattooImage(image: data)
-                    withAnimation {
-                        context.insert(image)
-                        imageSelected = nil
+        VStack {
+            SectionHeaderView(viewModel: .init(title: "Journal", systemImage: "photo.stack", button: headerViewButton))
+            photoGrid
+                .task(id: imageSelected) {
+                    if let data = try? await imageSelected?.loadTransferable(type: Data.self) {
+                        let image = TattooImage(image: data)
+                        withAnimation {
+                            context.insert(image)
+                            imageSelected = nil
+                        }
                     }
                 }
-            }
-            .sheet(item: $imageTapped) {
-                imageTapped = nil
-            } content: { image in
-                PhotoDetailView(image: image)
-                    .presentationDragIndicator(.visible)
-            }
-            .sheet(item: $imageLongTapped) {
-                imageLongTapped = nil
-            } content: { image in
-                PhotoDeleteModal(image: image)
-                    .presentationDetents([.height(75)])
-                    .presentationDragIndicator(.visible)
-            }
+                .sheet(item: $imageTapped) {
+                    imageTapped = nil
+                } content: { image in
+                    PhotoDetailView(image: image)
+                        .presentationDragIndicator(.visible)
+                }
+        }.padding(.horizontal, 5)
     }
 
     private var photoGrid: some View {
@@ -77,22 +81,49 @@ struct PhotoJournal: View {
                                             .imageScale(.small)
                                             .frame(width: 44, height: 44)
                                             .foregroundStyle(themeHandler.appColor)
+                                    }                      
+                                    .onTapGesture {
+                                        withAnimation {
+                                            if tattooImage.appointment == nil {
+                                                imageTappedToScale = tattooImage
+                                            } else {
+                                                imageTapped = tattooImage
+                                            }
+                                        }
                                     }
                                 }
                             }
-                            .onTapGesture {
-                                withAnimation {
-                                    if tattooImage.appointment == nil {
-                                        imageTappedToScale = tattooImage
-                                    } else {
-                                        imageTapped = tattooImage
+                            .overlay(alignment: .topTrailing) {
+                                ZStack {
+                                    Circle()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundStyle(Color(.cellBackground))
+                                    Image(systemName: "xmark.bin.fill")
+                                        .imageScale(.small)
+                                        .frame(width: 44, height: 44)
+                                        .foregroundStyle(.white)
+                                }
+                                .onTapGesture {
+                                    withAnimation {
+                                        imageDeleteAlert = true
                                     }
                                 }
-                            }
-                            .onLongPressGesture {
-                                withAnimation {
-                                    imageLongTapped = tattooImage
-                                }
+                                .alert("Are you sure?", isPresented: $imageDeleteAlert, actions: {
+                                    Button {
+                                        imageDeleteAlert = false
+                                    } label: {
+                                        Text("Cancel")
+                                    }.tint(.red)
+                                    Button {
+                                        imageDeleteAlert = false
+                                        context.delete(tattooImage)
+                                    } label: {
+                                        Text("Delete")
+                                            .bold()
+                                    }.tint(themeHandler.appColor)
+                                }, message: {
+                                    Text("Are you sure you want to delete this image?")
+                                })
                             }
                     }
                 }
@@ -104,11 +135,11 @@ struct PhotoJournal: View {
                 }
             }.padding(.horizontal, 7)
 
-            if images.count < 2 {
+            if queriedImages.count < 2 {
                 emptyTextView
             }
 
-            if images.count > 4 {
+            if queriedImages.count > 4 {
                 Button {
                     withAnimation(.easeOut) {
                         journalExpanded.toggle()
@@ -187,16 +218,6 @@ struct PhotoJournal: View {
                 .padding(50)
             }
             .aspectRatio(1, contentMode: .fit)
-        }
-    }
-}
-
-extension PhotoJournal {
-    var headerViewButton: some View {
-        PhotosPicker(selection: $imageSelected,
-                     matching: .images,
-                     photoLibrary: .shared()) {
-            XMarkButton(icon: "plus")
         }
     }
 }

@@ -22,7 +22,6 @@
 		2B5443AF2AF24DDF00521104 /* ShopMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5443AE2AF24DDF00521104 /* ShopMapView.swift */; };
 		2B5F42942B092FF7005BFAC3 /* TattooImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5F42932B092FF7005BFAC3 /* TattooImage.swift */; };
 		2B5F42962B093172005BFAC3 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5F42952B093172005BFAC3 /* PhotoDetailView.swift */; };
-		2B5F42982B09354C005BFAC3 /* PhotoDeleteModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5F42972B09354C005BFAC3 /* PhotoDeleteModal.swift */; };
 		2B5F429A2B0937BB005BFAC3 /* PhotoFullScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5F42992B0937BB005BFAC3 /* PhotoFullScreenView.swift */; };
 		2B64D2282A7D536900090EB6 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64D2272A7D536900090EB6 /* OnboardingView.swift */; };
 		2B64D22A2A7D649300090EB6 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64D2292A7D649300090EB6 /* OnboardingPageView.swift */; };
@@ -42,6 +41,7 @@
 		2BC420202AED3522003838D3 /* TJTabView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4201F2AED3522003838D3 /* TJTabView+Extensions.swift */; };
 		2BC8AC022B0C8B2E00B91B0C /* HomeScreenContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8AC012B0C8B2E00B91B0C /* HomeScreenContainer.swift */; };
 		2BC8AC052B0C8BEC00B91B0C /* ArtistsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8AC042B0C8BEC00B91B0C /* ArtistsGrid.swift */; };
+		2BC8AC072B0CFE7100B91B0C /* ArtistsGridDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8AC062B0CFE7100B91B0C /* ArtistsGridDetailView.swift */; };
 		2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */; };
 		2BD3184A29F275DF0059F9A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3184929F275DF0059F9A8 /* Assets.xcassets */; };
 		2BD3184D29F275DF0059F9A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3184C29F275DF0059F9A8 /* Preview Assets.xcassets */; };
@@ -105,7 +105,6 @@
 		2B5443AE2AF24DDF00521104 /* ShopMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopMapView.swift; sourceTree = "<group>"; };
 		2B5F42932B092FF7005BFAC3 /* TattooImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooImage.swift; sourceTree = "<group>"; };
 		2B5F42952B093172005BFAC3 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
-		2B5F42972B09354C005BFAC3 /* PhotoDeleteModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDeleteModal.swift; sourceTree = "<group>"; };
 		2B5F42992B0937BB005BFAC3 /* PhotoFullScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFullScreenView.swift; sourceTree = "<group>"; };
 		2B64D2272A7D536900090EB6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		2B64D2292A7D649300090EB6 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
@@ -125,6 +124,7 @@
 		2BC4201F2AED3522003838D3 /* TJTabView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TJTabView+Extensions.swift"; sourceTree = "<group>"; };
 		2BC8AC012B0C8B2E00B91B0C /* HomeScreenContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenContainer.swift; sourceTree = "<group>"; };
 		2BC8AC042B0C8BEC00B91B0C /* ArtistsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsGrid.swift; sourceTree = "<group>"; };
+		2BC8AC062B0CFE7100B91B0C /* ArtistsGridDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsGridDetailView.swift; sourceTree = "<group>"; };
 		2BD3184229F275DD0059F9A8 /* TattooJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TattooJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooJournalApp.swift; sourceTree = "<group>"; };
 		2BD3184929F275DF0059F9A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -197,7 +197,6 @@
 			children = (
 				2B52D0EE2B08125B00420C2D /* PhotoJournal.swift */,
 				2B5F42952B093172005BFAC3 /* PhotoDetailView.swift */,
-				2B5F42972B09354C005BFAC3 /* PhotoDeleteModal.swift */,
 				2B5F42992B0937BB005BFAC3 /* PhotoFullScreenView.swift */,
 			);
 			path = PhotoJournal;
@@ -390,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				2BC8AC042B0C8BEC00B91B0C /* ArtistsGrid.swift */,
+				2BC8AC062B0CFE7100B91B0C /* ArtistsGridDetailView.swift */,
 			);
 			path = ArtistsGrid;
 			sourceTree = "<group>";
@@ -741,6 +741,7 @@
 				2B5F42962B093172005BFAC3 /* PhotoDetailView.swift in Sources */,
 				2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */,
 				2BD3188629F29B070059F9A8 /* AppointmentsView.swift in Sources */,
+				2BC8AC072B0CFE7100B91B0C /* ArtistsGridDetailView.swift in Sources */,
 				2BC8AC052B0C8BEC00B91B0C /* ArtistsGrid.swift in Sources */,
 				2BD3189F29F2C0CD0059F9A8 /* HistoryView.swift in Sources */,
 				2BD3189729F2B6410059F9A8 /* Modifiers.swift in Sources */,
@@ -775,7 +776,6 @@
 				2B7B78942AF4274800284DF7 /* AppointmentDetailViewTip.swift in Sources */,
 				2B5443A52AF1750B00521104 /* ArtistFormView.swift in Sources */,
 				2BC420202AED3522003838D3 /* TJTabView+Extensions.swift in Sources */,
-				2B5F42982B09354C005BFAC3 /* PhotoDeleteModal.swift in Sources */,
 				2BF6BD622A86866A006A7602 /* HistoryTip.swift in Sources */,
 				2BF6BD602A8685B4006A7602 /* HomeTip.swift in Sources */,
 				2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */,

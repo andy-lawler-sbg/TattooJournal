@@ -29,38 +29,46 @@ struct ArtistsGrid: View {
 
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 7) {
-                ForEach(artists) { artist in
-                    ZStack {
-                        if let image = image(for: artist) {
-                            image
-                                .resizable()
-                        } else {
-                            RoundedRectangle(cornerRadius: 10)
-                                .background(.white)
-                                .foregroundStyle(LinearGradient(colors: [themeHandler.appColor, themeHandler.appColor.opacity(0.75)],
-                                                                startPoint: .top,
-                                                                endPoint: .bottom))
-                        }
-                        VStack {
-                            Spacer()
-                            VStack {
-                                Text(artist.name)
-                                    .bold()
-                                    .font(hasImage(for: artist) ? .caption2 : .largeTitle)
-                                    .foregroundStyle(hasImage(for: artist) ? themeHandler.appColor : .white)
-                                    .multilineTextAlignment(hasImage(for: artist) ? .center : .trailing)
-                                    .frame(maxWidth: .infinity, alignment: hasImage(for: artist) ? .center : .trailing)
+            if artists.isEmpty {
+                Text("You have no artists. You might want to add some?")
+            } else {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 7) {
+                    ForEach(artists) { artist in
+                        NavigationLink {
+                            ArtistsGridDetailView(viewModel: .init(artist: artist))
+                        } label: {
+                            ZStack {
+                                if let image = image(for: artist) {
+                                    image
+                                        .resizable()
+                                } else {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .background(.white)
+                                        .foregroundStyle(LinearGradient(colors: [themeHandler.appColor, themeHandler.appColor.opacity(0.75)],
+                                                                        startPoint: .top,
+                                                                        endPoint: .bottom))
+                                }
+                                VStack {
+                                    Spacer()
+                                    VStack {
+                                        Text(artist.name)
+                                            .bold()
+                                            .font(hasImage(for: artist) ? .caption2 : .largeTitle)
+                                            .foregroundStyle(hasImage(for: artist) ? themeHandler.appColor : .white)
+                                            .multilineTextAlignment(hasImage(for: artist) ? .center : .trailing)
+                                            .frame(maxWidth: .infinity, alignment: hasImage(for: artist) ? .center : .trailing)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .padding(5)
+                                    .background(Color(.cellBackground).opacity(hasImage(for: artist) ? 0.75 : 0))
+                                }
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding(5)
-                            .background(Color(.cellBackground).opacity(hasImage(for: artist) ? 0.75 : 0))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .aspectRatio(1, contentMode: .fit)
                         }
                     }
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .aspectRatio(1, contentMode: .fit)
-                }
-            }.padding(.horizontal, 7)
+                }.padding(.horizontal, 7)
+            }
         }
     }
 }
