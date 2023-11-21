@@ -6,11 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
+import PhotosUI
 
 struct ReviewAppointmentView: View {
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
     @EnvironmentObject private var themeHandler: AppThemeHandler
+
+    @State private var imageSelected: PhotosPickerItem? = nil
+    @State private var appointmentForSelectedImage: Appointment? = nil
 
     var viewModel: ReviewAppointmentViewModel
 
@@ -34,6 +40,17 @@ struct ReviewAppointmentView: View {
                             .padding(.horizontal)
                             .background(themeHandler.appColor.opacity(0.15))
                             .clipShape(.capsule)
+                    }
+                }
+            }
+            .task(id: imageSelected) {
+                if let data = try? await imageSelected?.loadTransferable(type: Data.self) {
+                    let image = TattooImage(image: data, appointment: viewModel.appointments.first)
+                    withAnimation {
+                        context.insert(image)
+                        // add tattooImage and link to Appointment
+                        imageSelected = nil
+                        appointmentForSelectedImage = nil
                     }
                 }
             }
@@ -67,6 +84,25 @@ struct ReviewAppointmentView: View {
                         .foregroundStyle(.secondary)
                         .padding(.bottom, 10)
                     StarRatingView(rating: .constant(1))
+                    if let image = appointment.image, let uiImage = UIImage(data: image.image) {
+                        PhotosPicker(selection: $imageSelected,
+                                     matching: .images,
+                                     photoLibrary: .shared()) {
+                            ZStack {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .frame(width: 50)
+                                Text("Tap to change")
+                            }
+                        }
+                    } else {
+                        PhotosPicker(selection: $imageSelected,
+                                     matching: .images,
+                                     photoLibrary: .shared()) {
+                            Label("Add Image", systemImage: "square.and.arrow.up")
+                                .foregroundStyle(themeHandler.appColor)
+                        }
+                    }
                 }
             }
         }

@@ -27,33 +27,8 @@ struct PhotoJournal: View {
         journalExpanded ? queriedImages : Array(queriedImages.prefix(4))
     }
 
-    var shouldShowExpandButton: Bool {
-        queriedImages.count > 4
-    }
-
     var body: some View {
-        VStack(spacing: 0) {
-            HStack {
-                Label("Journal", systemImage: "photo.stack")
-                    .font(.body)
-                    .bold()
-                    .foregroundStyle(themeHandler.appColor)
-                Spacer()
-                PhotosPicker(selection: $imageSelected,
-                             matching: .images,
-                             photoLibrary: .shared()) {
-                    XMarkButton(icon: "plus")
-                }.opacity(images.isEmpty ? 0.0 : 1.0)
-            }
-            .padding(.leading, 6)
-            .padding(.bottom, 4)
-            VStack {
-                if images.isEmpty {
-                    photosIsEmptyView
-                } else {
-                    hasPhotosView
-                }
-            }
+        photoGrid
             .task(id: imageSelected) {
                 if let data = try? await imageSelected?.loadTransferable(type: Data.self) {
                     let image = TattooImage(image: data)
@@ -76,12 +51,9 @@ struct PhotoJournal: View {
                     .presentationDetents([.height(75)])
                     .presentationDragIndicator(.visible)
             }
-
-        }
-        .padding(.horizontal, 5)
     }
 
-    private var hasPhotosView: some View {
+    private var photoGrid: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 7) {
                 ForEach(images) { tattooImage in
@@ -124,10 +96,19 @@ struct PhotoJournal: View {
                             }
                     }
                 }
-            }
-            .padding(.horizontal, 7)
+                if images.isEmpty {
+                    imageUploadView
+                    imageUploadView
+                } else if images.count == 1 {
+                    imageUploadView
+                }
+            }.padding(.horizontal, 7)
 
-            if shouldShowExpandButton {
+            if images.count < 2 {
+                emptyTextView
+            }
+
+            if images.count > 4 {
                 Button {
                     withAnimation(.easeOut) {
                         journalExpanded.toggle()
@@ -151,49 +132,71 @@ struct PhotoJournal: View {
         }
     }
 
-    private var emptyImageView: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .foregroundStyle(Color(.cellBackground))
-                .shadow(color: .black.opacity(0.025), radius: 2, x: 5, y: 5)
-            Image(systemName: "photo.on.rectangle")
-                .resizable()
-                .scaledToFit()
-                .padding(50)
-                .foregroundStyle(themeHandler.appColor)
-        }.aspectRatio(1, contentMode: .fit)
+    var emptyTextView: some View {
+        emptyText
+            .multilineTextAlignment(.center)
+            .font(.caption)
+            .foregroundColor(themeHandler.appColor)
+            .padding()
+            .padding(.horizontal)
+            .background(themeHandler.appColor.opacity(0.1))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .padding()
     }
 
-    private var photosIsEmptyView: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 7) {
-                emptyImageView
-                emptyImageView
-            }
-            .padding(.horizontal, 7)
+    var emptyText: some View {
+        boldText + regularText
+    }
 
-            Text("You have no images uploaded. Tap here to add some pictures of your previous tattoos.")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 30)
-                .padding(.vertical)
+    var regularText: Text {
+        Text(images.isEmpty ?
+            ", Tap above to add some pictures of your previous tattoos." :
+            ", maybe upload some more?"
+        )
+    }
 
-            PhotosPicker(selection: $imageSelected,
-                         matching: .images,
-                         photoLibrary: .shared()) {
-                Label("Add Images", systemImage: "square.and.arrow.up.on.square")
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .font(.caption)
-                    .foregroundColor(themeHandler.appColor)
-                    .padding()
-                    .frame(width: 200)
-                    .background(themeHandler.appColor.opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .shadow(color: .black.opacity(0.05), radius: 5, y: 3)
+    var boldText: Text {
+        Text(images.isEmpty ?
+            "You have no images uploaded" :
+            "You have one image uploaded"
+        ).bold()
+    }
+
+    private var imageUploadView: some View {
+        PhotosPicker(selection: $imageSelected,
+                     matching: .images,
+                     photoLibrary: .shared()) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundStyle(Color(.cellBackground))
+                    .shadow(color: themeHandler.appColor,
+                            radius: 0,
+                            x: 0,
+                            y: 2)
+                VStack(spacing: 20) {
+                    Image(systemName: "square.and.arrow.up.on.square")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundStyle(themeHandler.appColor)
+                    Text("Add Image")
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .font(.caption)
+                        .foregroundColor(themeHandler.appColor)
+                }
+                .padding(50)
             }
+            .aspectRatio(1, contentMode: .fit)
+        }
+    }
+}
+
+extension PhotoJournal {
+    var headerViewButton: some View {
+        PhotosPicker(selection: $imageSelected,
+                     matching: .images,
+                     photoLibrary: .shared()) {
+            XMarkButton(icon: "plus")
         }
     }
 }

@@ -40,6 +40,8 @@
 		2BC4201C2AED317D003838D3 /* StarRatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4201B2AED317D003838D3 /* StarRatingButton.swift */; };
 		2BC4201E2AED3480003838D3 /* AppEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4201D2AED3480003838D3 /* AppEventHandler.swift */; };
 		2BC420202AED3522003838D3 /* TJTabView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4201F2AED3522003838D3 /* TJTabView+Extensions.swift */; };
+		2BC8AC022B0C8B2E00B91B0C /* HomeScreenContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8AC012B0C8B2E00B91B0C /* HomeScreenContainer.swift */; };
+		2BC8AC052B0C8BEC00B91B0C /* ArtistsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC8AC042B0C8BEC00B91B0C /* ArtistsGrid.swift */; };
 		2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */; };
 		2BD3184A29F275DF0059F9A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3184929F275DF0059F9A8 /* Assets.xcassets */; };
 		2BD3184D29F275DF0059F9A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3184C29F275DF0059F9A8 /* Preview Assets.xcassets */; };
@@ -121,6 +123,8 @@
 		2BC4201B2AED317D003838D3 /* StarRatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingButton.swift; sourceTree = "<group>"; };
 		2BC4201D2AED3480003838D3 /* AppEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEventHandler.swift; sourceTree = "<group>"; };
 		2BC4201F2AED3522003838D3 /* TJTabView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TJTabView+Extensions.swift"; sourceTree = "<group>"; };
+		2BC8AC012B0C8B2E00B91B0C /* HomeScreenContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenContainer.swift; sourceTree = "<group>"; };
+		2BC8AC042B0C8BEC00B91B0C /* ArtistsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsGrid.swift; sourceTree = "<group>"; };
 		2BD3184229F275DD0059F9A8 /* TattooJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TattooJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BD3184529F275DD0059F9A8 /* TattooJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TattooJournalApp.swift; sourceTree = "<group>"; };
 		2BD3184929F275DF0059F9A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -300,7 +304,6 @@
 			children = (
 				2BD3187529F276830059F9A8 /* TJTabView.swift */,
 				2BC4201F2AED3522003838D3 /* TJTabView+Extensions.swift */,
-				2BC420122AED3102003838D3 /* ReviewAppointmentView */,
 				2BD3188B29F2B53E0059F9A8 /* HomeView */,
 				2BD3189229F2B5FA0059F9A8 /* AppointmentsView */,
 				2BD3189D29F2C0C10059F9A8 /* HistoryView */,
@@ -373,6 +376,22 @@
 				2BC4201B2AED317D003838D3 /* StarRatingButton.swift */,
 			);
 			path = StarRatingButton;
+			sourceTree = "<group>";
+		};
+		2BC8AC002B0C8B1900B91B0C /* HomeScreenContainer */ = {
+			isa = PBXGroup;
+			children = (
+				2BC8AC012B0C8B2E00B91B0C /* HomeScreenContainer.swift */,
+			);
+			path = HomeScreenContainer;
+			sourceTree = "<group>";
+		};
+		2BC8AC032B0C8BDE00B91B0C /* ArtistsGrid */ = {
+			isa = PBXGroup;
+			children = (
+				2BC8AC042B0C8BEC00B91B0C /* ArtistsGrid.swift */,
+			);
+			path = ArtistsGrid;
 			sourceTree = "<group>";
 		};
 		2BD3183929F275DD0059F9A8 = {
@@ -448,6 +467,8 @@
 		2BD3188B29F2B53E0059F9A8 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				2BC8AC032B0C8BDE00B91B0C /* ArtistsGrid */,
+				2BC8AC002B0C8B1900B91B0C /* HomeScreenContainer */,
 				2B52D0F12B08167800420C2D /* NextAppointmentView */,
 				2B52D0F02B08165200420C2D /* PhotoJournal */,
 				640B182E2AE70D3F00F5BF1E /* AppointmentSpendingChart */,
@@ -522,6 +543,7 @@
 		2BD3189D29F2C0C10059F9A8 /* HistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				2BC420122AED3102003838D3 /* ReviewAppointmentView */,
 				2B6C8CF429FC053F00A4BA6E /* VisitedShops */,
 				2BD3189E29F2C0CD0059F9A8 /* HistoryView.swift */,
 				2B6C8CF229FBFD8100A4BA6E /* HistoryViewModel.swift */,
@@ -712,12 +734,14 @@
 				2B5443A92AF1753100521104 /* ShopListView.swift in Sources */,
 				2B64D22A2A7D649300090EB6 /* OnboardingPageView.swift in Sources */,
 				2B5443A72AF1751900521104 /* ArtistListView.swift in Sources */,
+				2BC8AC022B0C8B2E00B91B0C /* HomeScreenContainer.swift in Sources */,
 				64EAF4AF2AE5B2B900AFD196 /* NotificationsHandler.swift in Sources */,
 				2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */,
 				2B7F418E2A7FA6F000ADF919 /* Haptics.swift in Sources */,
 				2B5F42962B093172005BFAC3 /* PhotoDetailView.swift in Sources */,
 				2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */,
 				2BD3188629F29B070059F9A8 /* AppointmentsView.swift in Sources */,
+				2BC8AC052B0C8BEC00B91B0C /* ArtistsGrid.swift in Sources */,
 				2BD3189F29F2C0CD0059F9A8 /* HistoryView.swift in Sources */,
 				2BD3189729F2B6410059F9A8 /* Modifiers.swift in Sources */,
 				2BD318A229F2C5120059F9A8 /* AppointmentCell.swift in Sources */,

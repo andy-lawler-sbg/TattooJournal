@@ -21,11 +21,21 @@ struct HomeView: View {
         order: .forward
     ) private var queriedAppointments: [Appointment]
 
+    private let photoJournal = PhotoJournal()
+    private let artistGrid = ArtistsGrid()
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    PhotoJournal()
+                    HomeScreenContainer(viewModel: .init(title: "Artists",
+                                                         systemImage: "paintbrush.pointed.fill",
+                                                         button: EmptyView(),
+                                                         pageContent: artistGrid))
+                    HomeScreenContainer(viewModel: .init(title: "Journal",
+                                                         systemImage: "photo.stack",
+                                                         button: photoJournal.headerViewButton,
+                                                         pageContent: photoJournal))
                 }.padding(.top)
                 Spacer()
             }
