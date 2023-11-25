@@ -10,9 +10,7 @@ import SwiftData
 
 @Observable
 final class ArtistsGridDetailViewModel {
-
     let artist: Artist
-    var appointmentToShowDetailView: Appointment?
 
     init(artist: Artist) {
         self.artist = artist
@@ -38,31 +36,10 @@ struct ArtistsGridDetailView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(filteredAppointments) { appointment in
-                    AppointmentCell(viewModel: .init(appointment: appointment, cellType: cellType(for: appointment), didTapAppointmentCell: {
-                        withAnimation {
-                            viewModel.appointmentToShowDetailView = appointment
-                        }
-                    }))
-                    .listRowSeparator(.hidden)
-                }.listRowBackground(Color.clear)
-            }
-            .listStyle(.plain)
-            .scrollIndicators(.hidden)
-            .listRowSpacing(-5)
+            AppointmentListView(viewModel: .init(appointments: filteredAppointments))
         }
         .background(Color(.background))
         .navigationTitle(viewModel.artist.name)
-        .sheet(item: $viewModel.appointmentToShowDetailView) {
-            withAnimation {
-                viewModel.appointmentToShowDetailView = nil
-            }
-        } content: { appointment in
-            AppointmentPopUpView(viewModel: .init(appointment: appointment, type: .appointments))
-                .presentationDetents([.height(620), .large])
-                .presentationDragIndicator(.visible)
-        }
     }
 }
 

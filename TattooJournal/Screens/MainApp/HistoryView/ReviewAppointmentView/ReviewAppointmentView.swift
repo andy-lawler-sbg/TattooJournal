@@ -21,19 +21,19 @@ struct ReviewAppointmentView: View {
 
     @Query private var tattooImages: [TattooImage]
 
-    var viewModel: ReviewAppointmentViewModel
+    @Bindable var appointment: Appointment
 
     var body: some View {
         NavigationStack {
             listView
-                .navigationTitle(formattedDateWithoutTime(for: viewModel.appointment.date))
+                .navigationTitle(formattedDateWithoutTime(for: appointment.date))
                 .background(Color(.background))
                 .task(id: imageSelected) {
                     if let data = try? await imageSelected?.loadTransferable(type: Data.self) {
-                        let images = tattooImages.filter { $0.appointment == viewModel.appointment }
+                        let images = tattooImages.filter { $0.appointment == appointment }
                         images.forEach { context.delete($0) }
 
-                        let image = TattooImage(image: data, appointment: viewModel.appointment)
+                        let image = TattooImage(image: data, appointment: appointment)
                         withAnimation {
                             context.insert(image)
                             // add tattooImage and link to Appointment
@@ -42,10 +42,17 @@ struct ReviewAppointmentView: View {
                         }
                     }
                 }
-                .task(id: starSelected) {
-                    let review = Review(rating: starSelected, appointment: viewModel.appointment)
+                .onChange(of: starSelected, {
+                    guard starSelected != appointment.review?.rating else { return }
+                    if let review = appointment.review {
+                        context.delete(review)
+                    }
+                    let review = Review(rating: starSelected, appointment: appointment)
                     context.insert(review)
-                }
+                })
+        }
+        .onAppear {
+            starSelected = appointment.review?.rating ?? 1
         }
         .overlay(
             Button {
@@ -61,15 +68,15 @@ struct ReviewAppointmentView: View {
     private var listView: some View {
         Form {
             Section {
-                if let artistName = viewModel.appointment.artist?.name {
+                if let artistName = appointment.artist?.name {
                     Text(artistName)
                         .font(.body)
                         .bold()
                 }
-                Text(viewModel.appointment.design)
+                Text(appointment.design)
                     .font(.body)
                 StarRatingView(rating: $starSelected)
-                if let image = viewModel.appointment.image, let uiImage = UIImage(data: image.image) {
+                if let image = appointment.image, let uiImage = UIImage(data: image.image) {
                     PhotosPicker(selection: $imageSelected,
                                  matching: .images,
                                  photoLibrary: .shared()) {

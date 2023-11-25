@@ -35,6 +35,7 @@ struct SectionHeaderView<Content: View>: View {
         }
         .padding(.leading, 6)
         .padding(.bottom, 4)
+        .frame(minHeight: 40)
     }
 }
 

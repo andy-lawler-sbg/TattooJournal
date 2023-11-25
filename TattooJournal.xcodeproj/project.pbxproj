@@ -30,11 +30,12 @@
 		2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6C8CF529FC054C00A4BA6E /* VisitedShops.swift */; };
 		2B7B78922AF41FB700284DF7 /* AppointmentPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B78912AF41FB700284DF7 /* AppointmentPopUpView.swift */; };
 		2B7B78942AF4274800284DF7 /* AppointmentDetailViewTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B78932AF4274800284DF7 /* AppointmentDetailViewTip.swift */; };
+		2B7CB7FF2B122C5000D91340 /* AppointmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CB7FE2B122C5000D91340 /* AppointmentListView.swift */; };
+		2B7CB8012B123A9700D91340 /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CB8002B123A9700D91340 /* Charts.swift */; };
 		2B7F418E2A7FA6F000ADF919 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7F418D2A7FA6F000ADF919 /* Haptics.swift */; };
 		2B9E0C6D2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9E0C6C2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift */; };
 		2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */; };
 		2BC420142AED3120003838D3 /* ReviewAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC420132AED3120003838D3 /* ReviewAppointmentView.swift */; };
-		2BC420162AED312E003838D3 /* ReviewAppointmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC420152AED312E003838D3 /* ReviewAppointmentViewModel.swift */; };
 		2BC420192AED315B003838D3 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC420182AED315B003838D3 /* StarRatingView.swift */; };
 		2BC4201C2AED317D003838D3 /* StarRatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4201B2AED317D003838D3 /* StarRatingButton.swift */; };
 		2BC4201E2AED3480003838D3 /* AppEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC4201D2AED3480003838D3 /* AppEventHandler.swift */; };
@@ -113,11 +114,12 @@
 		2B6C8CF529FC054C00A4BA6E /* VisitedShops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedShops.swift; sourceTree = "<group>"; };
 		2B7B78912AF41FB700284DF7 /* AppointmentPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentPopUpView.swift; sourceTree = "<group>"; };
 		2B7B78932AF4274800284DF7 /* AppointmentDetailViewTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentDetailViewTip.swift; sourceTree = "<group>"; };
+		2B7CB7FE2B122C5000D91340 /* AppointmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListView.swift; sourceTree = "<group>"; };
+		2B7CB8002B123A9700D91340 /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		2B7F418D2A7FA6F000ADF919 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		2B9E0C6C2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentSpendingChartViewModel.swift; sourceTree = "<group>"; };
 		2BB34DB329F2D4C700AC99B3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		2BC420132AED3120003838D3 /* ReviewAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAppointmentView.swift; sourceTree = "<group>"; };
-		2BC420152AED312E003838D3 /* ReviewAppointmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAppointmentViewModel.swift; sourceTree = "<group>"; };
 		2BC420182AED315B003838D3 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		2BC4201B2AED317D003838D3 /* StarRatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingButton.swift; sourceTree = "<group>"; };
 		2BC4201D2AED3480003838D3 /* AppEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEventHandler.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		2B64D21C2A7D519400090EB6 /* MainApp */ = {
 			isa = PBXGroup;
 			children = (
+				2B7CB7FD2B122C3100D91340 /* AppointmentList */,
 				2BD3187529F276830059F9A8 /* TJTabView.swift */,
 				2BC4201F2AED3522003838D3 /* TJTabView+Extensions.swift */,
 				2BD3188B29F2B53E0059F9A8 /* HomeView */,
@@ -342,6 +345,14 @@
 			path = AppointmentPopUpView;
 			sourceTree = "<group>";
 		};
+		2B7CB7FD2B122C3100D91340 /* AppointmentList */ = {
+			isa = PBXGroup;
+			children = (
+				2B7CB7FE2B122C5000D91340 /* AppointmentListView.swift */,
+			);
+			path = AppointmentList;
+			sourceTree = "<group>";
+		};
 		2B7F418C2A7FA6EB00ADF919 /* Haptics */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,7 +366,6 @@
 			children = (
 				2BC420172AED314D003838D3 /* StarRatingView */,
 				2BC420132AED3120003838D3 /* ReviewAppointmentView.swift */,
-				2BC420152AED312E003838D3 /* ReviewAppointmentViewModel.swift */,
 			);
 			path = ReviewAppointmentView;
 			sourceTree = "<group>";
@@ -582,6 +592,7 @@
 			children = (
 				640B182F2AE70D5A00F5BF1E /* AppointmentSpendingChart.swift */,
 				2B9E0C6C2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift */,
+				2B7CB8002B123A9700D91340 /* Charts.swift */,
 			);
 			path = AppointmentSpendingChart;
 			sourceTree = "<group>";
@@ -732,6 +743,7 @@
 				2BC420192AED315B003838D3 /* StarRatingView.swift in Sources */,
 				64EAF4B32AE5B54600AFD196 /* UpdateAppointmentForm.swift in Sources */,
 				2B5443A92AF1753100521104 /* ShopListView.swift in Sources */,
+				2B7CB7FF2B122C5000D91340 /* AppointmentListView.swift in Sources */,
 				2B64D22A2A7D649300090EB6 /* OnboardingPageView.swift in Sources */,
 				2B5443A72AF1751900521104 /* ArtistListView.swift in Sources */,
 				2BC8AC022B0C8B2E00B91B0C /* HomeScreenContainer.swift in Sources */,
@@ -762,7 +774,6 @@
 				2B9E0C6D2AE7932F000D50DB /* AppointmentSpendingChartViewModel.swift in Sources */,
 				2BE240BD2AFD80A60019540E /* UserPreferences.swift in Sources */,
 				2BE240B72AFD80560019540E /* Artist.swift in Sources */,
-				2BC420162AED312E003838D3 /* ReviewAppointmentViewModel.swift in Sources */,
 				640B18302AE70D5A00F5BF1E /* AppointmentSpendingChart.swift in Sources */,
 				2B5443AC2AF181E900521104 /* PersistedDataList.swift in Sources */,
 				2BB34DB429F2D4C700AC99B3 /* HomeViewModel.swift in Sources */,
@@ -780,6 +791,7 @@
 				2BF6BD602A8685B4006A7602 /* HomeTip.swift in Sources */,
 				2BD3184629F275DD0059F9A8 /* TattooJournalApp.swift in Sources */,
 				64EAF4AD2AE5B28700AFD196 /* AppointmentFormView.swift in Sources */,
+				2B7CB8012B123A9700D91340 /* Charts.swift in Sources */,
 				2B5443AF2AF24DDF00521104 /* ShopMapView.swift in Sources */,
 				2BE240BB2AFD805E0019540E /* Review.swift in Sources */,
 				2B6C8CF329FBFD8100A4BA6E /* HistoryViewModel.swift in Sources */,

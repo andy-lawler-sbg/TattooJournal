@@ -59,22 +59,6 @@ struct HistoryView: View {
             .sheet(isPresented: $viewModel.shouldShowVisitedShops) {
                 VisitedShops()
             }
-            .sheet(item: $viewModel.selectedAppointment) {
-                withAnimation {
-                    viewModel.selectedAppointment = nil
-                }
-            } content: { appointment in
-                ReviewAppointmentView(viewModel: .init(appointment: appointment))
-                    .presentationDetents([.medium, .large])
-            }
-            .sheet(item: $viewModel.appointmentToShowDetailView) {
-                withAnimation {
-                    viewModel.appointmentToShowDetailView = nil
-                }
-            } content: { appointment in
-                AppointmentPopUpView(viewModel: .init(appointment: appointment, type: .history))
-                    .presentationDetents([.height(550)])
-            }
         }
     }
 
@@ -93,49 +77,10 @@ struct HistoryView: View {
     /// Past Tattoos Live view.  Contains the tip and list
     private var pastTattoosListView: some View {
         VStack {
-            pastTattoosList
-                .mask(LinearGradient(gradient: Gradient(stops: [
-                            .init(color: .black, location: 0.75),
-                            .init(color: .black, location: 0.85),
-                            .init(color: .black, location: 0.95),
-                            .init(color: .clear, location: 1)
-                        ]
-                ), startPoint: .top, endPoint: .bottom))
+            AppointmentListView(viewModel: .init(appointments: queriedAppointments))
             AppointmentsCollapsible(viewModel: .init(appointments: appointments, type: .history))
             Spacer()
         }
-    }
-
-    /// List showing the appointments you have completed
-    private var pastTattoosList: some View {
-        List {
-            ForEach(appointments) { appointment in
-                AppointmentCell(viewModel: .init(appointment: appointment, cellType: .history, reviewAccessoryIconTap: {
-                    withAnimation {
-                        viewModel.selectedAppointment = appointment
-                    }
-                }, didTapAppointmentCell: {
-                    withAnimation {
-                        viewModel.appointmentToShowDetailView = appointment
-                    }
-                }))
-                .listRowSeparator(.hidden)
-                .swipeActions {
-                    Button(role: .destructive) {
-                        withAnimation {
-                            context.delete(appointment)
-                        }
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                            .symbolVariant(.fill)
-                    }
-                }
-            }
-            .listRowBackground(Color.clear)
-        }
-        .listStyle(.plain)
-        .scrollIndicators(.hidden)
-        .listRowSpacing(-5)
     }
 
     // MARK: - Empty State View

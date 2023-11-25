@@ -23,11 +23,16 @@ struct HomeView: View {
 
     private let photoJournal = PhotoJournal()
     private let artistGrid = ArtistsGrid()
+    private let charts = Charts()
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    HomeScreenContainer(viewModel: .init(title: "Data",
+                                                         systemImage: "waveform.path.ecg.rectangle",
+                                                         button: EmptyView(), 
+                                                         pageContent: charts))
                     HomeScreenContainer(viewModel: .init(title: "Artists",
                                                          systemImage: "paintbrush.pointed.fill",
                                                          button: EmptyView(),

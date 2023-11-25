@@ -15,9 +15,6 @@ final class AppointmentsViewModel {
 
     var shouldShowAppointmentsForm = false
     var shouldShowArtistAndShopList = false
-    
-    var appointmentToEdit: Appointment?
-    var appointmentToShowDetailView: Appointment?
 
     var shouldShowNotificationsAlert = false
     var notificationAlertType: NotificationsHandler.AppointmentNotificationAlertType = .enabled

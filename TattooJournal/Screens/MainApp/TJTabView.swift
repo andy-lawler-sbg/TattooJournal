@@ -56,7 +56,7 @@ struct TJTabView: View {
             UserDefaults.standard.removeObject(forKey: Constants.lastClosedAppKey)
         }) {
             if let filtered {
-                ReviewAppointmentView(viewModel: .init(appointment: filtered))
+                ReviewAppointmentView(appointment: filtered)
                     .presentationDetents([.medium, .large])
             }
         }

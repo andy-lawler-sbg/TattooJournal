@@ -68,24 +68,8 @@ struct AppointmentsView: View {
             .sheet(isPresented: $viewModel.shouldShowArtistAndShopList) {
                 PersistedDataList()
             }
-            .sheet(item: $viewModel.appointmentToEdit) {
-                withAnimation {
-                    viewModel.appointmentToEdit = nil
-                }
-            } content: { appointment in
-                UpdateAppointmentForm(appointment: appointment)
-            }
             .onAppear {
                 viewModel.setup(appEventHandler: appEventHandler)
-            }
-            .sheet(item: $viewModel.appointmentToShowDetailView) {
-                withAnimation {
-                    viewModel.appointmentToShowDetailView = nil
-                }
-            } content: { appointment in
-                AppointmentPopUpView(viewModel: .init(appointment: appointment, type: .appointments))
-                    .presentationDetents([.height(620), .large])
-                    .presentationDragIndicator(.visible)
             }
             .alert(viewModel.notificationAlertType.alertTitle,
                    isPresented: $viewModel.shouldShowNotificationsAlert, actions: {
@@ -127,14 +111,7 @@ struct AppointmentsView: View {
         VStack {
             appointmentsCollapsible
                 .padding(.top, 10)
-            appointmentsList
-                .mask(LinearGradient(gradient: Gradient(stops: [
-                            .init(color: .black, location: 0.75),
-                            .init(color: .black, location: 0.85),
-                            .init(color: .black, location: 0.95),
-                            .init(color: .clear, location: 1)
-                        ]
-                ), startPoint: .top, endPoint: .bottom))
+            AppointmentListView(viewModel: .init(appointments: queriedAppointments))
             Spacer()
         }
         .overlay(alignment: .bottomTrailing) {
@@ -152,43 +129,6 @@ struct AppointmentsView: View {
             }
             .onTapGesture(perform: Haptics.shared.successHaptic)
         }
-    }
-
-    /// List showing the appointments you have coming up.
-    private var appointmentsList: some View {
-        List {
-            ForEach(appointments) { appointment in
-                AppointmentCell(viewModel: .init(appointment: appointment, cellType: .upcoming, didTapAppointmentCell: {
-                    withAnimation {
-                        viewModel.appointmentToShowDetailView = appointment
-                    }
-                }))
-                .listRowSeparator(.hidden)
-                .swipeActions(allowsFullSwipe: false) {
-                    Button(role: .destructive) {
-                        withAnimation(.easeOut(duration: 10)) {
-                            notificationsHandler.deleteScheduledNotification(for: appointment)
-                            context.delete(appointment)
-                        }
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                            .symbolVariant(.fill)
-                    }
-                    Button {
-                        withAnimation(.linear) {
-                            viewModel.appointmentToEdit = appointment
-                        }
-                    } label: {
-                        Label("Edit", systemImage: "pencil.and.list.clipboard")
-                            .symbolVariant(.fill)
-                    }
-                    .tint(.yellow)
-                }
-            }.listRowBackground(Color.clear)
-        }
-        .listStyle(.plain)
-        .scrollIndicators(.hidden)
-        .listRowSpacing(-5)
     }
 
     /// Collapsible popup which shows the total cost of all appointments with some details about the cost.

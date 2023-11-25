@@ -80,7 +80,7 @@ struct PhotoJournal: View {
                                         Image(systemName: "hand.tap.fill")
                                             .imageScale(.small)
                                             .frame(width: 44, height: 44)
-                                            .foregroundStyle(themeHandler.appColor)
+                                            .foregroundStyle(Color(.oppositeStyle))
                                     }.onTapGesture {
                                         imageTapped = tattooImage
                                     }
@@ -94,7 +94,7 @@ struct PhotoJournal: View {
                                     Image(systemName: "xmark.bin.fill")
                                         .imageScale(.small)
                                         .frame(width: 44, height: 44)
-                                        .foregroundStyle(Color(.oppositeStyle))
+                                        .foregroundStyle(themeHandler.appColor)
                                 }
                                 .onTapGesture {
                                     withAnimation {
