@@ -64,7 +64,8 @@ struct HistoryView: View {
                     viewModel.selectedAppointment = nil
                 }
             } content: { appointment in
-                ReviewAppointmentView(viewModel: .init(appointments: [appointment]))
+                ReviewAppointmentView(viewModel: .init(appointment: appointment))
+                    .presentationDetents([.medium, .large])
             }
             .sheet(item: $viewModel.appointmentToShowDetailView) {
                 withAnimation {

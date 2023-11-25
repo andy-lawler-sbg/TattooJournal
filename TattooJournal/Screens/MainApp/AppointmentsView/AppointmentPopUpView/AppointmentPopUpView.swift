@@ -104,6 +104,13 @@ struct AppointmentPopUpView: View {
         .onAppear {
             viewModel.userPreferences = userPreferences
         }
+        .overlay(
+            Button {
+                dismiss()
+            } label: {
+               XMarkButton()
+            }, alignment: .topTrailing
+        )
     }
 }
 

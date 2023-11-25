@@ -17,102 +17,93 @@ struct ReviewAppointmentView: View {
 
     @State private var imageSelected: PhotosPickerItem? = nil
     @State private var appointmentForSelectedImage: Appointment? = nil
+    @State private var starSelected: Int = 1
+
+    @Query private var tattooImages: [TattooImage]
 
     var viewModel: ReviewAppointmentViewModel
 
     var body: some View {
         NavigationStack {
-            VStack {
-                descriptionText
-                listView
-                Spacer()
-            }
-            .navigationTitle(Constants.title)
-            .background(Color(.background))
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Text(Constants.closeText)
-                            .foregroundStyle(themeHandler.appColor)
-                            .padding(.vertical, 7)
-                            .padding(.horizontal)
-                            .background(themeHandler.appColor.opacity(0.15))
-                            .clipShape(.capsule)
+            listView
+                .navigationTitle(formattedDateWithoutTime(for: viewModel.appointment.date))
+                .background(Color(.background))
+                .task(id: imageSelected) {
+                    if let data = try? await imageSelected?.loadTransferable(type: Data.self) {
+                        let images = tattooImages.filter { $0.appointment == viewModel.appointment }
+                        images.forEach { context.delete($0) }
+
+                        let image = TattooImage(image: data, appointment: viewModel.appointment)
+                        withAnimation {
+                            context.insert(image)
+                            // add tattooImage and link to Appointment
+                            imageSelected = nil
+                            appointmentForSelectedImage = nil
+                        }
                     }
                 }
-            }
-            .task(id: imageSelected) {
-                if let data = try? await imageSelected?.loadTransferable(type: Data.self) {
-                    let image = TattooImage(image: data, appointment: viewModel.appointments.first)
-                    withAnimation {
-                        context.insert(image)
-                        // add tattooImage and link to Appointment
-                        imageSelected = nil
-                        appointmentForSelectedImage = nil
-                    }
+                .task(id: starSelected) {
+                    let review = Review(rating: starSelected, appointment: viewModel.appointment)
+                    context.insert(review)
                 }
-            }
         }
+        .overlay(
+            Button {
+                dismiss()
+            } label: {
+               XMarkButton()
+            }, alignment: .topTrailing
+        )
     }
 
     // MARK: - Views
 
-    private var descriptionText: some View {
-        Text(Constants.description)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .multilineTextAlignment(.center)
-            .font(.body)
-            .foregroundStyle(.primary)
-    }
-
     private var listView: some View {
-        List {
-            ForEach(viewModel.appointments) { appointment in
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(appointment.artist?.name ?? "")
-                        .font(.title3)
-                        .bold()
-                        .foregroundStyle(themeHandler.appColor)
-                    Text(formattedDate(for: appointment.date))
-                        .font(.subheadline)
-                        .foregroundStyle(.primary)
-                    Text(appointment.design)
+        Form {
+            Section {
+                if let artistName = viewModel.appointment.artist?.name {
+                    Text(artistName)
                         .font(.body)
-                        .foregroundStyle(.secondary)
-                        .padding(.bottom, 10)
-                    StarRatingView(rating: .constant(1))
-                    if let image = appointment.image, let uiImage = UIImage(data: image.image) {
-                        PhotosPicker(selection: $imageSelected,
-                                     matching: .images,
-                                     photoLibrary: .shared()) {
-                            ZStack {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                Image(systemName: "square.and.arrow.up")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30)
-                                    .foregroundStyle(themeHandler.appColor)
-                                    .bold()
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                                    .padding(10)
-                            }
-                            .frame(width: 100)
+                        .bold()
+                }
+                Text(viewModel.appointment.design)
+                    .font(.body)
+                StarRatingView(rating: $starSelected)
+                if let image = viewModel.appointment.image, let uiImage = UIImage(data: image.image) {
+                    PhotosPicker(selection: $imageSelected,
+                                 matching: .images,
+                                 photoLibrary: .shared()) {
+                        ZStack {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
-                    } else {
-                        PhotosPicker(selection: $imageSelected,
-                                     matching: .images,
-                                     photoLibrary: .shared()) {
-                            Label("Add Image", systemImage: "square.and.arrow.up")
-                                .foregroundStyle(themeHandler.appColor)
+                        .frame(width: 200)
+                        .overlay(alignment: .bottomTrailing) {
+                            ZStack {
+                                Circle()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundStyle(Color(.cellBackground))
+                                Image(systemName: "square.and.arrow.up")
+                                    .imageScale(.small)
+                                    .frame(width: 44, height: 44)
+                                    .foregroundStyle(Color(.oppositeStyle))
+                            }
                         }
                     }
+                } else {
+                    PhotosPicker(selection: $imageSelected,
+                                 matching: .images,
+                                 photoLibrary: .shared()) {
+                        Label("Add Image", systemImage: "square.and.arrow.up")
+                            .foregroundStyle(themeHandler.appColor)
+                    }
                 }
+            } header: {
+                Text(Constants.header)
+            } footer: {
+                Text(Constants.footer)
             }
         }
     }
@@ -125,12 +116,20 @@ struct ReviewAppointmentView: View {
         formatter1.timeStyle = .short
         return formatter1.string(from: date)
     }
+
+    private func formattedDateWithoutTime(for date: Date) -> String {
+        let formatter1 = DateFormatter()
+        formatter1.dateStyle = .full
+        formatter1.timeStyle = .none
+        return formatter1.string(from: date)
+    }
 }
 
 private extension ReviewAppointmentView {
     enum Constants {
         static let title = "Review"
         static let closeText = "Close"
-        static let description = "You have had some appointments since you last entered the app. Would you like to review how they went?"
+        static let header = "Review"
+        static let footer = "You have had an appointment since you last visited the app, would you like to review it?"
     }
 }

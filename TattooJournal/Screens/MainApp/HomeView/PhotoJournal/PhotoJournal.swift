@@ -81,15 +81,8 @@ struct PhotoJournal: View {
                                             .imageScale(.small)
                                             .frame(width: 44, height: 44)
                                             .foregroundStyle(themeHandler.appColor)
-                                    }                      
-                                    .onTapGesture {
-                                        withAnimation {
-                                            if tattooImage.appointment == nil {
-                                                imageTappedToScale = tattooImage
-                                            } else {
-                                                imageTapped = tattooImage
-                                            }
-                                        }
+                                    }.onTapGesture {
+                                        imageTapped = tattooImage
                                     }
                                 }
                             }
@@ -101,7 +94,7 @@ struct PhotoJournal: View {
                                     Image(systemName: "xmark.bin.fill")
                                         .imageScale(.small)
                                         .frame(width: 44, height: 44)
-                                        .foregroundStyle(.white)
+                                        .foregroundStyle(Color(.oppositeStyle))
                                 }
                                 .onTapGesture {
                                     withAnimation {
@@ -124,6 +117,11 @@ struct PhotoJournal: View {
                                 }, message: {
                                     Text("Are you sure you want to delete this image?")
                                 })
+                            }
+                            .onTapGesture {
+                                withAnimation {
+                                    imageTappedToScale = tattooImage
+                                }
                             }
                     }
                 }

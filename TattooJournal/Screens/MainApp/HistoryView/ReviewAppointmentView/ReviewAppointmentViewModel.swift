@@ -9,9 +9,9 @@ import SwiftUI
 
 @Observable
 final class ReviewAppointmentViewModel {
-    var appointments: [Appointment]
+    var appointment: Appointment
 
-    init(appointments: [Appointment]) {
-        self.appointments = appointments
+    init(appointment: Appointment) {
+        self.appointment = appointment
     }
 }
