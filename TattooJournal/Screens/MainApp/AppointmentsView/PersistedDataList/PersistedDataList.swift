@@ -32,55 +32,51 @@ struct PersistedDataList: View {
             VStack {
                 descriptionText
                 List {
-                    if !artists.isEmpty {
-                        NavigationLink {
-                            artistListView
-                        } label: {
-                            HStack(spacing: 10) {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .foregroundStyle(Color.pink)
-                                    Image(systemName: Constants.artistIcon)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .foregroundStyle(.white)
-                                        .padding(8)
-                                }
-                                .frame(width: 35, height: 35)
-                                Text(Constants.artistText)
-                                    .font(.headline)
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    NavigationLink {
+                        artistListView
+                    } label: {
+                        HStack(spacing: 10) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundStyle(Color.pink)
+                                Image(systemName: Constants.artistIcon)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .foregroundStyle(.white)
+                                    .padding(8)
                             }
-                            .padding(.vertical, 2)
+                            .frame(width: 35, height: 35)
+                            Text(Constants.artistText)
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         }
+                        .padding(.vertical, 2)
                     }
 
-                    if !shops.isEmpty {
-                        NavigationLink {
-                            shopListView
-                        } label: {
-                            HStack(spacing: 10) {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .foregroundStyle(Color.blue)
-                                    Image(systemName: Constants.shopIcon)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .foregroundStyle(.white)
-                                        .padding(8)
-                                }
-                                .frame(width: 35, height: 35)
-                                Text(Constants.shopText)
-                                    .font(.headline)
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    NavigationLink {
+                        shopListView
+                    } label: {
+                        HStack(spacing: 10) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundStyle(Color.blue)
+                                Image(systemName: Constants.shopIcon)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .foregroundStyle(.white)
+                                    .padding(8)
                             }
-                            .padding(.vertical, 2)
+                            .frame(width: 35, height: 35)
+                            Text(Constants.shopText)
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         }
+                        .padding(.vertical, 2)
                     }
                 }
             }
             .background(Color(.background))
-            .navigationTitle("Saved Information")
+            .navigationTitle("Saved Data")
         }
         .overlay(
             Button {

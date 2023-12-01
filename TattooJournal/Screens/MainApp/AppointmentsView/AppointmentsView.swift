@@ -49,17 +49,15 @@ struct AppointmentsView: View {
             .background(Color(.background))
             .navigationTitle(Constants.title)
             .toolbar {
-                if !artists.isEmpty || !shops.isEmpty {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            withAnimation {
-                                viewModel.shouldShowArtistAndShopList = true
-                            }
-                        } label: {
-                            NavBarItem(imageName: Constants.ImageNames.saved)
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        withAnimation {
+                            viewModel.shouldShowArtistAndShopList = true
                         }
-                        .onTapGesture(perform: Haptics.shared.successHaptic)
+                    } label: {
+                        NavBarItem(imageName: Constants.ImageNames.saved)
                     }
+                    .onTapGesture(perform: Haptics.shared.successHaptic)
                 }
             }
             .sheet(isPresented: $viewModel.shouldShowAppointmentsForm) {

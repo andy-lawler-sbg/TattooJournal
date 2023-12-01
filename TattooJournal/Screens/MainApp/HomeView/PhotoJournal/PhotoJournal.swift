@@ -200,15 +200,15 @@ struct PhotoJournal: View {
 
     var regularText: Text {
         Text(images.isEmpty ?
-            ", Tap above to add some pictures of your previous tattoos." :
-            ", maybe upload some more?"
+             ", Tap above to add some pictures of your previous tattoos." :
+                ", maybe upload some more?"
         )
     }
 
     var boldText: Text {
         Text(images.isEmpty ?
-            "You have no images uploaded" :
-            "You have one image uploaded"
+             "You have no images uploaded" :
+                "You have one image uploaded"
         ).bold()
     }
 
@@ -246,46 +246,71 @@ struct PhotoJournal: View {
 }
 
 struct ArtistSelectionSheet: View {
-    
+
     @Environment(\.modelContext) private var context
     @EnvironmentObject private var themeHandler: AppThemeHandler
     @Query private var artists: [Artist]
     @State private var selectedArtist: Artist? = nil
+    @State private var showArtistForm = false
     @Bindable var tattooImage: TattooImage
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(artists) { artist in
-                    HStack {
-                        Text(artist.name)
-                        Spacer()
-                        Button {
-                            selectedArtist = artist
-                        } label: {
-                            ZStack {
-                                Circle()
-                                    .foregroundStyle(selectedArtist == artist ? themeHandler.appColor : Color(.background))
-                                    .shadow(color: .black.opacity(0.1), radius: 5)
-                                if selectedArtist == artist {
-                                    Image(systemName: "checkmark")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .bold()
-                                        .frame(width: 15, height: 15)
-                                        .foregroundStyle(.white)
+            ZStack {
+                Color(.background)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .ignoresSafeArea()
+                VStack {
+                    if artists.isEmpty {
+                        Text("No Artists")
+                    } else {
+                        List {
+                            ForEach(artists) { artist in
+                                HStack {
+                                    Text(artist.name)
+                                    Spacer()
+                                    Button {
+                                        selectedArtist = artist
+                                    } label: {
+                                        ZStack {
+                                            Circle()
+                                                .foregroundStyle(selectedArtist == artist ? themeHandler.appColor : Color(.background))
+                                                .shadow(color: .black.opacity(0.1), radius: 5)
+                                            if selectedArtist == artist {
+                                                Image(systemName: "checkmark")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .bold()
+                                                    .frame(width: 15, height: 15)
+                                                    .foregroundStyle(.white)
+                                            }
+                                        }
+                                        .frame(width: 30, height: 30)
+                                    }
                                 }
+                                .padding(.vertical, 10)
                             }
-                            .frame(width: 30, height: 30)
                         }
                     }
-                    .padding(.vertical, 10)
                 }
+                .onChange(of: selectedArtist) {
+                    print(selectedArtist?.name)
+                }
+                .navigationTitle("Artist Selection")
+                .navigationBarTitleDisplayMode(.automatic)
             }
-            .onChange(of: selectedArtist) {
-                print(selectedArtist?.name)
-            }
-            .navigationTitle("Artist Selection")
         }
+        .sheet(isPresented: $showArtistForm) {
+            ArtistForm()
+                .presentationDetents([.height(270), .medium])
+                .presentationDragIndicator(.visible)
+        }
+        .overlay(
+            Button {
+                showArtistForm = true
+            } label: {
+                XMarkButton(icon: "plus")
+            }, alignment: .topTrailing
+        )
     }
 }
