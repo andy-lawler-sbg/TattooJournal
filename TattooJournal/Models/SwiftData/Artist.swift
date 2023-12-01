@@ -31,7 +31,6 @@ final class Artist: Codable {
     enum CodingKeys: String, CodingKey {
         case name
         case instagramHandle
-        case appointment
         case appointments
     }
 

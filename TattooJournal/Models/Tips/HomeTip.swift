@@ -10,14 +10,10 @@ import TipKit
 
 struct HomeTip: Tip {
     var title: Text {
-        Text("Hello")
+        Text("Welcome")
     }
 
     var message: Text? {
-        Text("Welcome to TattooJournal. Follow the steps below to get started.")
-    }
-
-    var asset: Image? {
-        Image(systemName: "hand.wave")
+        Text("Below you will find ways to store memories and find out more about your tattoos.")
     }
 }

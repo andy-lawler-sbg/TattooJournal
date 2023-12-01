@@ -98,8 +98,6 @@ struct AppointmentPopUpView: View {
             .navigationTitle(viewModel.pageTitle)
             .navigationBarTitleDisplayMode(.large)
             .background(Color(.background))
-            .popoverTip(AppointmentDetailViewTip(type: viewModel.type))
-            .tipBackground(Color(.cellBackground))
         }
         .onAppear {
             viewModel.userPreferences = userPreferences

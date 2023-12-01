@@ -14,6 +14,7 @@ final class HomeViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     var shouldShowSettingsScreen = false
+    var shouldShowArtistForm = false
 
     func setup(appEventHandler: AppEventHandler) {
         self.appEventHandler = appEventHandler

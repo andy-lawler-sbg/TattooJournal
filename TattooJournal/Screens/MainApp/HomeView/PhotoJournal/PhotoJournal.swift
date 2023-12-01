@@ -18,7 +18,8 @@ struct PhotoJournal: View {
     @State private var journalExpanded = false
 
     @State private var imageTappedToScale: TattooImage? = nil
-    @State private var imageTapped: TattooImage? = nil
+    @State private var imageToShowAppointmentDetail: TattooImage? = nil
+    @State private var imageToShowArtistSelection: TattooImage? = nil
     @State private var imageDeleteAlert: Bool = false
 
     @Query private var queriedImages: [TattooImage]
@@ -48,12 +49,20 @@ struct PhotoJournal: View {
                         }
                     }
                 }
-                .sheet(item: $imageTapped) {
-                    imageTapped = nil
+                .sheet(item: $imageToShowAppointmentDetail) {
+                    imageToShowAppointmentDetail = nil
                 } content: { image in
                     PhotoDetailView(image: image)
                         .presentationDragIndicator(.visible)
                 }
+                .sheet(item: $imageToShowArtistSelection) {
+                    imageToShowArtistSelection = nil
+                } content: { image in
+                    ArtistSelectionSheet(tattooImage: image)
+                        .presentationDetents([.medium])
+                        .presentationDragIndicator(.visible)
+                }
+
         }.padding(.horizontal, 5)
     }
 
@@ -82,7 +91,19 @@ struct PhotoJournal: View {
                                             .frame(width: 44, height: 44)
                                             .foregroundStyle(Color(.oppositeStyle))
                                     }.onTapGesture {
-                                        imageTapped = tattooImage
+                                        imageToShowAppointmentDetail = tattooImage
+                                    }
+                                } else {
+                                    ZStack {
+                                        Circle()
+                                            .frame(width: 30, height: 30)
+                                            .foregroundStyle(Color(.cellBackground))
+                                        Image(systemName: "paintbrush.pointed.fill")
+                                            .imageScale(.small)
+                                            .frame(width: 44, height: 44)
+                                            .foregroundStyle(Color(.oppositeStyle))
+                                    }.onTapGesture {
+                                        imageToShowArtistSelection = tattooImage
                                     }
                                 }
                             }
@@ -222,4 +243,49 @@ struct PhotoJournal: View {
 
 #Preview {
     PhotoJournal()
+}
+
+struct ArtistSelectionSheet: View {
+    
+    @Environment(\.modelContext) private var context
+    @EnvironmentObject private var themeHandler: AppThemeHandler
+    @Query private var artists: [Artist]
+    @State private var selectedArtist: Artist? = nil
+    @Bindable var tattooImage: TattooImage
+
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(artists) { artist in
+                    HStack {
+                        Text(artist.name)
+                        Spacer()
+                        Button {
+                            selectedArtist = artist
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .foregroundStyle(selectedArtist == artist ? themeHandler.appColor : Color(.background))
+                                    .shadow(color: .black.opacity(0.1), radius: 5)
+                                if selectedArtist == artist {
+                                    Image(systemName: "checkmark")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .bold()
+                                        .frame(width: 15, height: 15)
+                                        .foregroundStyle(.white)
+                                }
+                            }
+                            .frame(width: 30, height: 30)
+                        }
+                    }
+                    .padding(.vertical, 10)
+                }
+            }
+            .onChange(of: selectedArtist) {
+                print(selectedArtist?.name)
+            }
+            .navigationTitle("Artist Selection")
+        }
+    }
 }

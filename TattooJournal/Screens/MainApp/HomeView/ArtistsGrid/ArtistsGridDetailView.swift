@@ -26,6 +26,11 @@ struct ArtistsGridDetailView: View {
         appointments.filter { $0.artist == viewModel.artist }
     }
 
+    @Query private var images: [TattooImage]
+    private var filteredImages: [TattooImage] {
+        images.filter({ $0.appointment?.artist == viewModel.artist })
+    }
+
     func cellType(for appointment: Appointment) -> AppointmentCellViewModel.AppointmentCellType {
         if appointment.date > .now {
             return .upcoming
@@ -36,6 +41,19 @@ struct ArtistsGridDetailView: View {
 
     var body: some View {
         NavigationStack {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(filteredImages) { tattooImage in
+                        if let uiImage = UIImage(data: tattooImage.image) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 150)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                    }
+                }.padding(.horizontal)
+            }
             AppointmentListView(viewModel: .init(appointments: filteredAppointments))
         }
         .background(Color(.background))

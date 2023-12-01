@@ -86,7 +86,7 @@ struct ShopListView: View {
                         selectedMapShop = nil
                     }
                 } content: { shop in
-                    EditShopMapView(shop: shop)
+                    ViewShopMap(shop: shop)
                         .presentationDetents([.height(550), .large])
                 }
             }

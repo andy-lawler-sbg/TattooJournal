@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B081C0C29FAF6BD00A86E63 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */; };
+		2B1E921E2B19DAEB00B2B15A /* ArtistForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1E921D2B19DAEB00B2B15A /* ArtistForm.swift */; };
 		2B208AFF2A7D383A000EDCE3 /* AppointmentsCollapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B208AFE2A7D383A000EDCE3 /* AppointmentsCollapsible.swift */; };
 		2B52D0EF2B08125B00420C2D /* PhotoJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52D0EE2B08125B00420C2D /* PhotoJournal.swift */; };
 		2B52D0F32B08168400420C2D /* NextAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52D0F22B08168400420C2D /* NextAppointmentView.swift */; };
@@ -29,7 +30,6 @@
 		2B6C8CF329FBFD8100A4BA6E /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6C8CF229FBFD8100A4BA6E /* HistoryViewModel.swift */; };
 		2B6C8CF629FC054C00A4BA6E /* VisitedShops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6C8CF529FC054C00A4BA6E /* VisitedShops.swift */; };
 		2B7B78922AF41FB700284DF7 /* AppointmentPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B78912AF41FB700284DF7 /* AppointmentPopUpView.swift */; };
-		2B7B78942AF4274800284DF7 /* AppointmentDetailViewTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B78932AF4274800284DF7 /* AppointmentDetailViewTip.swift */; };
 		2B7CB7FF2B122C5000D91340 /* AppointmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CB7FE2B122C5000D91340 /* AppointmentListView.swift */; };
 		2B7CB8012B123A9700D91340 /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7CB8002B123A9700D91340 /* Charts.swift */; };
 		2B7F418E2A7FA6F000ADF919 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7F418D2A7FA6F000ADF919 /* Haptics.swift */; };
@@ -92,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		2B081C0B29FAF6BD00A86E63 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
+		2B1E921D2B19DAEB00B2B15A /* ArtistForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistForm.swift; sourceTree = "<group>"; };
 		2B208AFE2A7D383A000EDCE3 /* AppointmentsCollapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsCollapsible.swift; sourceTree = "<group>"; };
 		2B52D0EE2B08125B00420C2D /* PhotoJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoJournal.swift; sourceTree = "<group>"; };
 		2B52D0F22B08168400420C2D /* NextAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextAppointmentView.swift; sourceTree = "<group>"; };
@@ -113,7 +114,6 @@
 		2B6C8CF229FBFD8100A4BA6E /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		2B6C8CF529FC054C00A4BA6E /* VisitedShops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedShops.swift; sourceTree = "<group>"; };
 		2B7B78912AF41FB700284DF7 /* AppointmentPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentPopUpView.swift; sourceTree = "<group>"; };
-		2B7B78932AF4274800284DF7 /* AppointmentDetailViewTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentDetailViewTip.swift; sourceTree = "<group>"; };
 		2B7CB7FE2B122C5000D91340 /* AppointmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListView.swift; sourceTree = "<group>"; };
 		2B7CB8002B123A9700D91340 /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
 		2B7F418D2A7FA6F000ADF919 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
@@ -400,6 +400,7 @@
 			children = (
 				2BC8AC042B0C8BEC00B91B0C /* ArtistsGrid.swift */,
 				2BC8AC062B0CFE7100B91B0C /* ArtistsGridDetailView.swift */,
+				2B1E921D2B19DAEB00B2B15A /* ArtistForm.swift */,
 			);
 			path = ArtistsGrid;
 			sourceTree = "<group>";
@@ -582,7 +583,6 @@
 				2BF6BD5D2A868585006A7602 /* AppointmentsTip.swift */,
 				2BF6BD5F2A8685B4006A7602 /* HomeTip.swift */,
 				2BF6BD612A86866A006A7602 /* HistoryTip.swift */,
-				2B7B78932AF4274800284DF7 /* AppointmentDetailViewTip.swift */,
 			);
 			path = Tips;
 			sourceTree = "<group>";
@@ -784,7 +784,6 @@
 				2B53D28129F316930051F6B9 /* AppThemeHandler.swift in Sources */,
 				2B64D2282A7D536900090EB6 /* OnboardingView.swift in Sources */,
 				2BD3187629F276830059F9A8 /* TJTabView.swift in Sources */,
-				2B7B78942AF4274800284DF7 /* AppointmentDetailViewTip.swift in Sources */,
 				2B5443A52AF1750B00521104 /* ArtistFormView.swift in Sources */,
 				2BC420202AED3522003838D3 /* TJTabView+Extensions.swift in Sources */,
 				2BF6BD622A86866A006A7602 /* HistoryTip.swift in Sources */,
@@ -794,6 +793,7 @@
 				2B7CB8012B123A9700D91340 /* Charts.swift in Sources */,
 				2B5443AF2AF24DDF00521104 /* ShopMapView.swift in Sources */,
 				2BE240BB2AFD805E0019540E /* Review.swift in Sources */,
+				2B1E921E2B19DAEB00B2B15A /* ArtistForm.swift in Sources */,
 				2B6C8CF329FBFD8100A4BA6E /* HistoryViewModel.swift in Sources */,
 				2B5F429A2B0937BB005BFAC3 /* PhotoFullScreenView.swift in Sources */,
 				2B53D27D29F312C00051F6B9 /* EmptyState.swift in Sources */,

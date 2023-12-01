@@ -224,15 +224,10 @@ class LocationService: NSObject, MKLocalSearchCompleterDelegate {
 }
 
 
-struct EditShopMapView: View {
+struct ViewShopMap: View {
 
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var themeHandler: AppThemeHandler
-
     @State private var position = MapCameraPosition.automatic
-    @State private var isSheetPresented: Bool = true
-
-    @State private var searchResults = [SearchResult]()
     @State private var selectedLocation: SearchResult?
 
     @Bindable var shop: Shop

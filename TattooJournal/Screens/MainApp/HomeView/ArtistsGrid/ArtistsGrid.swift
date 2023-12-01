@@ -11,6 +11,9 @@ import SwiftData
 struct ArtistsGrid: View {
 
     @EnvironmentObject private var themeHandler: AppThemeHandler
+    @Environment(\.modelContext) private var context
+
+    @State private var artistDeleteAlert = false
 
     @Query private var artists: [Artist]
     @Query private var images: [TattooImage]
@@ -31,40 +34,70 @@ struct ArtistsGrid: View {
         ScrollView {
             if artists.isEmpty {
                 Text("You have no artists. You might want to add some?")
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 25)
             } else {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 7) {
                     ForEach(artists) { artist in
                         NavigationLink {
                             ArtistsGridDetailView(viewModel: .init(artist: artist))
                         } label: {
-                            ZStack {
-                                if let image = image(for: artist) {
-                                    image
-                                        .resizable()
-                                } else {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .background(.white)
-                                        .foregroundStyle(LinearGradient(colors: [themeHandler.appColor, themeHandler.appColor.opacity(0.75)],
-                                                                        startPoint: .top,
-                                                                        endPoint: .bottom))
-                                }
-                                VStack {
-                                    Spacer()
-                                    VStack {
-                                        Text(artist.name)
-                                            .bold()
-                                            .font(hasImage(for: artist) ? .caption2 : .largeTitle)
-                                            .foregroundStyle(hasImage(for: artist) ? themeHandler.appColor : .white)
-                                            .multilineTextAlignment(hasImage(for: artist) ? .center : .trailing)
-                                            .frame(maxWidth: .infinity, alignment: hasImage(for: artist) ? .center : .trailing)
+                            VStack {
+                                Text(artist.name)
+                                    .font(.callout)
+                                    .bold()
+                                    .foregroundStyle(Color(.oppositeStyle))
+                                    .multilineTextAlignment(.center)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                ZStack {
+                                    if let image = image(for: artist) {
+                                        image
+                                            .resizable()
+                                    } else {
+                                        RoundedRectangle(cornerRadius: 10)
+                                        Image(systemName: "person.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .padding(40)
+                                            .foregroundStyle(.white)
                                     }
-                                    .frame(maxWidth: .infinity)
-                                    .padding(5)
-                                    .background(Color(.cellBackground).opacity(hasImage(for: artist) ? 0.75 : 0))
+                                }
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .aspectRatio(1, contentMode: .fit)
+                                .overlay(alignment: .topTrailing) {
+                                    ZStack {
+                                        Circle()
+                                            .frame(width: 30, height: 30)
+                                            .foregroundStyle(Color(.cellBackground))
+                                        Image(systemName: "xmark.bin.fill")
+                                            .imageScale(.small)
+                                            .frame(width: 44, height: 44)
+                                            .foregroundStyle(themeHandler.appColor)
+                                    }
+                                    .onTapGesture {
+                                        withAnimation {
+                                            artistDeleteAlert = true
+                                        }
+                                    }
+                                    .alert("Are you sure?", isPresented: $artistDeleteAlert, actions: {
+                                        Button {
+                                            artistDeleteAlert = false
+                                        } label: {
+                                            Text("Cancel")
+                                        }.tint(.red)
+                                        Button {
+                                            artistDeleteAlert = false
+                                            context.delete(artist)
+                                        } label: {
+                                            Text("Delete")
+                                                .bold()
+                                        }.tint(themeHandler.appColor)
+                                    }, message: {
+                                        Text("Are you sure you want to delete \(artist.name.lowercased())?")
+                                    })
                                 }
                             }
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .aspectRatio(1, contentMode: .fit)
                         }
                     }
                 }.padding(.horizontal, 7)

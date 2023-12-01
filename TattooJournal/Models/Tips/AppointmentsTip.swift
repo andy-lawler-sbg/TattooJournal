@@ -9,7 +9,6 @@ import SwiftUI
 import TipKit
 
 struct AppointmentsTip: Tip {
-
     var hasAppointments: Bool
 
     var title: Text {
@@ -22,9 +21,5 @@ struct AppointmentsTip: Tip {
         } else {
             return Text("This list will show upcoming appointments. Add some appointments you have coming up.")
         }
-    }
-
-    var asset: Image? {
-        Image(systemName: "calendar.circle")
     }
 }

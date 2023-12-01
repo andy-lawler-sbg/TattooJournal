@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SwiftData
+import TipKit
+import MapKit
 
 struct HomeView: View {
 
@@ -25,18 +27,35 @@ struct HomeView: View {
     private let artistGrid = ArtistsGrid()
     private let charts = Charts()
 
+    private var artistGridButton: some View {
+        Button {
+            viewModel.shouldShowArtistForm = true
+        } label: {
+            XMarkButton(icon: "plus")
+        }
+    }
+
+    private var tipView: some View {
+        TipView(HomeTip(), arrowEdge: .bottom)
+            .tipBackground(Color(.cellBackground))
+            .padding(.horizontal)
+            .padding(.top, 7.5)
+            .padding(.bottom, -10)
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    tipView
+                    HomeScreenContainer(viewModel: .init(title: "Artists",
+                                                         systemImage: "paintbrush.pointed.fill",
+                                                         button: artistGridButton,
+                                                         pageContent: artistGrid))
                     HomeScreenContainer(viewModel: .init(title: "Data",
                                                          systemImage: "waveform.path.ecg.rectangle",
                                                          button: EmptyView(), 
                                                          pageContent: charts))
-                    HomeScreenContainer(viewModel: .init(title: "Artists",
-                                                         systemImage: "paintbrush.pointed.fill",
-                                                         button: EmptyView(),
-                                                         pageContent: artistGrid))
                     photoJournal
                 }.padding(.top)
                 Spacer()
@@ -59,6 +78,11 @@ struct HomeView: View {
             }
             .sheet(isPresented: $viewModel.shouldShowSettingsScreen) {
                 SettingsView()
+            }
+            .sheet(isPresented: $viewModel.shouldShowArtistForm) {
+                ArtistForm()
+                    .presentationDetents([.height(270), .medium])
+                    .presentationDragIndicator(.visible)
             }
             .onAppear {
                 viewModel.setup(appEventHandler: appEventHandler)
