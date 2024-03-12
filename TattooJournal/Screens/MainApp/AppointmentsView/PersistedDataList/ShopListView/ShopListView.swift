@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CoreLocation
 
 struct ShopListView: View {
 
@@ -17,6 +18,9 @@ struct ShopListView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     @Query private var shops: [Shop]
+
+    @State private var shopName: String = ""
+    @State private var shopLocation: CLLocationCoordinate2D? = nil
 
     var body: some View {
         NavigationStack {
@@ -82,10 +86,8 @@ struct ShopListView: View {
             .background(Color(.background))
             .navigationTitle("Shops")
             .overlay(alignment: .bottomTrailing) {
-                Button {
-                    withAnimation {
-                        shouldShowShopForm = true
-                    }
+                NavigationLink {
+                    ShopFormView()
                 } label: {
                     NavBarItem(imageName: "plus",
                                circleSize: 60,
@@ -94,14 +96,13 @@ struct ShopListView: View {
                                shadowRadius: 10)
                         .padding(30)
                 }
-                .onTapGesture(perform: Haptics.shared.successHaptic)
             }
             .sheet(item: $selectedEditShop) {
                 withAnimation {
                     selectedEditShop = nil
                 }
             } content: { shop in
-                ShopFormView(shop: shop)
+               ShopFormView()
             }
             .sheet(item: $selectedMapShop) {
                 withAnimation {

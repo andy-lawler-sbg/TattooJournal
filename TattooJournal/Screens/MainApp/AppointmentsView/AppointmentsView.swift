@@ -109,7 +109,7 @@ struct AppointmentsView: View {
         VStack {
             appointmentsCollapsible
                 .padding(.top, 10)
-            AppointmentListView(viewModel: .init(appointments: queriedAppointments))
+            AppointmentListView(viewModel: .init(appointments: appointments))
             Spacer()
         }
         .overlay(alignment: .bottomTrailing) {

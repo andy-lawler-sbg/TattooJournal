@@ -262,7 +262,10 @@ struct ArtistSelectionSheet: View {
                     .ignoresSafeArea()
                 VStack {
                     if artists.isEmpty {
-                        Text("No Artists")
+                        EmptyState(imageName: "paintbrush.pointed.fill",
+                                   title: "No Artists",
+                                   description: "You have no artists, you can add some above.")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
                         List {
                             ForEach(artists) { artist in
@@ -297,7 +300,7 @@ struct ArtistSelectionSheet: View {
                     print(selectedArtist?.name)
                 }
                 .navigationTitle("Artist Selection")
-                .navigationBarTitleDisplayMode(.automatic)
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
         .sheet(isPresented: $showArtistForm) {

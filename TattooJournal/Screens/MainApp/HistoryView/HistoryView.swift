@@ -77,7 +77,7 @@ struct HistoryView: View {
     /// Past Tattoos Live view.  Contains the tip and list
     private var pastTattoosListView: some View {
         VStack {
-            AppointmentListView(viewModel: .init(appointments: queriedAppointments))
+            AppointmentListView(viewModel: .init(appointments: appointments))
             AppointmentsCollapsible(viewModel: .init(appointments: appointments, type: .history))
             Spacer()
         }

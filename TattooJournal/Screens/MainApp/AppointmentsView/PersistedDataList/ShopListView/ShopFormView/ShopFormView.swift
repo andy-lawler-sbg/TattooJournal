@@ -6,40 +6,15 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ShopFormView: View {
 
-    @Bindable var shop: Shop
-    @Environment(\.dismiss) private var dismiss
+    @State private var shopName: String = ""
+    @State private var shopLocation: CLLocationCoordinate2D? = nil
 
     var body: some View {
-        NavigationStack {
-            Form {
-                Section {
-                    TextField("Shop Name", text: $shop.name)
-                        .autocorrectionDisabled()
-                } header: {
-                    Text("Shop Details")
-                }
-
-                Section {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Text("Update")
-                            .frame(maxWidth: .infinity)
-                            .multilineTextAlignment(.center)
-                    }
-                }
-                .navigationTitle("Update Shop")
-            }
-        }
-        .overlay(
-            Button {
-                dismiss()
-            } label: {
-                XMarkButton()
-            }, alignment: .topTrailing
-        )
+        ShopMapView(shopName: $shopName,
+                    shopLocation: $shopLocation)
     }
 }

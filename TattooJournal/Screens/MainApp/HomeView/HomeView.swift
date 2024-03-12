@@ -89,10 +89,6 @@ struct HomeView: View {
             }
         }
     }
-
-    private var spendingChart: some View {
-        AppointmentSpendingChart(viewModel: .init(appointments: queriedAppointments))
-    }
 }
 
 extension HomeView {
