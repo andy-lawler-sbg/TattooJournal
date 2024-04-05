@@ -21,7 +21,7 @@ struct VisitedShops: View {
             Map {
                 ForEach(shops) { shop in
                     Marker(shop.name,
-                           systemImage: "house.fill",
+                           systemImage: "housea.fill",
                            coordinate: shop.location ?? .init())
                 }
             }

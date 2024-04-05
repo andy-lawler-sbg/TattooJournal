@@ -12,18 +12,8 @@ struct NextAppointmentView: View {
     @Bindable var appointment: Appointment
 
     var body: some View {
-        VStack(spacing: 15) {
-            HStack {
-                Text("Next Appointment")
-                    .font(.body)
-                    .bold()
-                Spacer()
-            }
-            .padding(.horizontal, 6)
-            .padding(.bottom, 4)
-            AppointmentCell(viewModel: .init(appointment: appointment, cellType: .upcoming))
-                .padding(.horizontal)
-        }.padding(.horizontal, 5)
+        AppointmentCell(viewModel: .init(appointment: appointment, cellType: .upcoming))
+            .padding(.horizontal)
     }
 }
 

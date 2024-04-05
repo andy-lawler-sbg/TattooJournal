@@ -206,7 +206,7 @@ struct SettingsView: View {
     // MARK: - Socials
 
     private var socialLink: some View {
-        Link("Developer", destination: URL(string: "https://www.x.com/andylawlerdev")!)
+        Link("Developer", destination: URL(string: "https://andrewlawler.github.io")!)
             .foregroundStyle(.primary)
     }
 

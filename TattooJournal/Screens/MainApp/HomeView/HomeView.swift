@@ -40,8 +40,8 @@ struct HomeView: View {
     
     private var appointmentListView: some View {
         VStack {
-            if let first = queriedAppointments.first {
-                AppointmentListView(viewModel: .init(appointments: [first]))
+            if let appointment = queriedAppointments.first {
+                NextAppointmentView(appointment: appointment)
             } else {
                 emptyTextView
             }
