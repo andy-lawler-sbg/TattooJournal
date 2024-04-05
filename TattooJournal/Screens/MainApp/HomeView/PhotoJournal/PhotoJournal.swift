@@ -187,6 +187,7 @@ struct PhotoJournal: View {
             .multilineTextAlignment(.center)
             .font(.caption)
             .foregroundColor(themeHandler.appColor)
+            .frame(maxWidth: .infinity)
             .padding()
             .padding(.horizontal)
             .background(themeHandler.appColor.opacity(0.1))

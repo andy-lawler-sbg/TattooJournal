@@ -25,6 +25,29 @@ struct HomeView: View {
 
     private let photoJournal = PhotoJournal()
     private let artistGrid = ArtistsGrid()
+    
+    var emptyTextView: some View {
+        Label("You have no upcoming appointments. Add some?", systemImage: "clipboard.fill")
+            .font(.caption)
+            .foregroundColor(themeHandler.appColor)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .padding(.horizontal)
+            .background(themeHandler.appColor.opacity(0.1))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .padding()
+    }
+    
+    private var appointmentListView: some View {
+        VStack {
+            if let first = queriedAppointments.first {
+                AppointmentListView(viewModel: .init(appointments: [first]))
+            } else {
+                emptyTextView
+            }
+        }
+    }
+    
     private let charts = Charts()
 
     private var artistGridButton: some View {
@@ -48,14 +71,14 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     tipView
+                    HomeScreenContainer(viewModel: .init(title: "Upcoming",
+                                                         systemImage: "list.clipboard.fill",
+                                                         button: EmptyView(),
+                                                         pageContent: appointmentListView))
                     HomeScreenContainer(viewModel: .init(title: "Artists",
                                                          systemImage: "paintbrush.pointed.fill",
                                                          button: artistGridButton,
                                                          pageContent: artistGrid))
-                    HomeScreenContainer(viewModel: .init(title: "Data",
-                                                         systemImage: "waveform.path.ecg.rectangle",
-                                                         button: EmptyView(), 
-                                                         pageContent: charts))
                     photoJournal
                 }.padding(.top)
                 Spacer()

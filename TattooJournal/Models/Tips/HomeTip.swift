@@ -10,10 +10,10 @@ import TipKit
 
 struct HomeTip: Tip {
     var title: Text {
-        Text("Welcome")
+        Text("Welcome home")
     }
 
     var message: Text? {
-        Text("Below you will find ways to store memories and find out more about your tattoos.")
+        Text("Below you will find ways to store your tattoo memories and view more details about your sessions.")
     }
 }

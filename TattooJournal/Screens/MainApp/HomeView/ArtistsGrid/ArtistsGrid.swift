@@ -29,14 +29,23 @@ struct ArtistsGrid: View {
     private func hasImage(for artist: Artist) -> Bool {
         image(for: artist) != nil
     }
+    
+    var emptyTextView: some View {
+        Label("You have no artists. You might want to add some?", systemImage: "person.slash.fill")
+            .font(.caption)
+            .foregroundColor(themeHandler.appColor)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .padding(.horizontal)
+            .background(themeHandler.appColor.opacity(0.1))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .padding()
+    }
 
     var body: some View {
         ScrollView {
             if artists.isEmpty {
-                Text("You have no artists. You might want to add some?")
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 25)
+                emptyTextView
             } else {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 7) {
                     ForEach(artists) { artist in
