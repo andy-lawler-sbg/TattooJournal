@@ -16,8 +16,8 @@ struct Charts: View {
     @Query private var images: [TattooImage]
 
     var tattooDates: [Date] {
-        var appointmentDates = appointments.map { $0.date }
-        var imageDates = images.filter { image in
+        let appointmentDates = appointments.map { $0.date }
+        let imageDates = images.filter { image in
             !appointments.contains { appointment in
                 appointment.image == image
             }

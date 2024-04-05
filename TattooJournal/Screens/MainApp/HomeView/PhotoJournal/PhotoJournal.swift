@@ -298,7 +298,7 @@ struct ArtistSelectionSheet: View {
                     }
                 }
                 .onChange(of: selectedArtist) {
-                    print(selectedArtist?.name)
+                    print(selectedArtist?.name ?? "")
                 }
                 .navigationTitle("Artist Selection")
                 .navigationBarTitleDisplayMode(.inline)

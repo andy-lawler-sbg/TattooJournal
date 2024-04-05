@@ -34,10 +34,7 @@ final class Appointment: Codable {
     }
 
     var reviewDescription: String {
-        guard let review else { 
-            return "No review"
-        }
-        return "Reviewed"
+        review == nil ? "No Review" : "Reviewed"
     }
 
     init(artist: Artist? = nil,
