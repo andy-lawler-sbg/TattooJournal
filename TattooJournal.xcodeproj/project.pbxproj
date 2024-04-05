@@ -284,7 +284,6 @@
 		2B64D21A2A7D518A00090EB6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				2BD85ED42AEC836C0021D9EF /* Launch */,
 				2B64D21B2A7D518F00090EB6 /* Onboarding */,
 				2B64D21C2A7D519400090EB6 /* MainApp */,
 			);
@@ -568,13 +567,6 @@
 				2BD318A129F2C5120059F9A8 /* AppointmentCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		2BD85ED42AEC836C0021D9EF /* Launch */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Launch;
 			sourceTree = "<group>";
 		};
 		2BF6BD5C2A86857B006A7602 /* Tips */ = {
